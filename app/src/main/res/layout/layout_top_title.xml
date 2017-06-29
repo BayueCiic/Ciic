@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="118px"
+        android:orientation="vertical"
+        android:background="@color/themecolor">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40px"></LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1">
+           <FrameLayout android:id="@+id/fl_goback"
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:layout_alignParentLeft="true">
+               <ImageView android:id="@+id/iv_goback"
+                   android:layout_width="32px"
+                   android:layout_height="32px"
+                   android:layout_gravity="center_vertical"
+                   android:layout_marginLeft="29px"
+                   android:layout_marginRight="29px"/>
+
+           </FrameLayout>
+            <TextView
+                android:id="@+id/tv_titletxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="个人中心"
+                android:textColor="@android:color/white"
+                android:textSize="30px"/>
+            <FrameLayout android:id="@+id/fl_shezhi"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true">
+                <ImageView android:id="@+id/iv_shezhi"
+                    android:layout_width="34px"
+                    android:layout_height="33px"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="29px"
+                    android:layout_marginRight="29px"
+                    android:src="@mipmap/gerenzhongx_shezhi_3x"/>
+                <TextView android:id="@+id/tv_shezhi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@android:color/white"
+                    android:textSize="26px"
+                    android:layout_marginLeft="29px"
+                    android:layout_marginRight="29px"/>
+            </FrameLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

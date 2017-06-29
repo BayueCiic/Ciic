@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_top_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gerenBg"
+        android:orientation="vertical"
+        android:paddingBottom="20px"
+        android:paddingLeft="30px"
+        android:paddingRight="30px"
+        android:paddingTop="20px">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:paddingBottom="25px"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:paddingTop="25px">
+
+            <CheckBox
+                android:id="@+id/cb_xx_checkall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:button="@drawable/checkboxstye"
+                android:paddingLeft="20px"
+                android:text="全选"
+                android:textColor="@color/gerenTextcolor"
+                android:textSize="22px" />
+
+            <TextView
+                android:id="@+id/tv_xx_del"
+                android:layout_width="109px"
+                android:layout_height="53px"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/gerenxxdel_bg"
+                android:gravity="center"
+                android:text="删除"
+                android:textColor="@color/themecolor"
+                android:textSize="20px" />
+
+            <TextView
+                android:id="@+id/tv_xx_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="53px"
+                android:layout_marginRight="20px"
+                android:layout_toLeftOf="@id/tv_xx_del"
+                android:background="@drawable/gerenxxquan_bg"
+                android:gravity="center"
+                android:paddingLeft="15px"
+                android:paddingRight="15px"
+                android:text="标记为已读"
+                android:textColor="@color/gerenTextcolor"
+                android:textSize="20px" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="57px"
+            android:layout_marginTop="20px"
+            android:background="@color/guanfangtitlecolor"
+            android:orientation="horizontal"
+            android:paddingLeft="30px"
+            android:paddingRight="30px">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="主题"
+                android:textColor="@android:color/black"
+                android:textSize="22px" />
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="9" />
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="时间"
+                android:textColor="@android:color/black"
+                android:textSize="22px" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_xx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+    </LinearLayout>
+
+</LinearLayout>

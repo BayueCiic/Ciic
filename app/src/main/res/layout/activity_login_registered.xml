@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="611px"
+            android:layout_height="wrap_content"
+            android:padding="30px"
+            android:background="@android:color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="注册"
+                android:textSize="26px"
+                android:textColor="@android:color/black"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="31px"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/greyHorizontal"
+                android:layout_marginTop="30px"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/accountText"
+                android:textSize="20px"
+                android:text="@string/choose"
+                android:layout_marginTop="27px"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="150px"
+                android:layout_marginBottom="150px"
+                android:layout_marginLeft="80px"
+                    android:layout_marginRight="80px">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout android:id="@+id/ll_registered_company"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_alignParentLeft="true"
+                            android:gravity="center">
+                            <ImageView android:id="@+id/iv_registered_company"
+                                android:layout_width="101px"
+                                android:layout_height="101px"
+                                android:src="@mipmap/zhuce_qiye3x"/>
+                            <TextView android:id="@+id/tv_registered_company"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10px"
+                                android:textSize="18px"
+                                android:textColor="@color/registeredButtenColor"
+                                android:text="@string/company"/>
+                        </LinearLayout>
+                        <LinearLayout android:id="@+id/ll_registered_staff"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_centerInParent="true"
+                            android:gravity="center">
+                            <ImageView android:id="@+id/iv_registered_staff"
+                                android:layout_width="101px"
+                                android:layout_height="101px"
+                                android:src="@mipmap/zhuce_zhiyuan3x"/>
+                            <TextView android:id="@+id/tv_registered_staff"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10px"
+                                android:textSize="18px"
+                                android:textColor="@color/registeredButtenColor"
+                                android:text="@string/staff"/>
+                        </LinearLayout>
+                        <LinearLayout android:id="@+id/ll_registered_common"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center">
+                            <ImageView android:id="@+id/iv_registered_common"
+                                android:layout_width="101px"
+                                android:layout_height="101px"
+                                android:src="@mipmap/zhuce_yonghu3x"/>
+                            <TextView android:id="@+id/tv_registered_common"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10px"
+                                android:textSize="18px"
+                                android:textColor="@color/registeredButtenColor"
+                                android:text="@string/common"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+
+
+
+                </LinearLayout>
+            <Button  android:id="@+id/but_registered_next"
+                android:layout_width="match_parent"
+                android:layout_height="89px"
+                android:text="@string/next"
+                android:clickable="false"
+                android:layout_marginTop="20px"
+                android:textColor="@android:color/white"
+                android:background="@color/registeredButtenColor"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/greyHorizontal"
+                android:layout_marginTop="30px"/>
+            <TextView android:id="@+id/tv_registered_backlogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20px"
+                android:textColor="@color/themecolor"
+                android:text="@string/goBack"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="14px"/>
+        </LinearLayout>
+</LinearLayout>

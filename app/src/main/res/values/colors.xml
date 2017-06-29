@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    
+    <!--灰色横线-->
+    <color name="greyHorizontal">#F2F2F2</color>
+    <!--帐号字体颜色-->
+    <color name="accountText">#253237</color>
+    <!--帐号输入框边框色-->
+    <color name="accountBorder">#E0E3E4</color>
+    <!--帐号输入框背景色-->
+    <color name="accountBg">#F9FBFB</color>
+    <!--主题颜色-->
+    <color name="themecolor">#EF930A</color>
+    
+    <!--注册butten颜色-->
+    <color name="registeredButtenColor">#DDDDDD</color>
+    
+    <!--导航点击色-->
+    <color name="clickColor">#F2A531</color>
+    <!--个人中心字体颜色-->
+    <color name="gerenTextcolor">#999999</color>
+    <!--个人中心背景色-->
+    <color name="gerenBg">#FFEAC1</color>
+    <!--个人管理模块填充色-->
+    <color name="gerenMokuai">#F6F6F6</color>
+    <!--官方信息title-->
+    <color name="guanfangtitlecolor">#DCDCDC</color>
+
+</resources>

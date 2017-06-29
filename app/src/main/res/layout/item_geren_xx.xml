@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:paddingLeft="10px"
+        android:paddingRight="30px"
+        android:layout_width="match_parent"
+        android:layout_height="57px"
+        android:layout_marginTop="2px"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1">
+           <ImageView
+               android:layout_width="21px"
+               android:layout_height="21px"
+               android:src="@mipmap/checkbox_3x"/>
+            
+            
+        </LinearLayout>
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:gravity="start|center_vertical"
+            android:text="这是一条官方信息"
+            android:textColor="@android:color/black"
+            android:textSize="22px"
+            android:singleLine="true"
+            android:layout_weight="12"/>
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="2017-06-07"
+            android:textColor="@color/gerenTextcolor"
+            android:textSize="18px"
+            android:layout_weight="3"/>
+    </LinearLayout>
+
+</LinearLayout>

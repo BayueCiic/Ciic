@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gerenBg">
+    <include layout="@layout/layout_top_title"/>
+    <LinearLayout
+        android:paddingLeft="30px"
+        android:paddingRight="30px"
+        android:paddingTop="60px"
+        android:paddingBottom="60px"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="502px">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="联系方式:000-000000"
+            android:textColor="@color/gerenTextcolor"
+            android:textSize="22px"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8px"
+            android:text="微信公众号：xxxxxxx"
+            android:textColor="@color/gerenTextcolor"
+            android:textSize="22px"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8px"
+            android:text="电话：000-000000"
+            android:textColor="@color/gerenTextcolor"
+            android:textSize="22px"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8px"
+            android:text="地址：上海xxx有限公司"
+            android:textColor="@color/gerenTextcolor"
+            android:textSize="22px"/>
+
+
+    </LinearLayout>
+</LinearLayout>

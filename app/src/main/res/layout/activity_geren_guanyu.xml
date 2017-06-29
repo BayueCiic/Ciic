@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gerenBg">
+    <include layout="@layout/layout_top_title"/>
+    <LinearLayout
+        android:paddingLeft="30px"
+        android:paddingRight="30px"
+        android:paddingTop="50px"
+        android:paddingBottom="60px"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="502px">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="中智"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@android:color/black"
+            android:textSize="30px"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40px"
+            android:text="这是介绍内容，这是介绍内容，这是介绍内容，这是介绍内容，这是介绍内容，这是介绍内容，这是介绍内容，这是介绍内容，这是介绍内容，这是介绍内容，这是介绍内容，这是介绍内容，这是介绍内容，这是介绍内容，这是介绍内容，这是介绍内容，这是介绍内容，这是介绍内容，这是介绍内容，这是介绍内容."
+            android:textColor="@color/gerenTextcolor"
+            android:textSize="22px"/>
+
+
+
+    </LinearLayout>
+</LinearLayout>

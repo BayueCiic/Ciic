@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+       android:paddingLeft="30px"
+       android:paddingRight="30px"
+       android:background="@android:color/white"
+       android:layout_width="match_parent"
+       android:layout_height="89px"
+       android:layout_marginTop="2px">
+       <TextView
+           android:id="@+id/one"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="所属公司："
+           android:textColor="@android:color/black"
+           android:textSize="20px"
+           android:layout_centerVertical="true"/>
+       <TextView android:id="@+id/tv_item_companyname"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="上海中智"
+           android:textSize="20px"
+           android:textColor="@color/gerenTextcolor"
+           android:layout_toRightOf="@id/one"
+           android:layout_centerVertical="true"/>
+       <ImageView android:id="@+id/iv_item_updown"
+           android:layout_width="20px"
+           android:layout_height="12px"
+           android:src="@mipmap/bianjiziliao_kaxia_3x"
+           android:layout_alignParentRight="true"
+           android:layout_centerVertical="true"/>
+   </RelativeLayout>
+
+</LinearLayout>

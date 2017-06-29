@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55px"
+        android:paddingLeft="30px"
+        android:paddingRight="30px"
+        android:background="@color/guanfangtitlecolor"
+        android:gravity="center_vertical">
+        <TextView android:id="@+id/tv_subitem_companyname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上海中智"
+            android:textSize="20px"
+            android:textColor="@color/gerenTextcolor"/>
+    </LinearLayout>
+</LinearLayout>
