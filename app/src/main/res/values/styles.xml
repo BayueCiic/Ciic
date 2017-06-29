@@ -10,7 +10,7 @@
 
     <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
     <style name="loginBgTheme" parent="MyTheme">
-        <item name="android:windowBackground">@mipmap/denglu_bj3x</item>
+        <item name="android:windowBackground">@mipmap/splash768x1024</item>
     </style>
 
     <style name="MyDialogStyle" parent="MyTheme">

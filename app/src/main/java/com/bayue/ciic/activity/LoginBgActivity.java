@@ -51,7 +51,7 @@ public class LoginBgActivity extends BaseActivity {
                 startActivity(new Intent(LoginBgActivity.this, LoginActivity.class));
 //                overridePendingTransition(R.animator.slide_left_in,0);
             }
-        }, 800);
+        }, 10);
     }
 
 

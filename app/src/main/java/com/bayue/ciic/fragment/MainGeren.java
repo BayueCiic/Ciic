@@ -13,8 +13,10 @@ import android.widget.TextView;
 
 import com.bayue.ciic.MainActivity;
 import com.bayue.ciic.R;
+import com.bayue.ciic.activity.GerenComplaint;
 import com.bayue.ciic.activity.GerenGuanyu;
 import com.bayue.ciic.activity.GerenShezhi;
+import com.bayue.ciic.activity.GerenWonderful;
 import com.bayue.ciic.activity.GerenXiugai;
 import com.bayue.ciic.activity.GerenXx;
 import com.bayue.ciic.activity.Gerenlianxi;
@@ -111,12 +113,15 @@ public class MainGeren extends BaseFragment {
             case R.id.ll_geren_zhibo:
                 break;
             case R.id.ll_geren_jingcai:
+                main.startActivity(new Intent(main,GerenWonderful.class));
+
                 break;
             case R.id.ll_geren_canyu:
                 break;
             case R.id.ll_geren_shoucang:
                 break;
             case R.id.ll_geren_tousu:
+                main.startActivity(new Intent(main,GerenComplaint.class));
                 break;
             case R.id.rl_geren_xx:
                 main.startActivity(new Intent(main,GerenXx.class));
