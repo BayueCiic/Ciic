@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingLeft="30px"
+    android:paddingRight="30px"
+    android:paddingTop="20px"
+    android:paddingBottom="20px"
+    android:background="@color/gerenBg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="67px"
+                android:background="@android:color/white">
+                <ImageView android:id="@+id/iv_sanjiao"
+                    android:layout_width="21px"
+                    android:layout_height="27px"
+                    android:layout_marginLeft="10px"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:src="@mipmap/xiaosanjiao_3x"/>
+                <TextView android:id="@+id/tv_shipin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="推荐视频"
+                    android:textSize="26px"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/iv_sanjiao"
+                    android:layout_marginLeft="10px"/>
+                <TextView android:id="@+id/tv_xiuxian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="日常休闲"
+                    android:textSize="18px"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_shipin"
+                    android:layout_marginLeft="20px"/>
+                <View android:id="@+id/view_one"
+                    android:layout_width="2px"
+                    android:layout_height="15px"
+                    android:background="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_xiuxian"
+                    android:layout_marginLeft="20px"/>
+                <TextView android:id="@+id/tv_yepao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="夜跑"
+                    android:textSize="18px"
+                    android:textColor="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/view_one"
+                    android:layout_marginLeft="20px"/>
+                <View android:id="@+id/view_two"
+                    android:layout_width="2px"
+                    android:layout_height="15px"
+                    android:background="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_yepao"
+                    android:layout_marginLeft="20px"/>
+                <TextView android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="500强运动会"
+                    android:textSize="18px"
+                    android:textColor="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/view_two"
+                    android:layout_marginLeft="20px"/>
+
+                <TextView android:id="@+id/tv_genduo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="更多+"
+                    android:textSize="18px"
+                    android:textColor="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20px"/>
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_marginTop="10px"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:background="@android:color/white"
+                android:layout_height="418px">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="337px"
+                    android:src="@mipmap/shouye_img01_3x"
+                    android:scaleType="fitXY"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="中智—直播"
+                    android:textColor="@android:color/black"
+                    android:textSize="22px"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginTop="13px"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="主播:中智-管理"
+                    android:textSize="18px"
+                    android:textColor="@color/h99"
+                    android:layout_marginLeft="20px"
+                    android:paddingTop="10px"/>
+            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:layout_marginTop="10px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="67px"
+                android:background="@android:color/white">
+                <ImageView android:id="@+id/iv_sanjiao"
+                    android:layout_width="21px"
+                    android:layout_height="27px"
+                    android:layout_marginLeft="10px"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:src="@mipmap/xiaosanjiao_3x"/>
+                <TextView android:id="@+id/tv_shipin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="精彩瞬间"
+                    android:textSize="26px"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/iv_sanjiao"
+                    android:layout_marginLeft="10px"/>
+                <TextView android:id="@+id/tv_xiuxian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="日常休闲"
+                    android:textSize="18px"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_shipin"
+                    android:layout_marginLeft="20px"/>
+                <View android:id="@+id/view_one"
+                    android:layout_width="2px"
+                    android:layout_height="15px"
+                    android:background="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_xiuxian"
+                    android:layout_marginLeft="20px"/>
+                <TextView android:id="@+id/tv_yepao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="夜跑"
+                    android:textSize="18px"
+                    android:textColor="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/view_one"
+                    android:layout_marginLeft="20px"/>
+                <View android:id="@+id/view_two"
+                    android:layout_width="2px"
+                    android:layout_height="15px"
+                    android:background="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_yepao"
+                    android:layout_marginLeft="20px"/>
+                <TextView android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="500强运动会"
+                    android:textSize="18px"
+                    android:textColor="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/view_two"
+                    android:layout_marginLeft="20px"/>
+
+                <TextView android:id="@+id/tv_genduo2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="更多+"
+                    android:textSize="18px"
+                    android:textColor="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20px"/>
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_marginTop="10px"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="0px"
+                    android:layout_height="219px"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/shouye_img02_3x"/>
+                <ImageView
+                    android:layout_width="0px"
+                    android:layout_height="219px"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="10px"
+                    android:layout_marginRight="10px"
+                    android:src="@mipmap/shouye_img02_3x"/>
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="0px"
+                    android:layout_height="219px"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/shouye_img02_3x" />
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="67px"
+                android:layout_marginTop="20px"
+                android:background="@android:color/white">
+                <ImageView android:id="@+id/iv_sanjiao"
+                    android:layout_width="21px"
+                    android:layout_height="27px"
+                    android:layout_marginLeft="10px"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:src="@mipmap/xiaosanjiao_3x"/>
+                <TextView android:id="@+id/tv_shipin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="26px"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/iv_sanjiao"
+                    android:layout_marginLeft="10px"/>
+                <TextView android:id="@+id/tv_xiuxian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="日常休闲"
+                    android:textSize="18px"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_shipin"
+                    android:layout_marginLeft="20px"/>
+                <View android:id="@+id/view_one"
+                    android:layout_width="2px"
+                    android:layout_height="15px"
+                    android:background="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_xiuxian"
+                    android:layout_marginLeft="20px"/>
+                <TextView android:id="@+id/tv_yepao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="夜跑"
+                    android:textSize="18px"
+                    android:textColor="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/view_one"
+                    android:layout_marginLeft="20px"/>
+                <View android:id="@+id/view_two"
+                    android:layout_width="2px"
+                    android:layout_height="15px"
+                    android:background="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_yepao"
+                    android:layout_marginLeft="20px"/>
+                <TextView android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="500强运动会"
+                    android:textSize="18px"
+                    android:textColor="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/view_two"
+                    android:layout_marginLeft="20px"/>
+
+                <TextView android:id="@+id/tv_genduo2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="更多+"
+                    android:textSize="18px"
+                    android:textColor="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20px"/>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

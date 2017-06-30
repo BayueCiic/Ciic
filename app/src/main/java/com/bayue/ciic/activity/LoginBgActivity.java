@@ -8,8 +8,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.bayue.ciic.App;
+import com.bayue.ciic.MainActivity;
 import com.bayue.ciic.R;
 import com.bayue.ciic.base.BaseActivity;
+import com.bayue.ciic.preferences.Preferences;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,10 +50,15 @@ public class LoginBgActivity extends BaseActivity {
                 /*Intent mainIntent = new Intent(LoginActivity.this,   AndroidNews.class);
                 SplashScreen.this.startActivity(mainIntent);
                 SplashScreen.this.finish();*/
-                startActivity(new Intent(LoginBgActivity.this, LoginActivity.class));
+                if(!Preferences.getString(getApplicationContext(),Preferences.TOKEN).equals("-1")){
+                    startActivity(new Intent(LoginBgActivity.this, MainActivity.class));
+
+                }else {
+                    startActivity(new Intent(LoginBgActivity.this, LoginActivity.class));
 //                overridePendingTransition(R.animator.slide_left_in,0);
+                }
             }
-        }, 10);
+        }, 1);
     }
 
 

@@ -17,7 +17,7 @@ import okhttp3.RequestBody;
 public class HTTPUtils {
     public static void getNetDATA(String url, Map<String, Object> map, Callback callback){
         Tracer.e("AddAddressActivity", url);
-        map.put("safecode", "BaYue.deqingpu");
+        map.put("safecode", "BaYue.JingCai");
         map.put("apiversion", "v.1.0");
         RequestBody body ;
         FormBody.Builder formBody = new FormBody.Builder();

@@ -17,6 +17,7 @@ public class API {
         public static final String REG="/Home/Login/reg";
         public static final String LOGIN="/Home/Login/login";
         public static final String VALI="/Home/Login/send_message";
+        public static final String FORGET="/Home/Login/forgot_password";
 
 
 

@@ -24,6 +24,7 @@
     <color name="gerenTextcolor">#999999</color>
     <!--个人中心背景色-->
     <color name="gerenBg">#FFEAC1</color>
+    <color name="newgerenBg">#F8D094</color>
     <!--个人管理模块填充色-->
     <color name="gerenMokuai">#F6F6F6</color>
     <!--官方信息title-->
@@ -33,5 +34,6 @@
     <!--新闻管理平台企业BJ-->
     <color name="newstitleBj">#FCECD3</color>
     <color name="h99">#999999</color>
+
 
 </resources>

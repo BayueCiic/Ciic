@@ -19,6 +19,7 @@ import com.bayue.ciic.base.BaseActivity;
 import com.bayue.ciic.base.BaseLoginActivity;
 import com.bayue.ciic.bean.RegBean;
 import com.bayue.ciic.http.API;
+import com.bayue.ciic.preferences.Preferences;
 import com.bayue.ciic.utils.DensityUtil;
 import com.bayue.ciic.utils.HTTPUtils;
 import com.bayue.ciic.utils.ToolKit;
@@ -88,9 +89,10 @@ public class LoginActivity extends BaseLoginActivity {
                 break;
             case R.id.bt_login:
                 Log.e("登录","+++++++++");
-                startActivity(new Intent(this, MainActivity.class));
-                finish();
-                App.bgActivity.finish();
+//                startActivity(new Intent(this, MainActivity.class));
+//                finish();
+//                App.bgActivity.finish();
+                login();
 
                 break;
             case R.id.tv_login_register:
@@ -141,6 +143,7 @@ public class LoginActivity extends BaseLoginActivity {
                         @Override
                         public void run() {
                             if(bean.getCode()==200){
+                                Preferences.saveString(getApplicationContext(),Preferences.TOKEN,bean.getToken());
                                 DensityUtil.showToast(LoginActivity.this,bean.getData());
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 LoginActivity.this.finish();
@@ -157,9 +160,6 @@ public class LoginActivity extends BaseLoginActivity {
                             DensityUtil.showToast(LoginActivity.this,response.message());
                         }
                     });
-
-
-
                 }
             }
         });

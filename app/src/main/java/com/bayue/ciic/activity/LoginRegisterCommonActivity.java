@@ -18,6 +18,7 @@ import com.bayue.ciic.base.BaseLoginActivity;
 import com.bayue.ciic.bean.RegBean;
 import com.bayue.ciic.bean.VerificationBean;
 import com.bayue.ciic.http.API;
+import com.bayue.ciic.preferences.Preferences;
 import com.bayue.ciic.utils.DensityUtil;
 import com.bayue.ciic.utils.HTTPUtils;
 import com.bayue.ciic.utils.ToolKit;
@@ -81,7 +82,6 @@ public class LoginRegisterCommonActivity extends BaseLoginActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_common_send:
-                send();
                 sendTag();
                 break;
             case R.id.but_common_zhuce:
@@ -145,7 +145,7 @@ public class LoginRegisterCommonActivity extends BaseLoginActivity {
             Toast.makeText(this,"请输入密码",Toast.LENGTH_SHORT).show();
             return;
         }
-        if(password.equals(password2)){
+        if(!password.equals(password2)){
             Toast.makeText(this,"两次密码不一致",Toast.LENGTH_SHORT).show();
             return;
         }
@@ -157,7 +157,12 @@ public class LoginRegisterCommonActivity extends BaseLoginActivity {
 
             @Override
             public void onFailure(Call call, IOException e) {
-
+                ToolKit.runOnMainThreadSync(new Runnable() {
+                    @Override
+                    public void run() {
+                        DensityUtil.showToast(LoginRegisterCommonActivity.this,"请检查网络");
+                    }
+                });
             }
 
             @Override
@@ -170,6 +175,7 @@ public class LoginRegisterCommonActivity extends BaseLoginActivity {
                         @Override
                         public void run() {
                             if(bean.getCode()==200){
+                                Preferences.saveString(getApplicationContext(),Preferences.TOKEN,bean.getToken());
                                 DensityUtil.showToast(LoginRegisterCommonActivity.this,bean.getData());
                                 startActivity(new Intent(LoginRegisterCommonActivity.this, MainActivity.class));
                                 LoginRegisterCommonActivity.this.finish();
@@ -197,6 +203,7 @@ public class LoginRegisterCommonActivity extends BaseLoginActivity {
 
     }
     private void sendTag(){
+        phone=etCommonPhone.getText().toString();
         if(phone.length()!=11){
             Toast.makeText(this,"请输入正确的手机号码",Toast.LENGTH_SHORT).show();
             return;
@@ -204,16 +211,20 @@ public class LoginRegisterCommonActivity extends BaseLoginActivity {
         Map<String ,Object> map=new HashMap<>();
 
         map.put("phone",phone);
-
+        send();
         HTTPUtils.getNetDATA(API.BaseUrl + API.Login.VALI, map, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                ToolKit.runOnMainThreadSync(new Runnable() {
+                    @Override
+                    public void run() {
+                        DensityUtil.showToast(LoginRegisterCommonActivity.this,"请检查网络");
+                    }
+                });
             }
-
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
-
+                Log.e("^^^^^^^^^^^^","2222222222222");
                 String msg=response.body().string();
                 if(response.code()==200){
                     Gson gson=new Gson();
