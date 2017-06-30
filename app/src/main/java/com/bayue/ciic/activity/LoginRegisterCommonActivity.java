@@ -11,10 +11,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bayue.ciic.App;
+import com.bayue.ciic.MainActivity;
 import com.bayue.ciic.R;
 import com.bayue.ciic.base.BaseLoginActivity;
+import com.bayue.ciic.bean.RegBean;
+import com.bayue.ciic.bean.VerificationBean;
 import com.bayue.ciic.http.API;
+import com.bayue.ciic.utils.DensityUtil;
 import com.bayue.ciic.utils.HTTPUtils;
+import com.bayue.ciic.utils.ToolKit;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -76,8 +82,10 @@ public class LoginRegisterCommonActivity extends BaseLoginActivity {
         switch (view.getId()) {
             case R.id.tv_common_send:
                 send();
+                sendTag();
                 break;
             case R.id.but_common_zhuce:
+                reg();
 
                 break;
             case R.id.et_common_backlogin:
@@ -153,14 +161,35 @@ public class LoginRegisterCommonActivity extends BaseLoginActivity {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-
+            public void onResponse(Call call, final Response response) throws IOException {
                 String msg=response.body().string();
                 if(response.code()==200){
                     Gson gson=new Gson();
+                    final RegBean bean=gson.fromJson(msg,RegBean.class);
+                    ToolKit.runOnMainThreadSync(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(bean.getCode()==200){
+                                DensityUtil.showToast(LoginRegisterCommonActivity.this,bean.getData());
+                                startActivity(new Intent(LoginRegisterCommonActivity.this, MainActivity.class));
+                                LoginRegisterCommonActivity.this.finish();
+                                App.bgActivity.finish();
+                            }else {
+                                DensityUtil.showToast(LoginRegisterCommonActivity.this,bean.getMsg());
+                            }
+                        }
+                    });
+                }else {
+                    ToolKit.runOnMainThreadSync(new Runnable() {
+                        @Override
+                        public void run() {
+                            DensityUtil.showToast(LoginRegisterCommonActivity.this,response.message());
+                        }
+                    });
+
+
 
                 }
-
             }
         });
 
@@ -183,7 +212,34 @@ public class LoginRegisterCommonActivity extends BaseLoginActivity {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Call call, final Response response) throws IOException {
+
+                String msg=response.body().string();
+                if(response.code()==200){
+                    Gson gson=new Gson();
+                    final VerificationBean bean=gson.fromJson(msg,VerificationBean.class);
+                    ToolKit.runOnMainThreadSync(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(bean.getCode()==200){
+                                etCommonVerification.setText(bean.getData());
+                            }else {
+                                DensityUtil.showToast(LoginRegisterCommonActivity.this,bean.getMsg());
+                            }
+                        }
+                    });
+                }else {
+                    ToolKit.runOnMainThreadSync(new Runnable() {
+                        @Override
+                        public void run() {
+                            DensityUtil.showToast(LoginRegisterCommonActivity.this,response.message());
+                        }
+                    });
+
+
+
+                }
+
 
             }
         });

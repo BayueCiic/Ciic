@@ -15,6 +15,8 @@ import com.bayue.ciic.MainActivity;
 import com.bayue.ciic.R;
 import com.bayue.ciic.activity.GerenComplaint;
 import com.bayue.ciic.activity.GerenGuanyu;
+import com.bayue.ciic.activity.GerenNews;
+import com.bayue.ciic.activity.GerenParty;
 import com.bayue.ciic.activity.GerenShezhi;
 import com.bayue.ciic.activity.GerenWonderful;
 import com.bayue.ciic.activity.GerenXiugai;
@@ -105,8 +107,11 @@ public class MainGeren extends BaseFragment {
             case R.id.iv_geren_toux:
                 break;
             case R.id.ll_geren_huodong:
+                main.startActivity(new Intent(main,GerenParty.class));
+
                 break;
             case R.id.ll_geren_xinwen:
+                main.startActivity(new Intent(main,GerenNews.class));
                 break;
             case R.id.ll_geren_shipin:
                 break;

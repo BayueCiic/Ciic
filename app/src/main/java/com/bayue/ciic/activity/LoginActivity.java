@@ -10,16 +10,30 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bayue.ciic.App;
 import com.bayue.ciic.MainActivity;
 import com.bayue.ciic.R;
 import com.bayue.ciic.base.BaseActivity;
 import com.bayue.ciic.base.BaseLoginActivity;
+import com.bayue.ciic.bean.RegBean;
+import com.bayue.ciic.http.API;
+import com.bayue.ciic.utils.DensityUtil;
+import com.bayue.ciic.utils.HTTPUtils;
+import com.bayue.ciic.utils.ToolKit;
+import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * Created by Administrator on 2017/6/26.
@@ -84,6 +98,74 @@ public class LoginActivity extends BaseLoginActivity {
                 startActivity(new Intent(LoginActivity.this,LoginRegisterActivity.class));
                 break;
         }
+    }
+    String phone;
+    private void login(){
+        phone=etLoginAccount.getText().toString();
+//        String verification=etCommonVerification.getText().toString();
+        String password=etLoginPassword.getText().toString();
+//        String password2=etCommonPassword2.getText().toString();
+
+        if(phone.length()!=11){
+            Toast.makeText(this,"请输入正确的手机号码",Toast.LENGTH_SHORT).show();
+            return;
+        }
+//        if(verification.isEmpty()){
+//            Toast.makeText(this,"请输入验证码",Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+        if(password.isEmpty()){
+            Toast.makeText(this,"请输入密码",Toast.LENGTH_SHORT).show();
+            return;
+        }
+//        if(password.equals(password2)){
+//            Toast.makeText(this,"两次密码不一致",Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+        Map<String ,Object> map=new HashMap<>();
+
+        map.put("phone",phone);
+        map.put("password",password);
+        HTTPUtils.getNetDATA(API.BaseUrl + API.Login.LOGIN, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                String msg=response.body().string();
+                if(response.code()==200){
+                    Gson gson=new Gson();
+                    final RegBean bean=gson.fromJson(msg,RegBean.class);
+                    ToolKit.runOnMainThreadSync(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(bean.getCode()==200){
+                                DensityUtil.showToast(LoginActivity.this,bean.getData());
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                LoginActivity.this.finish();
+                                App.bgActivity.finish();
+                            }else {
+                                DensityUtil.showToast(LoginActivity.this,bean.getMsg());
+                            }
+                        }
+                    });
+                }else {
+                    ToolKit.runOnMainThreadSync(new Runnable() {
+                        @Override
+                        public void run() {
+                            DensityUtil.showToast(LoginActivity.this,response.message());
+                        }
+                    });
+
+
+
+                }
+            }
+        });
+
+
+
     }
 
     /*private void initAnim() {

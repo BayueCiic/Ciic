@@ -28,5 +28,10 @@
     <color name="gerenMokuai">#F6F6F6</color>
     <!--官方信息title-->
     <color name="guanfangtitlecolor">#DCDCDC</color>
+    <!--新闻管理bg填充-->
+    <color name="itemtitlecolor">#F8F4ED</color>
+    <!--新闻管理平台企业BJ-->
+    <color name="newstitleBj">#FCECD3</color>
+    <color name="h99">#999999</color>
 
 </resources>

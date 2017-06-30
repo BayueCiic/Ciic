@@ -95,7 +95,7 @@ public class MainActivity extends BaseActivity {
         FragmentTransaction transaction=getFragmentManager().beginTransaction();
         ll.setBackgroundColor(getResources().getColor(R.color.clickColor));
         getFragmentManager().popBackStack();
-        Log.e("数量yyyyyyy", getFragmentManager().getBackStackEntryCount()+"");
+//        Log.e("数量yyyyyyy", getFragmentManager().getBackStackEntryCount()+"");
         transaction.replace(R.id.fl_main,fragm);
 //        transaction.addToBackStack(null);//将fragment加入返回栈
         transaction.commit();
@@ -112,7 +112,7 @@ public class MainActivity extends BaseActivity {
         FragmentTransaction transaction=getFragmentManager().beginTransaction();
 //        ll.setBackgroundColor(getResources().getColor(R.color.clickColor));
         getFragmentManager().popBackStack();
-       Log.e("数量", getFragmentManager().getBackStackEntryCount()+"");
+        Log.e("数量", getFragmentManager().getBackStackEntryCount()+"");
         transaction.add(R.id.fl_main,fragm,tag);
         transaction.addToBackStack(null);//将fragment加入返回栈
         transaction.commit();

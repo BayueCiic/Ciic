@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_top_title"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_news_platfrom"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="平台"
+            android:textColor="@color/themecolor"
+            android:textSize="26px"
+            android:background="@drawable/geren_newstitle_bg"/>
+        <TextView
+            android:id="@+id/tv_news_company"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="企业"
+            android:textColor="@color/h99"
+            android:textSize="26px"
+            android:background="@color/itemtitlecolor"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:paddingLeft="30px"
+        android:paddingRight="30px"
+        android:paddingTop="20px"
+        android:paddingBottom="67px"
+        android:background="@color/gerenBg">
+        <FrameLayout
+            android:id="@+id/fl_news"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+    
+</LinearLayout>
