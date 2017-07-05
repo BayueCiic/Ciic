@@ -1,7 +1,11 @@
 package com.bayue.ciic.fragment;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +14,8 @@ import android.widget.TextView;
 
 import com.bayue.ciic.R;
 import com.bayue.ciic.base.BaseFragment;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +49,7 @@ public class MainPlatfrom extends BaseFragment {
     ViewPager vpPaltfrom;
     Unbinder unbinder;
 
+    ArrayList<BaseFragment> fragments;
     @Override
     protected int getViewId() {
         return R.layout.frament_main_platfrom;
@@ -50,9 +57,17 @@ public class MainPlatfrom extends BaseFragment {
 
     @Override
     public void init() {
+        fragments=new ArrayList<>();
+        fragments.add(new PlatfromShouye());
+        fragments.add(new PlatfromShouye());
 
+        vpPaltfrom.setAdapter(new VpAdapter(getChildFragmentManager()));
+        vpPaltfrom.setCurrentItem(0);
+        Log.e("创建++++++++++","111111111==="+fragments.size());
 
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -89,4 +104,20 @@ public class MainPlatfrom extends BaseFragment {
                 break;
         }
     }
+    class  VpAdapter extends FragmentPagerAdapter{
+        public VpAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+    }
+
 }

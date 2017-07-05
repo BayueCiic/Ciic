@@ -52,6 +52,7 @@ public class LoginBgActivity extends BaseActivity {
                 SplashScreen.this.finish();*/
                 if(!Preferences.getString(getApplicationContext(),Preferences.TOKEN).equals("-1")){
                     startActivity(new Intent(LoginBgActivity.this, MainActivity.class));
+                    LoginBgActivity.this.finish();
 
                 }else {
                     startActivity(new Intent(LoginBgActivity.this, LoginActivity.class));

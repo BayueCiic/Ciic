@@ -1,10 +1,15 @@
 package com.bayue.ciic.fragment;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,21 +18,43 @@ import android.widget.TextView;
 
 import com.bayue.ciic.MainActivity;
 import com.bayue.ciic.R;
+import com.bayue.ciic.activity.GerenCanyu;
 import com.bayue.ciic.activity.GerenComplaint;
 import com.bayue.ciic.activity.GerenGuanyu;
 import com.bayue.ciic.activity.GerenNews;
 import com.bayue.ciic.activity.GerenParty;
 import com.bayue.ciic.activity.GerenShezhi;
+import com.bayue.ciic.activity.GerenShoucang;
 import com.bayue.ciic.activity.GerenWonderful;
 import com.bayue.ciic.activity.GerenXiugai;
 import com.bayue.ciic.activity.GerenXx;
 import com.bayue.ciic.activity.Gerenlianxi;
+import com.bayue.ciic.activity.LoginActivity;
+import com.bayue.ciic.activity.LoginBgActivity;
 import com.bayue.ciic.base.BaseFragment;
+import com.bayue.ciic.bean.DetailsBean;
+import com.bayue.ciic.bean.GerenBean;
+import com.bayue.ciic.http.API;
+import com.bayue.ciic.preferences.Preferences;
+import com.bayue.ciic.utils.HTTPUtils;
+import com.bayue.ciic.utils.ToastUtils;
+import com.bayue.ciic.utils.ToolKit;
+import com.bayue.ciic.utils.glide.GlideCircleTransform;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * Created by Administrator on 2017/6/27.
@@ -72,7 +99,11 @@ public class MainGeren extends BaseFragment {
     RelativeLayout rlGerenTuichu;
     Unbinder unbinder;
     MainActivity main;
+    @BindView(R.id.tv_titletxt)
+    TextView tvTitletxt;
+    boolean b=false;
 
+    RequestManager glideRequest;
     @Override
     protected int getViewId() {
         return R.layout.frament_main_geren;
@@ -80,8 +111,21 @@ public class MainGeren extends BaseFragment {
 
     @Override
     public void init() {
-        main= (MainActivity) getActivity();
-
+        main = (MainActivity) getActivity();
+        hide();
+        glideRequest= Glide.with(main);
+        tvTitletxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(b){
+                    hide();
+                    b=false;
+                }else {
+                    show();
+                    b=true;
+                }
+            }
+        });
     }
 
     @Override
@@ -102,46 +146,168 @@ public class MainGeren extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.fl_shezhi:
-                main.startActivity(new Intent(main,GerenShezhi.class));
+                main.startActivity(new Intent(main, GerenShezhi.class));
                 break;
             case R.id.iv_geren_toux:
                 break;
             case R.id.ll_geren_huodong:
-                main.startActivity(new Intent(main,GerenParty.class));
-
+                main.startActivity(new Intent(main, GerenParty.class));
                 break;
             case R.id.ll_geren_xinwen:
-                main.startActivity(new Intent(main,GerenNews.class));
+                main.startActivity(new Intent(main, GerenNews.class));
                 break;
             case R.id.ll_geren_shipin:
                 break;
             case R.id.ll_geren_zhibo:
                 break;
             case R.id.ll_geren_jingcai:
-                main.startActivity(new Intent(main,GerenWonderful.class));
-
+                main.startActivity(new Intent(main, GerenWonderful.class));
                 break;
             case R.id.ll_geren_canyu:
+                main.startActivity(new Intent(main, GerenCanyu.class));
                 break;
             case R.id.ll_geren_shoucang:
+                main.startActivity(new Intent(main, GerenShoucang.class));
                 break;
             case R.id.ll_geren_tousu:
-                main.startActivity(new Intent(main,GerenComplaint.class));
+                main.startActivity(new Intent(main, GerenComplaint.class));
                 break;
             case R.id.rl_geren_xx:
-                main.startActivity(new Intent(main,GerenXx.class));
+                main.startActivity(new Intent(main, GerenXx.class));
                 break;
             case R.id.rl_geren_guanyu:
-                main.startActivity(new Intent(main,GerenGuanyu.class));
+                main.startActivity(new Intent(main, GerenGuanyu.class));
                 break;
             case R.id.rl_geren_lianxi:
-                main.startActivity(new Intent(main,Gerenlianxi.class));
+                main.startActivity(new Intent(main, Gerenlianxi.class));
                 break;
             case R.id.rl_geren_xiugai:
-                main.startActivity(new Intent(main,GerenXiugai.class));
+                main.startActivity(new Intent(main, GerenXiugai.class));
                 break;
             case R.id.rl_geren_tuichu:
+                exit();
                 break;
         }
+    }
+
+    private void show() {
+
+        llGerenHuodong.setVisibility(View.VISIBLE);
+        llGerenXinwen.setVisibility(View.VISIBLE);
+        llGerenShipin.setVisibility(View.VISIBLE);
+        llGerenZhibo.setVisibility(View.VISIBLE);
+        llGerenJingcai.setVisibility(View.VISIBLE);
+
+    }
+
+    private void hide() {
+
+        llGerenHuodong.setVisibility(View.GONE);
+        llGerenXinwen.setVisibility(View.GONE);
+        llGerenShipin.setVisibility(View.GONE);
+        llGerenZhibo.setVisibility(View.GONE);
+        llGerenJingcai.setVisibility(View.GONE);
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getData();
+    }
+
+    private void getData() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", Preferences.getString(main, Preferences.TOKEN));
+        HTTPUtils.getNetDATA(API.BaseUrl + API.user.GEREN, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ToolKit.runOnMainThreadSync(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtils.showShortToast("请检查网络");
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                String msg = response.body().string();
+                if (response.code() == 200) {
+                    Gson gson = new Gson();
+                    final GerenBean bean = gson.fromJson(msg, GerenBean.class);
+
+                    if (bean.getCode() == 200) {
+                        ToolKit.runOnMainThreadSync(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(bean.getData()!=null){
+                                    Log.e("uri========",bean+"");
+                                    glideRequest.load("http://192.168.1.171/zhongz/"+bean.getData().getUseravatar())
+                                            .placeholder(R.mipmap.bianjiziliao_toux2_3x)
+                                            .error(R.mipmap.bianjiziliao_toux2_3x)
+                                            .transform(new GlideCircleTransform(main))
+                                            .into(ivGerenToux);
+                                    tvGerenToux.setText(bean.getData().getEnterpriseShortName()+"-"+bean.getData().getUsername());
+                                    tvGerenCompanyname.setText(bean.getData().getEnterpriseName());
+                                    tvGerenMininame.setText(bean.getData().getEnterpriseShortName());
+
+                                }
+
+
+                            }
+                        });
+                    } else {
+                        ToolKit.runOnMainThreadSync(new Runnable() {
+                            @Override
+                            public void run() {
+                                ToastUtils.showShortToast(bean.getMsg());
+                            }
+                        });
+                    }
+                } else {
+                    ToolKit.runOnMainThreadSync(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.showShortToast(response.message());
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    private void exit(){
+        LayoutInflater inflaterDl = LayoutInflater.from(main);
+        LinearLayout layout = (LinearLayout)inflaterDl.inflate(R.layout.dialog_exit, null );
+
+        //对话框
+        final Dialog dialog = new AlertDialog.Builder(main).create();
+        dialog.show();
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes() ;
+        Display display =main.getWindowManager().getDefaultDisplay();
+        params.width =(int) (display.getWidth()*0.8);
+
+        //使用这种方式更改了dialog的框宽
+        dialog.getWindow().setAttributes(params);
+        dialog.getWindow().setContentView(layout);
+
+        layout.findViewById(R.id.but_dailog_quxiao).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        layout.findViewById(R.id.but_dailog_queding).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Preferences.saveString(getContext(),Preferences.TOKEN,"-1");
+                dialog.dismiss();
+                main.startActivity(new Intent(main, LoginBgActivity.class));
+                main.finish();
+            }
+        });
+
+
     }
 }

@@ -11,6 +11,7 @@ import com.bayue.ciic.utils.Utils;
 
 public class App extends Application {
     public static Activity bgActivity;
+    public static Activity mainActivity;
     @Override
     public void onCreate() {
         super.onCreate();

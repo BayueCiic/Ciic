@@ -19,22 +19,23 @@ import butterknife.Unbinder;
  * Created by Administrator on 2017/6/30.
  */
 
-public class NewsCompany extends BaseFragment {
-    @BindView(R.id.rlv_company)
-    RecyclerView rlvCompany;
+public class PartyPlatfrom extends BaseFragment {
+    @BindView(R.id.rlv_platfrom)
+    RecyclerView rlvPlatfrom;
     Unbinder unbinder;
 
     @Override
     protected int getViewId() {
-        return R.layout.frament_news_company;
+        return R.layout.frament_news_platfrom;
     }
 
     @Override
     public void init() {
-        rlvCompany.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rlvCompany.setHasFixedSize(true);
-        rlvCompany.setItemAnimator(new DefaultItemAnimator());
-        rlvCompany.setAdapter(new NewsCompany.Myadapter());
+
+        rlvPlatfrom.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rlvPlatfrom.setHasFixedSize(true);
+        rlvPlatfrom.setItemAnimator(new DefaultItemAnimator());
+        rlvPlatfrom.setAdapter(new PartyPlatfrom.Myadapter());
 
     }
 
@@ -51,9 +52,7 @@ public class NewsCompany extends BaseFragment {
         super.onDestroyView();
         unbinder.unbind();
     }
-
-
-    class Myadapter extends RecyclerView.Adapter<NewsCompany.Myadapter.MyHolder> {
+    class Myadapter extends RecyclerView.Adapter<PartyPlatfrom.Myadapter.MyHolder> {
 
         public class MyHolder extends RecyclerView.ViewHolder{
 
@@ -62,14 +61,14 @@ public class NewsCompany extends BaseFragment {
             }
         }
         @Override
-        public NewsCompany.Myadapter.MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_company,parent,false);
-            NewsCompany.Myadapter.MyHolder holder=new NewsCompany.Myadapter.MyHolder(v);
+        public PartyPlatfrom.Myadapter.MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_party_platfrom,parent,false);
+            PartyPlatfrom.Myadapter.MyHolder holder=new PartyPlatfrom.Myadapter.MyHolder(v);
             return holder;
         }
 
         @Override
-        public void onBindViewHolder(NewsCompany.Myadapter.MyHolder holder, int position) {
+        public void onBindViewHolder(PartyPlatfrom.Myadapter.MyHolder holder, int position) {
 
         }
 

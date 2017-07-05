@@ -15,9 +15,10 @@
         android:paddingRight="30px"
         android:paddingTop="20px">
 
-        <RelativeLayout
+        <RelativeLayout android:id="@+id/rl_shoucang_bianji"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:background="@android:color/white"
             android:paddingBottom="25px"
             android:paddingLeft="20px"
@@ -25,7 +26,7 @@
             android:paddingTop="25px">
 
             <CheckBox
-                android:id="@+id/cb_canyu_checkall"
+                android:id="@+id/cb_shoucang_checkall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -36,7 +37,7 @@
                 android:textSize="22px" />
 
             <TextView
-                android:id="@+id/tv_canyu_del"
+                android:id="@+id/tv_shoucang_del"
                 android:layout_width="109px"
                 android:layout_height="53px"
                 android:layout_alignParentRight="true"
@@ -48,53 +49,13 @@
 
 
         </RelativeLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="57px"
-            android:layout_marginTop="20px"
-            android:gravity="center_vertical"
-            android:background="@color/itemtitlecolor">
-            <TextView
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="活动标题"
-                android:textSize="22px"
-                android:textColor="@android:color/black"/>
-            <TextView
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="发布者"
-                android:textSize="22px"
-                android:textColor="@android:color/black"/>
-            <TextView
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="上传时间"
-                android:textSize="22px"
-                android:textColor="@android:color/black"/>
-            <TextView
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="活动状态"
-                android:textSize="22px"
-                android:textColor="@android:color/black"/>
-        </LinearLayout>
+
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_canyu"
+            android:id="@+id/rv_shoucang"
+            android:layout_marginTop="20px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-
-
 
         </android.support.v7.widget.RecyclerView>
 

@@ -32,4 +32,21 @@ public class HTTPUtils {
                 .build();
         OKHttpUtils.enqueue(request,callback);
     }
+    public static void getFileDATA(String url, Map<String, Object> map, Callback callback){
+        Tracer.e("AddAddressActivity", url);
+        map.put("safecode", "BaYue.JingCai");
+        map.put("apiversion", "v.1.0");
+        RequestBody body ;
+        FormBody.Builder formBody = new FormBody.Builder();
+        for (Map.Entry<String, Object> entry : map.entrySet()){
+            formBody.add(entry.getKey(), String.valueOf(entry.getValue()));
+//            Tracer.e("AddAddressActivity", entry.getKey() +":"+String.valueOf(entry.getValue()));
+        }
+        body = formBody.build();
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        OKHttpUtils.enqueue(request,callback);
+    }
 }

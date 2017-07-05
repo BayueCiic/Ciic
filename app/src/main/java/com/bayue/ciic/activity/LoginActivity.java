@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,8 +69,26 @@ public class LoginActivity extends BaseLoginActivity {
 
     @Override
     protected void initViews() {
+        cboxLoginMemoryPassword.setVisibility(View.GONE);
+        /*if(!Preferences.getUserName().isEmpty()&&!Preferences.getPassword().isEmpty()){
 
+        }
+        etLoginAccount.setText(Preferences.getUserName());
+        etLoginPassword.setText(Preferences.getPassword());
+        cboxLoginMemoryPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    Preferences.saveUserName(etLoginAccount.getText().toString());
+                    Preferences.savePassword(etLoginPassword.getText().toString());
+                }else {
+                    Preferences.saveUserName("");
+                    Preferences.savePassword("");
+                }
+            }
+        });*/
     }
+
 
 
 
@@ -105,7 +124,7 @@ public class LoginActivity extends BaseLoginActivity {
     private void login(){
         phone=etLoginAccount.getText().toString();
 //        String verification=etCommonVerification.getText().toString();
-        String password=etLoginPassword.getText().toString();
+        final String password=etLoginPassword.getText().toString();
 //        String password2=etCommonPassword2.getText().toString();
 
         if(phone.length()!=11){
@@ -144,6 +163,10 @@ public class LoginActivity extends BaseLoginActivity {
                         public void run() {
                             if(bean.getCode()==200){
                                 Preferences.saveString(getApplicationContext(),Preferences.TOKEN,bean.getToken());
+                                Preferences.saveAdmin(bean.getIs_admin());
+                                Preferences.saveUserName(etLoginAccount.getText().toString());
+                                Preferences.savePassword(etLoginPassword.getText().toString());
+                                Log.e("token",bean.getToken());
                                 DensityUtil.showToast(LoginActivity.this,bean.getData());
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 LoginActivity.this.finish();

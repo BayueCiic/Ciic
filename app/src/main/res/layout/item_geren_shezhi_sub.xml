@@ -5,10 +5,10 @@
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55px"
+        android:layout_height="70px"
         android:paddingLeft="30px"
         android:paddingRight="30px"
-        android:background="@color/guanfangtitlecolor"
+        android:background="@color/accountBg"
         android:gravity="center_vertical">
         <TextView android:id="@+id/tv_subitem_companyname"
             android:layout_width="wrap_content"

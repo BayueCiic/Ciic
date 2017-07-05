@@ -1,11 +1,13 @@
 package com.bayue.ciic;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+
+
+
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -15,6 +17,7 @@ import com.bayue.ciic.base.BaseActivity;
 import com.bayue.ciic.fragment.MainCompany;
 import com.bayue.ciic.fragment.MainGeren;
 import com.bayue.ciic.fragment.MainPlatfrom;
+import com.bayue.ciic.preferences.Preferences;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,11 +53,14 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-
+        App.mainActivity=this;
         platfrom=new MainPlatfrom();
         company=new MainCompany();
         geren=new MainGeren();
         setFrament(geren,llMainGeren);
+
+//        Log.e("Token======", Preferences.getString(this,Preferences.TOKEN));
+
 
 
     }
@@ -89,10 +95,10 @@ public class MainActivity extends BaseActivity {
                 break;
         }
     }
-    private void setFrament(Fragment fragm,LinearLayout ll){
+    private void setFrament(Fragment fragm, LinearLayout ll){
         restoreColor();
 
-        FragmentTransaction transaction=getFragmentManager().beginTransaction();
+        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
         ll.setBackgroundColor(getResources().getColor(R.color.clickColor));
         getFragmentManager().popBackStack();
 //        Log.e("数量yyyyyyy", getFragmentManager().getBackStackEntryCount()+"");
@@ -109,8 +115,8 @@ public class MainActivity extends BaseActivity {
 
     public void addFrament(Fragment fragm,String tag){
 
-        FragmentTransaction transaction=getFragmentManager().beginTransaction();
-//        ll.setBackgroundColor(getResources().getColor(R.color.clickColor));
+        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+//      ll.setBackgroundColor(getResources().getColor(R.color.clickColor));
         getFragmentManager().popBackStack();
         Log.e("数量", getFragmentManager().getBackStackEntryCount()+"");
         transaction.add(R.id.fl_main,fragm,tag);

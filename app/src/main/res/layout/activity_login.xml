@@ -67,8 +67,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/memoryPassword"
+                android:button="@drawable/checkboxstye"
                 android:textSize="20px"
-                android:layout_marginLeft="-13px"
+                android:paddingLeft="20px"
                 android:textColor="@color/accountText"/>
             <TextView android:id="@+id/tv_login_forgetPassword"
                 android:layout_width="wrap_content"

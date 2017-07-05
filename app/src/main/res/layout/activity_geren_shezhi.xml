@@ -49,6 +49,7 @@
             android:id="@+id/et_shezhi_name"
             android:layout_width="0px"
             android:layout_weight="1"
+
             android:background="@android:color/transparent"
             android:layout_height="match_parent"
             android:hint="请输入姓名"
@@ -59,7 +60,7 @@
         android:id="@+id/elv_shezhi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2px">
+        android:layout_marginTop="1px">
 
     </ExpandableListView>
     <!--<RelativeLayout
@@ -97,7 +98,7 @@
         android:layout_height="89px"
         android:paddingRight="30px"
         android:paddingLeft="30px"
-        android:layout_marginTop="2px"
+        android:layout_marginTop="3px"
         android:gravity="center_vertical"
         android:background="@android:color/white">
         <TextView
@@ -106,10 +107,10 @@
             android:text="公司简称："
             android:textSize="20px"
             android:textColor="@android:color/black"/>
-        <TextView
+        <TextView android:id="@+id/tv_shezhi_shorname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="中智"
+            android:text=""
             android:textColor="@color/gerenTextcolor"
             android:textSize="20px"/>
     </LinearLayout>

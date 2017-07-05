@@ -19,7 +19,7 @@ public class ToolKit {
   
     /** 
      * Asynchronously 
-     * The child thread asynchronous run relative to the main thread, 
+     * The child thread asynchronous run relative to the popup_up thread,
      * not blocking the child thread 
      * 
      * @param runnable Runnable Interface 
@@ -36,7 +36,7 @@ public class ToolKit {
      * Synchronously 
      * The child thread relative thread synchronization operation, 
      * blocking the child thread, 
-     * thread for the main thread to complete 
+     * thread for the popup_up thread to complete
      * 
      * @param runnable Runnable Interface 
      */  

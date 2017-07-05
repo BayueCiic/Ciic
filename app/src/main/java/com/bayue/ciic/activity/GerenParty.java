@@ -1,8 +1,9 @@
 package com.bayue.ciic.activity;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -10,8 +11,8 @@ import android.widget.TextView;
 
 import com.bayue.ciic.R;
 import com.bayue.ciic.base.BaseActivity;
-import com.bayue.ciic.fragment.NewsCompany;
-import com.bayue.ciic.fragment.NewsPlatfrom;
+import com.bayue.ciic.fragment.PartyCompany;
+import com.bayue.ciic.fragment.PartyPlatfrom;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,8 +42,8 @@ public class GerenParty extends BaseActivity {
     @BindView(R.id.fl_news)
     FrameLayout flNews;
 
-    NewsCompany company;
-    NewsPlatfrom platfrom;
+    Fragment company;
+    Fragment platfrom;
 
     @Override
     protected void setTheme() {
@@ -60,11 +61,11 @@ public class GerenParty extends BaseActivity {
         tvTitletxt.setText("活动管理");
         ivShezhi.setVisibility(View.INVISIBLE);
 
-        company=new NewsCompany();
-        platfrom=new NewsPlatfrom();
-        FragmentTransaction transaction=getFragmentManager().beginTransaction();
+       company=new PartyCompany();
+        platfrom=new PartyPlatfrom();
+        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
 
-        transaction.replace(R.id.fl_news,platfrom);
+        FragmentTransaction replace = transaction.replace(R.id.fl_news, platfrom);
 
         transaction.commit();
     }
@@ -105,7 +106,7 @@ public class GerenParty extends BaseActivity {
     }
     private void setFrament(Fragment frament){
 
-        FragmentTransaction transaction=getFragmentManager().beginTransaction();
+        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
 
         transaction.replace(R.id.fl_news,frament);
 
@@ -114,4 +115,5 @@ public class GerenParty extends BaseActivity {
 
 
     }
+
 }

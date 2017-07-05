@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bayue.ciic.R;
-import com.bayue.ciic.activity.GerenXx;
 import com.bayue.ciic.base.BaseFragment;
 
 import butterknife.BindView;
@@ -20,23 +19,22 @@ import butterknife.Unbinder;
  * Created by Administrator on 2017/6/30.
  */
 
-public class NewsPlatfrom extends BaseFragment {
-    @BindView(R.id.rlv_platfrom)
-    RecyclerView rlvPlatfrom;
+public class PartyCompany extends BaseFragment {
+    @BindView(R.id.rlv_company)
+    RecyclerView rlvCompany;
     Unbinder unbinder;
 
     @Override
     protected int getViewId() {
-        return R.layout.frament_news_platfrom;
+        return R.layout.frament_news_company;
     }
 
     @Override
     public void init() {
-
-        rlvPlatfrom.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rlvPlatfrom.setHasFixedSize(true);
-        rlvPlatfrom.setItemAnimator(new DefaultItemAnimator());
-        rlvPlatfrom.setAdapter(new NewsPlatfrom.Myadapter());
+        rlvCompany.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rlvCompany.setHasFixedSize(true);
+        rlvCompany.setItemAnimator(new DefaultItemAnimator());
+        rlvCompany.setAdapter(new PartyCompany.Myadapter());
 
     }
 
@@ -53,7 +51,9 @@ public class NewsPlatfrom extends BaseFragment {
         super.onDestroyView();
         unbinder.unbind();
     }
-    class Myadapter extends RecyclerView.Adapter<NewsPlatfrom.Myadapter.MyHolder> {
+
+
+    class Myadapter extends RecyclerView.Adapter<PartyCompany.Myadapter.MyHolder> {
 
         public class MyHolder extends RecyclerView.ViewHolder{
 
@@ -62,14 +62,14 @@ public class NewsPlatfrom extends BaseFragment {
             }
         }
         @Override
-        public NewsPlatfrom.Myadapter.MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_platfrom,parent,false);
-            NewsPlatfrom.Myadapter.MyHolder holder=new NewsPlatfrom.Myadapter.MyHolder(v);
+        public PartyCompany.Myadapter.MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_party_company,parent,false);
+            PartyCompany.Myadapter.MyHolder holder=new PartyCompany.Myadapter.MyHolder(v);
             return holder;
         }
 
         @Override
-        public void onBindViewHolder(NewsPlatfrom.Myadapter.MyHolder holder, int position) {
+        public void onBindViewHolder(PartyCompany.Myadapter.MyHolder holder, int position) {
 
         }
 

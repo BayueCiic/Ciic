@@ -90,7 +90,7 @@ public class LoginRegisterCommonActivity extends BaseLoginActivity {
                 break;
             case R.id.et_common_backlogin:
                 startActivity(new Intent(this,LoginActivity.class));
-                overridePendingTransition(R.animator.slide_left_out, R.animator.slide_right_in);
+                overridePendingTransition(R.anim.slide_left_out, R.anim.slide_right_in);
                 finish();
                 break;
         }

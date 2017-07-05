@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingLeft="30px"
+    android:paddingRight="30px"
+    android:paddingTop="20px"
+    android:paddingBottom="3px"
+    android:background="@color/gerenBg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="67px"
+                android:background="@android:color/white">
+                <ImageView android:id="@+id/iv_shipin_sanjiao"
+                    android:layout_width="21px"
+                    android:layout_height="27px"
+                    android:layout_marginLeft="10px"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:src="@mipmap/xiaosanjiao_3x"/>
+                <TextView android:id="@+id/tv_zhibo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="热门直播"
+                    android:textSize="26px"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/iv_shipin_sanjiao"
+                    android:layout_marginLeft="10px"/>
+                <TextView android:id="@+id/tv_zhibo_xiuxian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="日常休闲"
+                    android:textSize="18px"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_zhibo"
+                    android:layout_marginLeft="20px"/>
+                <View android:id="@+id/view_zhibo_one"
+                    android:layout_width="2px"
+                    android:layout_height="15px"
+                    android:background="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_zhibo_xiuxian"
+                    android:layout_marginLeft="20px"/>
+                <TextView android:id="@+id/tv_zhibo_yepao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="夜跑"
+                    android:textSize="18px"
+                    android:textColor="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/view_zhibo_one"
+                    android:layout_marginLeft="20px"/>
+                <View android:id="@+id/view_zhibo_two"
+                    android:layout_width="2px"
+                    android:layout_height="15px"
+                    android:background="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_zhibo_yepao"
+                    android:layout_marginLeft="20px"/>
+                <TextView android:id="@+id/tv_zhibo_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="500强运动会"
+                    android:textSize="18px"
+                    android:textColor="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/view_zhibo_two"
+                    android:layout_marginLeft="20px"/>
+
+                <TextView android:id="@+id/tv_zhibo_genduo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="更多+"
+                    android:textSize="18px"
+                    android:textColor="@color/gerenTextcolor"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20px"/>
+
+            </RelativeLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/vp_zhibo"
+                android:layout_marginTop="5px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

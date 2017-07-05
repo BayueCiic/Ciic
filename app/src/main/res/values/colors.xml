@@ -3,6 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="black">#000000</color>
     
     <!--灰色横线-->
     <color name="greyHorizontal">#F2F2F2</color>
@@ -34,6 +35,7 @@
     <!--新闻管理平台企业BJ-->
     <color name="newstitleBj">#FCECD3</color>
     <color name="h99">#999999</color>
-
+    <!--灰色按钮-->
+    <color name="huianniu">#FFD1D3D4</color>
 
 </resources>

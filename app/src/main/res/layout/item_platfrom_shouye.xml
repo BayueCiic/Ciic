@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginTop="10px"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@android:color/white"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="138px"
+            android:src="@mipmap/shouye_img01_3x"
+            android:scaleType="fitXY"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="中智—直播"
+            android:textColor="@android:color/black"
+            android:textSize="22px"
+            android:layout_marginLeft="20px"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="主播:中智-管理"
+            android:textSize="18px"
+            android:textColor="@color/h99"
+            android:layout_marginLeft="20px"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>
