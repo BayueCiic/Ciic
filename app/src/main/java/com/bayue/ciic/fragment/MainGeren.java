@@ -243,18 +243,22 @@ public class MainGeren extends BaseFragment {
                             public void run() {
                                 if(bean.getData()!=null){
                                     Log.e("uri========",bean+"");
-                                    glideRequest.load("http://192.168.1.171/zhongz/"+bean.getData().getUseravatar())
-                                            .placeholder(R.mipmap.bianjiziliao_toux2_3x)
-                                            .error(R.mipmap.bianjiziliao_toux2_3x)
-                                            .transform(new GlideCircleTransform(main))
-                                            .into(ivGerenToux);
-                                    tvGerenToux.setText(bean.getData().getEnterpriseShortName()+"-"+bean.getData().getUsername());
-                                    tvGerenCompanyname.setText(bean.getData().getEnterpriseName());
-                                    tvGerenMininame.setText(bean.getData().getEnterpriseShortName());
+                                    Log.e("个人图片===",bean.getData().getUseravatar());
+                                    if(bean.getData()==null){
+                                        return;
+                                    }
+                                    if(ivGerenToux!=null){
+                                        glideRequest.load(bean.getData().getUseravatar())
+                                                .placeholder(R.mipmap.bianjiziliao_toux2_3x)
+                                                .error(R.mipmap.bianjiziliao_toux2_3x)
+                                                .transform(new GlideCircleTransform(main))
+                                                .into(ivGerenToux);
+                                        tvGerenToux.setText(bean.getData().getEnterpriseShortName()+"-"+bean.getData().getUsername());
+                                        tvGerenCompanyname.setText(bean.getData().getEnterpriseName());
+                                        tvGerenMininame.setText(bean.getData().getEnterpriseShortName());
+                                    }
 
                                 }
-
-
                             }
                         });
                     } else {

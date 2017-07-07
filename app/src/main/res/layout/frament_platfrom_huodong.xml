@@ -8,6 +8,7 @@
     android:background="@color/gerenBg"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
@@ -16,65 +17,65 @@
                 android:layout_width="match_parent"
                 android:layout_height="67px"
                 android:background="@android:color/white">
-                <ImageView android:id="@+id/iv_shipin_sanjiao"
+                <ImageView android:id="@+id/iv_huodong_sanjiao"
                     android:layout_width="21px"
                     android:layout_height="27px"
                     android:layout_marginLeft="10px"
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
                     android:src="@mipmap/xiaosanjiao_3x"/>
-                <TextView android:id="@+id/tv_zhibo"
+                <TextView android:id="@+id/tv_huodong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="热门直播"
                     android:textSize="26px"
                     android:textColor="@android:color/black"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/iv_shipin_sanjiao"
+                    android:layout_toRightOf="@+id/iv_huodong_sanjiao"
                     android:layout_marginLeft="10px"/>
-                <TextView android:id="@+id/tv_zhibo_xiuxian"
+                <TextView android:id="@+id/tv_huodong_xiuxian"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="日常休闲"
                     android:textSize="18px"
                     android:textColor="@android:color/black"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/tv_zhibo"
+                    android:layout_toRightOf="@+id/tv_huodong"
                     android:layout_marginLeft="20px"/>
-                <View android:id="@+id/view_zhibo_one"
+                <View android:id="@+id/view_huodong_one"
                     android:layout_width="2px"
                     android:layout_height="15px"
                     android:background="@color/gerenTextcolor"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/tv_zhibo_xiuxian"
+                    android:layout_toRightOf="@+id/tv_huodong_xiuxian"
                     android:layout_marginLeft="20px"/>
-                <TextView android:id="@+id/tv_zhibo_yepao"
+                <TextView android:id="@+id/tv_huodong_yepao"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="夜跑"
                     android:textSize="18px"
                     android:textColor="@color/gerenTextcolor"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/view_zhibo_one"
+                    android:layout_toRightOf="@+id/view_huodong_one"
                     android:layout_marginLeft="20px"/>
-                <View android:id="@+id/view_zhibo_two"
+                <View android:id="@+id/view_huodong_two"
                     android:layout_width="2px"
                     android:layout_height="15px"
                     android:background="@color/gerenTextcolor"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/tv_zhibo_yepao"
+                    android:layout_toRightOf="@+id/tv_huodong_yepao"
                     android:layout_marginLeft="20px"/>
-                <TextView android:id="@+id/tv_zhibo_name"
+                <TextView android:id="@+id/tv_huodong_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="500强运动会"
                     android:textSize="18px"
                     android:textColor="@color/gerenTextcolor"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/view_zhibo_two"
+                    android:layout_toRightOf="@+id/view_huodong_two"
                     android:layout_marginLeft="20px"/>
 
-                <TextView android:id="@+id/tv_zhibo_genduo"
+                <TextView android:id="@+id/tv_huodong_genduo"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -87,7 +88,7 @@
 
             </RelativeLayout>
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/vp_zhibo"
+                android:id="@+id/vp_huodong"
                 android:layout_marginTop="20px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

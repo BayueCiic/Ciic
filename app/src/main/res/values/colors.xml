@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
     
     <!--灰色横线-->
     <color name="greyHorizontal">#F2F2F2</color>
@@ -37,5 +38,9 @@
     <color name="h99">#999999</color>
     <!--灰色按钮-->
     <color name="huianniu">#FFD1D3D4</color>
+
+    <!--首页活动bg-->
+    <color name="shouye_huodongBg">#FDF6E9</color>
+
 
 </resources>

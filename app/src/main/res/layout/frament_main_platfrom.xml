@@ -28,7 +28,7 @@
                     android:src="@mipmap/shouye_sousuo_3x"/>
 
             </FrameLayout>
-            <LinearLayout
+            <LinearLayout android:id="@+id/ll_div"
                 android:layout_weight="1"
                 android:layout_width="0px"
                 android:orientation="vertical"
@@ -126,18 +126,5 @@
         android:layout_height="0px"
         android:layout_weight="1">
     </android.support.v4.view.ViewPager>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </LinearLayout>

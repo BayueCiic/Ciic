@@ -20,6 +20,7 @@ import com.bayue.ciic.R;
 import com.bayue.ciic.base.BaseActivity;
 import com.bayue.ciic.bean.VerificationBean;
 import com.bayue.ciic.http.API;
+import com.bayue.ciic.preferences.Preferences;
 import com.bayue.ciic.utils.HTTPUtils;
 import com.bayue.ciic.utils.ToastUtils;
 import com.bayue.ciic.utils.ToolKit;
@@ -41,6 +42,8 @@ import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+
+import static com.bayue.ciic.activity.GerenShezhi.compressImage2;
 
 /**
  * Created by Administrator on 2017/6/28.
@@ -128,6 +131,7 @@ public class GerenComplaint extends BaseActivity {
         }
     }
     boolean b=false;
+    File file;
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         Log.e("resultCode===>>>>",resultCode+"");
@@ -142,12 +146,18 @@ public class GerenComplaint extends BaseActivity {
             ivComplaintImg1.setImageBitmap(bitmap);
             ivComplaintImg1.setVisibility(View.VISIBLE);
             b=true;
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            file= compressImage2(bitmap);
+
+
+
+
+
+            /*ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
             byte[] bytes = baos.toByteArray();
 
             //base64 encode
-            byte[] encode = Base64.encode(bytes, Base64.DEFAULT);
+            byte[] encode = Base64.encode(bytes, Base64.DEFAULT);*/
 //            pic = new String(encode);
 //            Log.e("base64",pic);
 
@@ -157,17 +167,27 @@ public class GerenComplaint extends BaseActivity {
                 return;
             }
             List<String> photos = (List<String>) data.getSerializableExtra(GalleryActivity.PHOTOS);
-            BitmapFactory.Options opts = new BitmapFactory.Options();
-            opts.inPreferredConfig = Bitmap.Config.ARGB_4444;
-            opts.inSampleSize = 4;
+
+
+
+//            BitmapFactory.Options opts = new BitmapFactory.Options();
+//            opts.inPreferredConfig = Bitmap.Config.ARGB_4444;
+//            opts.inSampleSize = 4;
             for (int i = 0; i <photos.size() ; i++) {
 
-
-                Bitmap bitmap = BitmapFactory.decodeFile(photos.get(i), opts);
+                Log.e("图片==",photos.get(i));
+                /*try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }*/
                 switch (i){
                     case 0:
+                        Bitmap bitmap1=BitmapFactory.decodeFile(photos.get(0),GerenShezhi.getBitmapOption(2));
+                        file=compressImage2(bitmap1);
+                        fileMap.put(file.getName(),file);
                         Glide.with(getBaseContext())
-                                .load(new File(photos.get(i)))
+                                .load(file)
                                 .error(R.mipmap.ic_launcher_round)
                                 .into(ivComplaintImg1);
 //                        ivComplaintImg1.setImageBitmap(bitmap);
@@ -175,22 +195,36 @@ public class GerenComplaint extends BaseActivity {
                         b=true;
                         break;
                     case 1:
-                        ivComplaintImg2.setImageBitmap(bitmap);
+                        Bitmap bitmap2=BitmapFactory.decodeFile(photos.get(1),GerenShezhi.getBitmapOption(2));
+                        file=compressImage2(bitmap2);
+                        fileMap.put(file.getName(),file);
+                        Glide.with(getBaseContext())
+                                .load(file)
+                                .error(R.mipmap.ic_launcher_round)
+                                .into(ivComplaintImg2);
+//                        ivComplaintImg2.setImageBitmap(bitmap);
                         ivComplaintImg2.setVisibility(View.VISIBLE);
                         break;
                     case 2:
-                        ivComplaintImg3.setImageBitmap(bitmap);
+                        Bitmap bitmap3=BitmapFactory.decodeFile(photos.get(2),GerenShezhi.getBitmapOption(2));
+                        file=compressImage2(bitmap3);
+                        fileMap.put(file.getName(),file);
+//                        ivComplaintImg3.setImageBitmap(bitmap);
+                        Glide.with(getBaseContext())
+                                .load(file)
+                                .error(R.mipmap.ic_launcher_round)
+                                .into(ivComplaintImg3);
                         ivComplaintImg3.setVisibility(View.VISIBLE);
                         break;
                 }
 
 
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+              /*  ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
                 byte[] bytes = baos.toByteArray();
 
                 //base64 encode
-                byte[] encode = Base64.encode(bytes, Base64.DEFAULT);
+                byte[] encode = Base64.encode(bytes, Base64.DEFAULT);*/
 //                pic = new String(encode);
 //                Log.e("base64",pic);
     //            mTvShow.setText(encodeString);
@@ -203,17 +237,19 @@ public class GerenComplaint extends BaseActivity {
 //        Log.e(">>>>>>data>>>>>",data+"");
 
     }
-
+    Map<String ,File>  fileMap=new HashMap<>();
     private void tiJiao(){
-        String complaint =etComplaintTxt.getText().toString();
-        if(complaint.isEmpty()&& !b ){
-            ToastUtils.showShortToast("说点什么吧");
+        String txt=etComplaintTxt.getText().toString();
+        if(txt.isEmpty()&&!b ){
+            ToastUtils.showShortToast("你没有添加任何资料");
             return;
         }
         Map<String , Object> map=new HashMap<>();
-        HTTPUtils.getNetDATA(API.BaseUrl + API.user.COMPLAINT, map, new Callback() {
+        map.put("token", Preferences.getString(this,Preferences.TOKEN));
+        map.put("complain",txt);
+        HTTPUtils.getFileDATA(API.BaseUrl + API.user.COMPLAINT, map,fileMap, new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(Call call, IOException e){
                 ToolKit.runOnMainThreadSync(new Runnable() {
                     @Override
                     public void run() {
@@ -225,6 +261,7 @@ public class GerenComplaint extends BaseActivity {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 String msg = response.body().string();
+                Log.e("返回值===",msg);
                 if (response.code() == 200) {
                     Gson gson = new Gson();
                     final VerificationBean bean = gson.fromJson(msg, VerificationBean.class);
@@ -233,6 +270,7 @@ public class GerenComplaint extends BaseActivity {
                         public void run() {
                             if (bean.getCode() == 200) {
                                 ToastUtils.showShortToast(bean.getData());
+                                finish();
 //                                for (int i = 0; i < data.size(); i++) {
 //                                    if (data.get(i).isSelected()) {
 //                                        data.remove(i);
@@ -241,7 +279,7 @@ public class GerenComplaint extends BaseActivity {
 //                                    }
 //                                }
                             } else {
-                                ToastUtils.showShortToast(bean.getMsg());
+                                ToastUtils.showShortToast(bean.getMsg()+">>>>>>>>>>>");
                             }
                         }
                     });

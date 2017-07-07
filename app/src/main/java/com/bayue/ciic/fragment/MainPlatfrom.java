@@ -9,7 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bayue.ciic.R;
@@ -49,7 +52,19 @@ public class MainPlatfrom extends BaseFragment {
     ViewPager vpPaltfrom;
     Unbinder unbinder;
 
+
+    int currentIndex;
+
+    int screenWidth;
+
     ArrayList<BaseFragment> fragments;
+    @BindView(R.id.ll_div)
+    LinearLayout llDiv;
+    @BindView(R.id.iv_shezhi)
+    ImageView ivShezhi;
+    @BindView(R.id.tv_shezhi)
+    TextView tvShezhi;
+
     @Override
     protected int getViewId() {
         return R.layout.frament_main_platfrom;
@@ -57,17 +72,168 @@ public class MainPlatfrom extends BaseFragment {
 
     @Override
     public void init() {
-        fragments=new ArrayList<>();
+        fragments = new ArrayList<>();
+        initTabLineWidth();
         fragments.add(new PlatfromShouye());
-        fragments.add(new PlatfromShouye());
+        fragments.add(new PlatfromZhibo());
+        fragments.add(new PlatfromShipin());
+        fragments.add(new PlatfromHuodong());
+        fragments.add(new PlatfromNews());
+        fragments.add(new PlatfromWenderful());
 
         vpPaltfrom.setAdapter(new VpAdapter(getChildFragmentManager()));
         vpPaltfrom.setCurrentItem(0);
-        Log.e("创建++++++++++","111111111==="+fragments.size());
+        setColor(0);
+//        Log.e("创建++++++++++","111111111==="+fragments.size());
+
+        vpPaltfrom.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            /**
+             * state滑动中的状态 有三种状态（0，1，2） 1：正在滑动 2：滑动完毕 0：什么都没做。
+             */
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+
+            /**
+             * position :当前页面，及你点击滑动的页面 offset:当前页面偏移的百分比
+             * offsetPixels:当前页面偏移的像素位置
+             */
+            @Override
+            public void onPageScrolled(int position, float offset,
+                                       int offsetPixels) {
+                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) viewPlatfromXian
+                        .getLayoutParams();
+
+                Log.e("offset:", offset + "");
+                /**
+                 * 利用currentIndex(当前所在页面)和position(下一个页面)以及offset来
+                 * 设置mTabLineIv的左边距 滑动场景：
+                 * 记3个页面,
+                 * 从左到右分别为0,1,2
+                 * 0->1; 1->2; 2->1; 1->0
+                 */
+
+                if (currentIndex == 0 && position == 0)// 0->1
+                {
+                    lp.leftMargin = (int) (offset * (screenWidth * 1.0 / 6) + currentIndex
+                            * (screenWidth / 6));
+                    Log.e(">>>>>滑动>>>", "" + lp.leftMargin);
+
+                } else if (currentIndex == 1 && position == 0) // 1->0
+                {
+                    lp.leftMargin = (int) (-(1 - offset)
+                            * (screenWidth * 1.0 / 6) + currentIndex
+                            * (screenWidth / 6));
+
+                } else if (currentIndex == 1 && position == 1) // 1->2
+                {
+                    lp.leftMargin = (int) (offset * (screenWidth * 1.0 / 6) + currentIndex
+                            * (screenWidth / 6));
+                } else if (currentIndex == 2 && position == 1) // 2->1
+                {
+                    lp.leftMargin = (int) (-(1 - offset)
+                            * (screenWidth * 1.0 / 6) + currentIndex
+                            * (screenWidth / 6));
+                } else if (currentIndex == 2 && position == 2) // 2->3
+                {
+                    lp.leftMargin = (int) (offset * (screenWidth * 1.0 / 6) + currentIndex
+                            * (screenWidth / 6));
+                } else if (currentIndex == 3 && position == 2) // 3->2
+                {
+                    lp.leftMargin = (int) (-(1 - offset)
+                            * (screenWidth * 1.0 / 6) + currentIndex
+                            * (screenWidth / 6));
+                } else if (currentIndex == 3 && position == 3) // 3->4
+                {
+                    lp.leftMargin = (int) (offset * (screenWidth * 1.0 / 6) + currentIndex
+                            * (screenWidth / 6));
+                } else if (currentIndex == 4 && position == 3) // 4->3
+                {
+                    lp.leftMargin = (int) (-(1 - offset)
+                            * (screenWidth * 1.0 / 6) + currentIndex
+                            * (screenWidth / 6));
+                } else if (currentIndex == 4 && position == 4) // 4->5
+                {
+                    lp.leftMargin = (int) (offset * (screenWidth * 1.0 / 6) + currentIndex
+                            * (screenWidth / 6));
+                } else if (currentIndex == 5 && position == 4) // 5->4
+                {
+                    lp.leftMargin = (int) (-(1 - offset)
+                            * (screenWidth * 1.0 / 6) + currentIndex
+                            * (screenWidth / 6));
+                }
+
+                viewPlatfromXian.setLayoutParams(lp);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                setColor(position);
+                currentIndex = position;
+            }
+        });
+
+
+    }
+    private void resetTextView(){
+        tvPaltfromShouye.setTextColor(getContext().getResources().getColor(R.color.newgerenBg));
+        tvPaltfromZhibo.setTextColor(getContext().getResources().getColor(R.color.newgerenBg));
+        tvPaltfromShipin.setTextColor(getContext().getResources().getColor(R.color.newgerenBg));
+        tvPaltfromHuodong.setTextColor(getContext().getResources().getColor(R.color.newgerenBg));
+        tvPaltfromXinwen.setTextColor(getContext().getResources().getColor(R.color.newgerenBg));
+        tvPaltfromJingcai.setTextColor(getContext().getResources().getColor(R.color.newgerenBg));
+    }
+    private void setColor(int i){
+        resetTextView();
+        switch (i){
+            case 0:
+                tvPaltfromShouye.setTextColor(getContext().getResources().getColor(R.color.white));
+                break;
+            case 1:
+                tvPaltfromZhibo.setTextColor(getContext().getResources().getColor(R.color.white));
+
+                break;
+            case 2:
+                tvPaltfromShipin.setTextColor(getContext().getResources().getColor(R.color.white));
+
+                break;
+            case 3:
+                tvPaltfromHuodong.setTextColor(getContext().getResources().getColor(R.color.white));
+
+                break;
+            case 4:
+                tvPaltfromXinwen.setTextColor(getContext().getResources().getColor(R.color.white));
+
+                break;
+            case 5:
+                tvPaltfromJingcai.setTextColor(getContext().getResources().getColor(R.color.white));
+
+                break;
+        }
 
     }
 
+    private void initTabLineWidth() {
+        ViewTreeObserver vto2 = llDiv.getViewTreeObserver();
+        vto2.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                llDiv.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                screenWidth=llDiv.getWidth();
+                Log.e("lldiv==111==",screenWidth+"");
+                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) viewPlatfromXian
+                        .getLayoutParams();
+                lp.width = screenWidth / 6;
+                Log.e("lldiv==222==",lp.width+"");
+                viewPlatfromXian.setLayoutParams(lp);
+//                textView.append("\n\n" + imageView.getHeight() + "," + imageView.getWidth());
+            }
+        });
 
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -104,7 +270,12 @@ public class MainPlatfrom extends BaseFragment {
                 break;
         }
     }
-    class  VpAdapter extends FragmentPagerAdapter{
+
+    @OnClick(R.id.ll_div)
+    public void onViewClicked() {
+    }
+
+    class VpAdapter extends FragmentPagerAdapter {
         public VpAdapter(FragmentManager fm) {
             super(fm);
         }

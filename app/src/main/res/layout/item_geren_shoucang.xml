@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <RelativeLayout
-        android:layout_width="340px"
+        android:layout_width="match_parent"
         android:layout_height="230px">
         <ImageView android:id="@+id/iv_video_img"
             android:layout_width="match_parent"
@@ -15,6 +15,7 @@
             android:layout_height="34px"
             android:src="@mipmap/checkbox_3x"
             android:layout_marginLeft="20px"
+            android:visibility="gone"
             android:layout_marginTop="20px"/>
         <TextView android:id="@+id/tv_video_time"
             android:layout_width="89px"
@@ -41,7 +42,7 @@
             android:layout_marginBottom="20px"/>
     </RelativeLayout>
     <LinearLayout
-        android:layout_width="340px"
+        android:layout_width="match_parent"
         android:layout_height="62px"
         android:gravity="center_vertical"
         android:background="@android:color/white">

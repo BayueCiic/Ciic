@@ -3,7 +3,7 @@ package com.bayue.ciic.fragment;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,40 +22,29 @@ import butterknife.Unbinder;
  * Created by Administrator on 2017/7/3.
  */
 
-public class PlatfromZhibo extends BaseFragment {
+public class PlatfromNews extends BaseFragment {
 
-    @BindView(R.id.iv_shipin_sanjiao)
-    ImageView ivShipinSanjiao;
-    @BindView(R.id.tv_zhibo)
-    TextView tvZhibo;
-    @BindView(R.id.tv_zhibo_xiuxian)
-    TextView tvZhiboXiuxian;
-    @BindView(R.id.view_zhibo_one)
-    View viewZhiboOne;
-    @BindView(R.id.tv_zhibo_yepao)
-    TextView tvZhiboYepao;
-    @BindView(R.id.view_zhibo_two)
-    View viewZhiboTwo;
-    @BindView(R.id.tv_zhibo_name)
-    TextView tvZhiboName;
-    @BindView(R.id.tv_zhibo_genduo)
-    TextView tvZhiboGenduo;
-    @BindView(R.id.vp_zhibo)
-    RecyclerView vpZhibo;
+
+    @BindView(R.id.iv_news_sanjiao)
+    ImageView ivNewsSanjiao;
+    @BindView(R.id.tv_news)
+    TextView tvNews;
+    @BindView(R.id.vp_news)
+    RecyclerView vpNews;
     Unbinder unbinder;
 
     @Override
     protected int getViewId() {
-        return R.layout.frament_platfrom_zhibo;
+        return R.layout.frament_platfrom_news;
     }
 
     @Override
     public void init() {
-        vpZhibo.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        vpZhibo.setHasFixedSize(true);
-        vpZhibo.setItemAnimator(new DefaultItemAnimator());
-        vpZhibo.setAdapter(new Myadapter());
-        vpZhibo.addItemDecoration(new SpaceItemDecoration(18));
+        vpNews.setLayoutManager(new LinearLayoutManager(getContext()));
+        vpNews.setHasFixedSize(true);
+        vpNews.setItemAnimator(new DefaultItemAnimator());
+        vpNews.setAdapter(new Myadapter());
+//        vpZhibo.addItemDecoration(new SpaceItemDecoration(18));
 
 
     }
@@ -86,7 +75,7 @@ public class PlatfromZhibo extends BaseFragment {
 
         @Override
         public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_platfrom_zhibo, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_platfrom_news, parent, false);
             MyHolder holder = new MyHolder(v);
             return holder;
         }
@@ -119,11 +108,11 @@ public class PlatfromZhibo extends BaseFragment {
             //由于每行都只有3个，所以第一个都是3的倍数，把左边距设为0
             if (parent.getChildLayoutPosition(view) % 2 == 0) {
                 outRect.left = 0;
-                outRect.right = 15;
+//                outRect.right = 10;
             }
             if ((parent.getChildLayoutPosition(view) - 1) % 2 == 0) {
-                outRect.left = 15;
-                outRect.right = 0;
+                outRect.left = 40;
+//                outRect.right = 0;
 
             }
 

@@ -22,40 +22,41 @@ import butterknife.Unbinder;
  * Created by Administrator on 2017/7/3.
  */
 
-public class PlatfromZhibo extends BaseFragment {
+public class PlatfromWenderful extends BaseFragment {
 
-    @BindView(R.id.iv_shipin_sanjiao)
-    ImageView ivShipinSanjiao;
-    @BindView(R.id.tv_zhibo)
-    TextView tvZhibo;
-    @BindView(R.id.tv_zhibo_xiuxian)
-    TextView tvZhiboXiuxian;
-    @BindView(R.id.view_zhibo_one)
-    View viewZhiboOne;
-    @BindView(R.id.tv_zhibo_yepao)
-    TextView tvZhiboYepao;
-    @BindView(R.id.view_zhibo_two)
-    View viewZhiboTwo;
-    @BindView(R.id.tv_zhibo_name)
-    TextView tvZhiboName;
-    @BindView(R.id.tv_zhibo_genduo)
-    TextView tvZhiboGenduo;
-    @BindView(R.id.vp_zhibo)
-    RecyclerView vpZhibo;
+
+    @BindView(R.id.iv_wonderful_sanjiao)
+    ImageView ivWonderfulSanjiao;
+    @BindView(R.id.tv_wonderful_shipin)
+    TextView tvWonderfulShipin;
+    @BindView(R.id.tv_wonderful_xiuxian)
+    TextView tvWonderfulXiuxian;
+    @BindView(R.id.view_wonderful_one)
+    View viewWonderfulOne;
+    @BindView(R.id.tv_wonderful_yepao)
+    TextView tvWonderfulYepao;
+    @BindView(R.id.view_wonderful_two)
+    View viewWonderfulTwo;
+    @BindView(R.id.tv_wonderful_name)
+    TextView tvWonderfulName;
+    @BindView(R.id.tv_wonderful_genduo)
+    TextView tvWonderfulGenduo;
+    @BindView(R.id.vp_wonderful)
+    RecyclerView vpWonderful;
     Unbinder unbinder;
 
     @Override
     protected int getViewId() {
-        return R.layout.frament_platfrom_zhibo;
+        return R.layout.frament_platfrom_wonderful;
     }
 
     @Override
     public void init() {
-        vpZhibo.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        vpZhibo.setHasFixedSize(true);
-        vpZhibo.setItemAnimator(new DefaultItemAnimator());
-        vpZhibo.setAdapter(new Myadapter());
-        vpZhibo.addItemDecoration(new SpaceItemDecoration(18));
+        vpWonderful.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        vpWonderful.setHasFixedSize(true);
+        vpWonderful.setItemAnimator(new DefaultItemAnimator());
+        vpWonderful.setAdapter(new Myadapter());
+        vpWonderful.addItemDecoration(new SpaceItemDecoration(18));
 
 
     }
@@ -86,7 +87,7 @@ public class PlatfromZhibo extends BaseFragment {
 
         @Override
         public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_platfrom_zhibo, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_platfrom_wonderful, parent, false);
             MyHolder holder = new MyHolder(v);
             return holder;
         }

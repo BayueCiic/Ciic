@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10px">
+
+        <RelativeLayout
+            android:background="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="51px">
+            <ImageView
+                android:id="@+id/civ_dian"
+                android:layout_width="15px"
+                android:layout_height="15px"
+                android:background="@color/themecolor"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="这里是活动的标题"
+                android:textColor="#5F5F5F"
+                android:textSize="24px"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/civ_dian"
+                android:layout_marginLeft="20px"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:paddingBottom="8px">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:layout_marginBottom="20px"
+                android:background="@color/greyHorizontal"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="191px"
+                android:layout_marginBottom="29px"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="201px"
+                    android:layout_height="match_parent"
+                    android:background="#F2F2F2"/>
+                <TextView
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingTop="20px"
+                    android:paddingBottom="20px"
+                    android:layout_marginLeft="20px"
+                    android:text="这里是活动的内容，这里是活动的内容，这里是活动的内容，这里是活动的内容，这里是活动的内容，这里是活动的内容.."
+                    android:textSize="20px"
+                    android:textColor="#818181"
+                    android:lines="3"/>
+                
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/greyHorizontal"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_marginTop="22px"
+                android:layout_weight="1">
+
+                <TextView android:id="@+id/tv_news_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2017-05-05"
+                    android:textSize="18px"
+                    android:textColor="#5F5F5F"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/tv_news_name"
+                    android:text="中智-管理员"
+                    android:textColor="#5F5F5F"
+                    android:textSize="18px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20px"/>
+            </RelativeLayout>
+            
+            
+            
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10px">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="51px"
+            android:background="@color/greyHorizontal">
+            <com.bayue.ciic.view.CircleImageView
+                android:id="@+id/civ_dian"
+                android:layout_width="15px"
+                android:layout_height="15px"
+                android:background="@color/themecolor"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="这里是活动的标题"
+                android:textColor="#5F5F5F"
+                android:textSize="24px"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/civ_dian"
+                android:layout_marginLeft="20px"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2017-05-05"
+                android:textSize="18px"
+                android:textColor="#5F5F5F"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20px"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="195px"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:paddingTop="24px"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:paddingBottom="8px">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="92px"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="145px"
+                    android:layout_height="match_parent"
+                    android:background="#F2F2F2"/>
+                <TextView
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="20px"
+                    android:text="这里是活动的内容，这里是活动的内容，这里是活动的内容，这里是活动的内容，这里是活动的内容，这里是活动的内容.."
+                    android:textSize="20px"
+                    android:textColor="#818181"
+                    android:lines="3"/>
+                
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="进行中..."
+                    android:textColor="@color/themecolor"
+                    android:textSize="24px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10px"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="中智-管理员"
+                    android:textSize="18px"
+                    android:textColor="#5F5F5F"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+            
+            
+            
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -38,10 +39,18 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.google.gson.Gson;
 import com.tangxiaolv.telegramgallery.GalleryActivity;
+import com.tangxiaolv.telegramgallery.GalleryConfig;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,6 +93,7 @@ public class GerenShezhi extends BaseActivity {
 
     Myadapter myadapter;
     String companyName = "";
+    String companyId;
     boolean updown=false;
     @BindView(R.id.tv_shezhi_shorname)
     TextView tvShezhiShorname;
@@ -104,7 +114,14 @@ public class GerenShezhi extends BaseActivity {
                     popupWindow.dismiss();
                     break;
                 case R.id.but_popup_xiangce:
-                    GalleryActivity.openActivity(GerenShezhi.this, true,2);
+                    GalleryConfig config = new GalleryConfig.Build()
+                            .limitPickPhoto(1)
+                            .singlePhoto(false)
+                            .hintOfPick("this is pick hint")
+//                            .filterMimeTypes(new String[]{"jpg","png"})
+                            .build();
+                    GalleryActivity.openActivity(GerenShezhi.this, 100, config);
+//                    GalleryActivity.openActivity(GerenShezhi.this, true,2);
                     popupWindow.dismiss();
                     break;
             }
@@ -164,6 +181,7 @@ public class GerenShezhi extends BaseActivity {
 
                 elvShezhi.collapseGroup(groupPosition);
                 companyName = data.get(childPosition).getName();
+                companyId=data.get(childPosition).getId();
                 tvShezhiShorname.setText(data.get(childPosition).getShort_name());
                 myadapter.notifyDataSetChanged();
                 updown=false;
@@ -255,9 +273,17 @@ public class GerenShezhi extends BaseActivity {
             return;
         }
         Map<String , Object> map=new HashMap<>();
-        HTTPUtils.getNetDATA(API.BaseUrl + API.user.ALTER, map, new Callback() {
+        map.put("token",Preferences.getString(this,Preferences.TOKEN));
+        map.put("id",companyId);
+        map.put("username",name);
+
+        Map<String ,File>  fileMap=new HashMap<>();
+        if(file!=null){
+            fileMap.put(file.getName(),file);
+        }
+        HTTPUtils.getFileDATA(API.BaseUrl + API.user.ALTER, map,fileMap, new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(Call call, IOException e){
                 ToolKit.runOnMainThreadSync(new Runnable() {
                     @Override
                     public void run() {
@@ -269,6 +295,7 @@ public class GerenShezhi extends BaseActivity {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 String msg = response.body().string();
+                Log.e("返回值===",msg);
                 if (response.code() == 200) {
                     Gson gson = new Gson();
                     final VerificationBean bean = gson.fromJson(msg, VerificationBean.class);
@@ -277,6 +304,7 @@ public class GerenShezhi extends BaseActivity {
                         public void run() {
                             if (bean.getCode() == 200) {
                                 ToastUtils.showShortToast(bean.getData());
+                                finish();
 //                                for (int i = 0; i < data.size(); i++) {
 //                                    if (data.get(i).isSelected()) {
 //                                        data.remove(i);
@@ -285,7 +313,7 @@ public class GerenShezhi extends BaseActivity {
 //                                    }
 //                                }
                             } else {
-                                ToastUtils.showShortToast(bean.getMsg());
+                                ToastUtils.showShortToast(bean.getMsg()+">>>>>>>>>>>");
                             }
                         }
                     });
@@ -304,7 +332,7 @@ public class GerenShezhi extends BaseActivity {
 
     }
 
-
+    File file;
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(data==null){
             return;
@@ -315,17 +343,24 @@ public class GerenShezhi extends BaseActivity {
 
             Bundle bundle=data.getExtras();
 
+
 //            Log.e("data=====1111===",bundle.getString("data"));
             Bitmap bitmap= (Bitmap) bundle.get("data");
-            Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null,null));
+            Log.e("bitmap===bbbbb====",bitmap+"");
+            file=compressImage2(bitmap);
+//            Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null,null));
+//            file=saveBitmap(bitmap);
+//            bitmap=compressImage(bitmap);
+
+            Log.e("file===????????====",file+"");
             glideRequest.
-                    load(uri)
+                    load(file)
                     .placeholder(R.mipmap.bianjiziliao_toux2_3x)
                     .error(R.mipmap.bianjiziliao_toux2_3x)
                     .transform(new  GlideCircleTransform(this))
                     .into(ivShezhiToux);
             b=true;
-            //            ivTupianXie.setImageBitmap(bitmap);
+            /*//            ivTupianXie.setImageBitmap(bitmap);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
             byte[] bytes = baos.toByteArray();
@@ -333,16 +368,26 @@ public class GerenShezhi extends BaseActivity {
             //base64 encode
             byte[] encode = Base64.encode(bytes, Base64.DEFAULT);
 //            pic = new String(encode);
-//            Log.e("base64",pic);
+//            Log.e("base64",pic);*/
 
         }else {
 
             List<String> photos = (List<String>) data.getSerializableExtra(GalleryActivity.PHOTOS);
-            BitmapFactory.Options opts = new BitmapFactory.Options();
+
+            file=new File(photos.get(0));
+            Bitmap bitmap=BitmapFactory.decodeFile(photos.get(0),getBitmapOption(2));
+            Log.e("file原大小=====",file.length()+"");
+
+            file=compressImage2(bitmap);
+            Log.e("file现在大小=====",file.length()+"");
+
+            /*BitmapFactory.Options opts = new BitmapFactory.Options();
             opts.inPreferredConfig = Bitmap.Config.ARGB_4444;
             opts.inSampleSize = 4;
-
             Bitmap bitmap = BitmapFactory.decodeFile(photos.get(0), opts);
+//            file=saveBitmap(bitmap);*/
+
+            Log.e("图片file=111111===",file+"");
 //            ivTupianXie.setImageBitmap(bitmap);
             glideRequest.
                     load(photos.get(0))
@@ -351,24 +396,29 @@ public class GerenShezhi extends BaseActivity {
                     .transform(new GlideCircleTransform(this))
                     .into(ivShezhiToux);
             b=true;
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+           /* ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
             byte[] bytes = baos.toByteArray();
 
             //base64 encode
-            byte[] encode = Base64.encode(bytes, Base64.DEFAULT);
+            byte[] encode = Base64.encode(bytes, Base64.DEFAULT);*/
 
 //            pic = new String(encode);
 //            Log.e("base64",pic);
 //            mTvShow.setText(encodeString);
         }
 
-
-
-
 //        Log.e(">>>>>>data>>>>>",data+"");
 
     }
+    public static BitmapFactory.Options getBitmapOption(int inSampleSize){
+        System.gc();
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPurgeable = true;
+        options.inSampleSize = inSampleSize;
+        return options;
+    }
+
 
     class Myadapter extends BaseExpandableListAdapter {
 
@@ -441,4 +491,65 @@ public class GerenShezhi extends BaseActivity {
             return true;
         }
     }
+
+    public static Bitmap compressImage(Bitmap image) {
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        int options = 90;
+
+        while (baos.toByteArray().length / 1024 > 100) { // 循环判断如果压缩后图片是否大于100kb,大于继续压缩
+            baos.reset(); // 重置baos即清空baos
+            image.compress(Bitmap.CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
+            options -= 10;// 每次都减少10
+        }
+        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// 把压缩后的数据baos存放到ByteArrayInputStream中
+        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);// 把ByteArrayInputStream数据生成图片
+        return bitmap;
+    }
+
+    public static File compressImage2(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        int options = 100;
+        while (baos.toByteArray().length / 1024 > 500) {  //循环判断如果压缩后图片是否大于500kb,大于继续压缩
+            baos.reset();//重置baos即清空baos
+            options -= 10;//每次都减少10
+            bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
+            long length = baos.toByteArray().length;
+        }
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date = new Date(System.currentTimeMillis());
+        String filename = format.format(date);
+
+        File file = new File(Environment.getExternalStorageDirectory(), date.getTime()+".png");
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            try {
+                fos.write(baos.toByteArray());
+                fos.flush();
+                fos.close();
+            } catch (IOException e) {
+//                BAFLogger.e(TAG,e.getMessage());
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+//            BAFLogger.e(TAG,e.getMessage());
+            e.printStackTrace();
+        }
+        recycleBitmap(bitmap);
+        Log.e("图片file=77777===",file+"");
+        return file;
+    }
+    public static void recycleBitmap(Bitmap... bitmaps) {
+        if (bitmaps==null) {
+            return;
+        }
+        for (Bitmap bm : bitmaps) {
+            if (null != bm && !bm.isRecycled()) {
+                bm.recycle();
+            }
+        }
+    }
+
 }

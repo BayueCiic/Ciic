@@ -22,40 +22,41 @@ import butterknife.Unbinder;
  * Created by Administrator on 2017/7/3.
  */
 
-public class PlatfromZhibo extends BaseFragment {
+public class PlatfromShipin extends BaseFragment {
+
 
     @BindView(R.id.iv_shipin_sanjiao)
     ImageView ivShipinSanjiao;
-    @BindView(R.id.tv_zhibo)
-    TextView tvZhibo;
-    @BindView(R.id.tv_zhibo_xiuxian)
-    TextView tvZhiboXiuxian;
-    @BindView(R.id.view_zhibo_one)
-    View viewZhiboOne;
-    @BindView(R.id.tv_zhibo_yepao)
-    TextView tvZhiboYepao;
-    @BindView(R.id.view_zhibo_two)
-    View viewZhiboTwo;
-    @BindView(R.id.tv_zhibo_name)
-    TextView tvZhiboName;
-    @BindView(R.id.tv_zhibo_genduo)
-    TextView tvZhiboGenduo;
-    @BindView(R.id.vp_zhibo)
-    RecyclerView vpZhibo;
+    @BindView(R.id.tv_shipin)
+    TextView tvShipin;
+    @BindView(R.id.tv_shipin_xiuxian)
+    TextView tvShipinXiuxian;
+    @BindView(R.id.view_shipin_one)
+    View viewShipinOne;
+    @BindView(R.id.tv_shipin_yepao)
+    TextView tvShipinYepao;
+    @BindView(R.id.view_shipin_two)
+    View viewShipinTwo;
+    @BindView(R.id.tv_shipin_name)
+    TextView tvShipinName;
+    @BindView(R.id.tv_shipin_genduo)
+    TextView tvShipinGenduo;
+    @BindView(R.id.vp_shipin)
+    RecyclerView vpShipin;
     Unbinder unbinder;
 
     @Override
     protected int getViewId() {
-        return R.layout.frament_platfrom_zhibo;
+        return R.layout.frament_platfrom_shipin;
     }
 
     @Override
     public void init() {
-        vpZhibo.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        vpZhibo.setHasFixedSize(true);
-        vpZhibo.setItemAnimator(new DefaultItemAnimator());
-        vpZhibo.setAdapter(new Myadapter());
-        vpZhibo.addItemDecoration(new SpaceItemDecoration(18));
+        vpShipin.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        vpShipin.setHasFixedSize(true);
+        vpShipin.setItemAnimator(new DefaultItemAnimator());
+        vpShipin.setAdapter(new Myadapter());
+        vpShipin.addItemDecoration(new SpaceItemDecoration(18));
 
 
     }
@@ -86,7 +87,7 @@ public class PlatfromZhibo extends BaseFragment {
 
         @Override
         public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_platfrom_zhibo, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_geren_shoucang, parent, false);
             MyHolder holder = new MyHolder(v);
             return holder;
         }
