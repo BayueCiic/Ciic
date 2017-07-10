@@ -75,7 +75,7 @@ public class MainCompany extends BaseFragment {
         fragments.add(new PlatfromShipin());
         fragments.add(new PlatfromHuodong());
 
-        vpCompany.setAdapter(new VpAdapter(getFragmentManager()));
+        vpCompany.setAdapter(new VpAdapter(getChildFragmentManager()));
         vpCompany.setCurrentItem(0);
         setColor(0);
         vpCompany.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -220,12 +220,20 @@ public class MainCompany extends BaseFragment {
             case R.id.fl_company_sousou:
                 break;
             case R.id.tv_company_shouye:
+                vpCompany.setCurrentItem(0);
+                setColor(0);
                 break;
             case R.id.tv_company_zhibo:
+                vpCompany.setCurrentItem(1);
+                setColor(1);
                 break;
             case R.id.tv_company_shipin:
+                vpCompany.setCurrentItem(2);
+                setColor(2);
                 break;
             case R.id.tv_company_huodong:
+                vpCompany.setCurrentItem(3);
+                setColor(3);
                 break;
             case R.id.fl_company_zhibo:
                 break;

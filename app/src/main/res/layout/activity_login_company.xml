@@ -30,7 +30,7 @@
             android:textSize="20px"
             android:text="邮箱"
             android:layout_marginTop="27px"/>
-        <EditText
+        <EditText android:id="@+id/et_company_mail"
             android:layout_width="match_parent"
             android:layout_height="89px"
             android:layout_marginTop="9px"
@@ -40,7 +40,7 @@
             android:hint="请输入公司邮箱"
             android:textSize="20px"
             android:textColor="@color/accountText"
-            android:inputType="number"/>
+            android:inputType="textEmailAddress"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             android:paddingLeft="30px"
             android:paddingRight="30px"
             android:orientation="horizontal">
-            <EditText
+            <EditText  android:id="@+id/et_company_yanzheng"
                 android:layout_width="0px"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -70,7 +70,7 @@
                 android:layout_height="22px"
                 android:layout_gravity="center_vertical"
                 android:background="@color/themecolor"/>
-            <TextView
+            <TextView android:id="@+id/tv_company_send"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -87,10 +87,9 @@
             android:textSize="20px"
             android:text="公司全称"
             android:layout_marginTop="10px"/>
-        <EditText
+        <EditText  android:id="@+id/et_company_name"
             android:layout_width="match_parent"
             android:layout_height="89px"
-            android:inputType="numberPassword"
             android:layout_marginTop="9px"
             android:background="@drawable/account_bg"
             android:paddingLeft="30px"
@@ -105,7 +104,7 @@
             android:textSize="20px"
             android:text="公司简称"
             android:layout_marginTop="10px"/>
-        <EditText
+        <EditText   android:id="@+id/et_company_shorname"
             android:layout_width="match_parent"
             android:layout_height="89px"
             android:layout_marginTop="9px"
@@ -125,7 +124,7 @@
             android:textColor="@color/accountText"
             android:textSize="20px" />
 
-        <EditText
+        <EditText   android:id="@+id/et_company_address"
             android:layout_width="match_parent"
             android:layout_height="89px"
             android:layout_marginTop="9px"
@@ -143,7 +142,7 @@
             android:textColor="@color/accountText"
             android:textSize="20px" />
 
-        <EditText
+        <EditText   android:id="@+id/et_company_prassword"
             android:layout_width="match_parent"
             android:layout_height="89px"
             android:layout_marginTop="9px"
@@ -151,6 +150,7 @@
             android:paddingLeft="30px"
             android:paddingRight="30px"
             android:hint="请输入密码"
+            android:inputType="numberPassword"
             android:textSize="20px"
             android:textColor="@color/accountText"/>
         <TextView
@@ -161,7 +161,7 @@
             android:textColor="@color/accountText"
             android:textSize="20px" />
 
-        <EditText
+        <EditText android:id="@+id/et_company_prassword2"
             android:layout_width="match_parent"
             android:layout_height="89px"
             android:layout_marginTop="9px"
@@ -169,10 +169,11 @@
             android:paddingLeft="30px"
             android:paddingRight="30px"
             android:hint="请确认密码"
+            android:inputType="numberPassword"
             android:textSize="20px"
             android:textColor="@color/accountText"/>
 
-        <Button
+        <Button android:id="@+id/but_company_zhuce"
             android:layout_width="match_parent"
             android:layout_height="89px"
             android:text="注册"
@@ -184,10 +185,12 @@
             android:layout_height="1px"
             android:background="@color/greyHorizontal"
             android:layout_marginTop="30px"/>
-        <TextView
+
+        <TextView android:id="@+id/et_company_backlogin"
             android:layout_width="wrap_content"
-            android:layout_height="30px"
+            android:layout_height="match_parent"
             android:textSize="20px"
+            android:gravity="center"
             android:textColor="@color/themecolor"
             android:text="@string/goBack"
             android:layout_gravity="center_horizontal"/>

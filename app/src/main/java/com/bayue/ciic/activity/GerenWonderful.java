@@ -1,5 +1,6 @@
 package com.bayue.ciic.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,10 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bayue.ciic.R;
 import com.bayue.ciic.base.BaseActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,8 +44,11 @@ public class GerenWonderful extends BaseActivity {
     @BindView(R.id.rlv_wonderful)
     RecyclerView rlvWonderful;
 
+    List data=new ArrayList();
+
     @Override
     protected void setTheme() {
+
     }
 
     @Override
@@ -74,9 +82,16 @@ public class GerenWonderful extends BaseActivity {
     class Myadapter extends RecyclerView.Adapter<GerenWonderful.Myadapter.MyHolder> {
 
         public class MyHolder extends RecyclerView.ViewHolder{
-
+            RelativeLayout rl_wonderful_photo;
+            ImageView iv_photo;
+            TextView tv_name,tv_author,tv_time;
             public MyHolder(View itemView) {
                 super(itemView);
+                rl_wonderful_photo= (RelativeLayout) itemView.findViewById(R.id.rl_wonderful_photo);
+                iv_photo= (ImageView) itemView.findViewById(R.id.iv_photo);
+                tv_name= (TextView) itemView.findViewById(R.id.tv_name);
+                tv_time= (TextView) itemView.findViewById(R.id.tv_time);
+
             }
         }
         @Override
@@ -88,6 +103,13 @@ public class GerenWonderful extends BaseActivity {
 
         @Override
         public void onBindViewHolder(GerenWonderful.Myadapter.MyHolder holder, int position) {
+            holder.rl_wonderful_photo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(GerenWonderful.this,PhotoAlbum.class));
+                }
+            });
+
 
         }
 

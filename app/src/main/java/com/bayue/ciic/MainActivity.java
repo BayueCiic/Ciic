@@ -108,6 +108,18 @@ public class MainActivity extends BaseActivity {
 //        transaction.addToBackStack(null);//将fragment加入返回栈
         transaction.commit();
     }
+   /* public void switchContent(Fragment from, Fragment to, int position) {
+        if (mContent != to) {
+            mContent = to;
+            FragmentTransaction transaction = fm.beginTransaction();
+            if (!to.isAdded()) { // 先判断是否被add过
+                transaction.hide(from)
+                        .add(R.id.content_frame, to, tags[position]).commit(); // 隐藏当前的fragment，add下一个到Activity中
+            } else {
+                transaction.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个
+            }
+        }
+    }*/
 
     private void restoreColor(){
         llMainPlatform.setBackgroundColor(getResources().getColor(R.color.themecolor));

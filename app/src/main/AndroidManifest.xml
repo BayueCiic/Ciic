@@ -77,6 +77,12 @@
         <activity android:name=".activity.GerenDetails"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".activity.PhotoAlbum"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.PhotoDetails"
+            android:theme="@style/MyPhotoDetails"
+            android:screenOrientation="portrait"/>
+
         <!--相册-->
         <activity android:name="com.tangxiaolv.telegramgallery.GalleryActivity" />
     </application>

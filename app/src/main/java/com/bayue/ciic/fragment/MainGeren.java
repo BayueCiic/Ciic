@@ -242,11 +242,11 @@ public class MainGeren extends BaseFragment {
                             @Override
                             public void run() {
                                 if(bean.getData()!=null){
-                                    Log.e("uri========",bean+"");
-                                    Log.e("个人图片===",bean.getData().getUseravatar());
                                     if(bean.getData()==null){
                                         return;
                                     }
+                                    Log.e("uri========",bean+"");
+                                    Log.e("个人图片===",bean.getData().getUseravatar());
                                     if(ivGerenToux!=null){
                                         glideRequest.load(bean.getData().getUseravatar())
                                                 .placeholder(R.mipmap.bianjiziliao_toux2_3x)

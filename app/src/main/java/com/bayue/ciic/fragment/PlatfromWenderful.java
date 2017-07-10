@@ -1,5 +1,6 @@
 package com.bayue.ciic.fragment;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bayue.ciic.R;
+import com.bayue.ciic.activity.PhotoDetails;
 import com.bayue.ciic.base.BaseFragment;
 
 import butterknife.BindView;
@@ -58,6 +60,12 @@ public class PlatfromWenderful extends BaseFragment {
         vpWonderful.setAdapter(new Myadapter());
         vpWonderful.addItemDecoration(new SpaceItemDecoration(18));
 
+        tvWonderfulShipin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), PhotoDetails.class));
+            }
+        });
 
     }
 

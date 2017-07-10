@@ -163,7 +163,7 @@ public class LoginActivity extends BaseLoginActivity {
                         public void run() {
                             if(bean.getCode()==200){
                                 Preferences.saveString(getApplicationContext(),Preferences.TOKEN,bean.getToken());
-                                Preferences.saveAdmin(bean.getIs_admin());
+                                Preferences.saveAdmin(bean.getIs_admin()+"");
                                 Preferences.saveUserName(etLoginAccount.getText().toString());
                                 Preferences.savePassword(etLoginPassword.getText().toString());
                                 Log.e("token",bean.getToken());

@@ -255,25 +255,34 @@ public class MainPlatfrom extends BaseFragment {
             case R.id.fl_paltfrom_sousou:
                 break;
             case R.id.tv_paltfrom_shouye:
+                vpPaltfrom.setCurrentItem(0);
+                setColor(0);
                 break;
             case R.id.tv_paltfrom_zhibo:
+                vpPaltfrom.setCurrentItem(1);
+                setColor(1);
                 break;
             case R.id.tv_paltfrom_shipin:
+                vpPaltfrom.setCurrentItem(2);
+                setColor(2);
                 break;
             case R.id.tv_paltfrom_huodong:
+                vpPaltfrom.setCurrentItem(3);
+                setColor(3);
                 break;
             case R.id.tv_paltfrom_xinwen:
+                vpPaltfrom.setCurrentItem(4);
+                setColor(4);
                 break;
             case R.id.tv_paltfrom_jingcai:
+                vpPaltfrom.setCurrentItem(5);
+                setColor(5);
                 break;
             case R.id.fl_paltfrom_zhibo:
                 break;
         }
     }
 
-    @OnClick(R.id.ll_div)
-    public void onViewClicked() {
-    }
 
     class VpAdapter extends FragmentPagerAdapter {
         public VpAdapter(FragmentManager fm) {

@@ -17,6 +17,7 @@ public class API {
         public static final String LOGIN="/Home/Login/login";
         public static final String VALI="/Home/Login/send_message";
         public static final String FORGET="/Home/Login/forgot_password";
+        public static final String MAIL="/Home/Login/send_mail";
 
     }
     public static class user{
@@ -34,5 +35,19 @@ public class API {
         public static final String DETAILS="/Home/User/MessageInfo";
         public static final String GEREN="/Home/User/Userinfo";
     }
+
+    public  static class patfrom{
+        public static final String SHOUYE="";
+        public static final String ZHIBO="/Home/Index/index_direct";
+        public static final String SHIPIN="";
+        public static final String HUODOANG="";
+        public static final String XINWEN="";
+        public static final String JINGCAI="";
+    }
+
+
+
+
+
 
 }

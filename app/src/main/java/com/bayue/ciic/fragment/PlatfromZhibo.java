@@ -13,10 +13,22 @@ import android.widget.TextView;
 
 import com.bayue.ciic.R;
 import com.bayue.ciic.base.BaseFragment;
+import com.bayue.ciic.http.API;
+import com.bayue.ciic.utils.HTTPUtils;
+import com.bayue.ciic.utils.ToastUtils;
+import com.bayue.ciic.utils.ToolKit;
+import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * Created by Administrator on 2017/7/3.
@@ -128,6 +140,44 @@ public class PlatfromZhibo extends BaseFragment {
             }
 
         }
+
+    }
+
+    private void getData(){
+
+        Map<String ,Object> map=new HashMap();
+
+        HTTPUtils.getNetDATA(API.BaseUrl + API.patfrom.ZHIBO, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ToolKit.runOnMainThreadSync(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtils.showShortToast("请检查网络");
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                String msg=response.body().string();
+                if(response.code()==200){
+                    Gson gson=new Gson();
+
+
+
+
+                }else {
+                    ToolKit.runOnMainThreadSync(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.showShortToast(response.message());
+                        }
+                    });
+                }
+            }
+        });
+
 
     }
 }
