@@ -59,7 +59,7 @@ public class HTTPUtils {
         for (Map.Entry<String, File> entry : fileMap.entrySet()){
             Log.e("图片file=2222222===",entry.getValue()+"");
             Log.e("图片大小=====",entry.getValue().length()+"");
-            part.addFormDataPart("file"+(i++),entry.getKey(), RequestBody.create( MediaType.parse("application/octet-stream"), entry.getValue()));
+            part.addFormDataPart(entry.getKey(),entry.getValue().getName(), RequestBody.create( MediaType.parse("application/octet-stream"), entry.getValue()));
 
 //            Tracer.e("AddAddressActivity", entry.getKey() +":"+String.valueOf(entry.getValue()));
         }

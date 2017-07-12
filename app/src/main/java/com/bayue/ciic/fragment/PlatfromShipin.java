@@ -39,8 +39,6 @@ public class PlatfromShipin extends BaseFragment {
     View viewShipinTwo;
     @BindView(R.id.tv_shipin_name)
     TextView tvShipinName;
-    @BindView(R.id.tv_shipin_genduo)
-    TextView tvShipinGenduo;
     @BindView(R.id.vp_shipin)
     RecyclerView vpShipin;
     Unbinder unbinder;

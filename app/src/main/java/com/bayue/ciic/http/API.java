@@ -18,6 +18,8 @@ public class API {
         public static final String VALI="/Home/Login/send_message";
         public static final String FORGET="/Home/Login/forgot_password";
         public static final String MAIL="/Home/Login/send_mail";
+        public static final String EMAIL_REG="/Home/Login/EnterpriseReg";
+        public static final String EMAIL_lOGIN= "/Home/Login/EnterpriseLogin";
 
     }
     public static class user{
@@ -34,6 +36,7 @@ public class API {
         public static final String ALTER="/Home/User/ChangeUserinfo";
         public static final String DETAILS="/Home/User/MessageInfo";
         public static final String GEREN="/Home/User/Userinfo";
+
     }
 
     public  static class patfrom{

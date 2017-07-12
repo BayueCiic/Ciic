@@ -150,7 +150,7 @@
             android:paddingLeft="30px"
             android:paddingRight="30px"
             android:hint="请输入密码"
-            android:inputType="numberPassword"
+            android:inputType="textPassword"
             android:textSize="20px"
             android:textColor="@color/accountText"/>
         <TextView
@@ -169,7 +169,7 @@
             android:paddingLeft="30px"
             android:paddingRight="30px"
             android:hint="请确认密码"
-            android:inputType="numberPassword"
+            android:inputType="textPassword"
             android:textSize="20px"
             android:textColor="@color/accountText"/>
 

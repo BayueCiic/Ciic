@@ -83,6 +83,13 @@ public class CompanyShouye extends BaseFragment {
     LinearLayout llHuodon4;
     Unbinder unbinder;
 
+    MainCompany mainCompany;
+
+    public CompanyShouye(MainCompany mainCompany){
+        super();
+        this.mainCompany=mainCompany;
+    }
+
     @Override
     protected int getViewId() {
         return R.layout.frament_company_shouye;
@@ -119,10 +126,12 @@ public class CompanyShouye extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_shipin_genduo:
+                mainCompany.setCurrentItem(2);
                 break;
             case R.id.ll_zhibo:
                 break;
             case R.id.tv_huodong_genduo:
+                mainCompany.setCurrentItem(3);
                 break;
             case R.id.ll_huodon1:
                 break;

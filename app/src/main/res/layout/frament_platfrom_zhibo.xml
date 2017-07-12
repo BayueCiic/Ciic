@@ -74,17 +74,6 @@
                     android:layout_toRightOf="@+id/view_zhibo_two"
                     android:layout_marginLeft="20px"/>
 
-                <TextView android:id="@+id/tv_zhibo_genduo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="更多+"
-                    android:textSize="18px"
-                    android:textColor="@color/gerenTextcolor"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="20px"/>
-
             </RelativeLayout>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/vp_zhibo"

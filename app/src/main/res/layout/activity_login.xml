@@ -41,7 +41,7 @@
             android:hint="@string/promptAccount"
             android:textSize="20px"
             android:textColor="@color/accountText"
-            android:inputType="number"/>
+            android:inputType="textEmailAddress"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,6 +54,7 @@
             android:layout_height="89px"
             android:layout_marginTop="9px"
             android:background="@drawable/account_bg"
+            android:inputType="textPassword"
             android:paddingLeft="30px"
             android:paddingRight="30px"
             android:hint="@string/promptPassword"

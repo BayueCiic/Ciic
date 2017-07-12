@@ -6,11 +6,53 @@
 
     <include layout="@layout/layout_top_title"/>
 
-    <fragment
-        android:id="@+id/fragment"
-        android:name="com.bayue.ciic.fragment.PlatfromWenderful"
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:paddingLeft="30px"
+        android:paddingRight="30px"
+        android:paddingTop="10px"
+        android:paddingBottom="3px"
+        android:background="@color/gerenBg"
         android:layout_width="match_parent"
-        android:layout_height="0px"
-        android:layout_weight="1" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="67px"
+                android:layout_marginTop="20px"
+                android:background="@android:color/white">
+                <ImageView android:id="@+id/iv_wonderful_sanjiao"
+                    android:layout_width="21px"
+                    android:layout_height="27px"
+                    android:layout_marginLeft="10px"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:src="@mipmap/xiaosanjiao_3x"/>
+                <TextView android:id="@+id/tv_album_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="精彩瞬间"
+                    android:textSize="26px"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/iv_wonderful_sanjiao"
+                    android:layout_marginLeft="10px"/>
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/vp_album"
+                android:layout_marginTop="20px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

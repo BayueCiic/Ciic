@@ -43,12 +43,21 @@ public class CompanyBean {
     public static class DataBean {
         /**
          * id : 1
-         * name : 这个个企业1
+         * username : 这个个企业1
          * short_name : 企业1
          */
 
         private String id;
-        private String name;
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        private String username;
         private String short_name;
 
         public String getId() {
@@ -59,13 +68,6 @@ public class CompanyBean {
             this.id = id;
         }
 
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
 
         public String getShort_name() {
             return short_name;

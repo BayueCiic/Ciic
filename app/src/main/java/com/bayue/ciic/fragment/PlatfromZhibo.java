@@ -36,6 +36,7 @@ import okhttp3.Response;
 
 public class PlatfromZhibo extends BaseFragment {
 
+
     @BindView(R.id.iv_shipin_sanjiao)
     ImageView ivShipinSanjiao;
     @BindView(R.id.tv_zhibo)
@@ -50,8 +51,6 @@ public class PlatfromZhibo extends BaseFragment {
     View viewZhiboTwo;
     @BindView(R.id.tv_zhibo_name)
     TextView tvZhiboName;
-    @BindView(R.id.tv_zhibo_genduo)
-    TextView tvZhiboGenduo;
     @BindView(R.id.vp_zhibo)
     RecyclerView vpZhibo;
     Unbinder unbinder;
@@ -143,9 +142,9 @@ public class PlatfromZhibo extends BaseFragment {
 
     }
 
-    private void getData(){
+    private void getData() {
 
-        Map<String ,Object> map=new HashMap();
+        Map<String, Object> map = new HashMap();
 
         HTTPUtils.getNetDATA(API.BaseUrl + API.patfrom.ZHIBO, map, new Callback() {
             @Override
@@ -160,14 +159,12 @@ public class PlatfromZhibo extends BaseFragment {
 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
-                String msg=response.body().string();
-                if(response.code()==200){
-                    Gson gson=new Gson();
+                String msg = response.body().string();
+                if (response.code() == 200) {
+                    Gson gson = new Gson();
 
 
-
-
-                }else {
+                } else {
                     ToolKit.runOnMainThreadSync(new Runnable() {
                         @Override
                         public void run() {

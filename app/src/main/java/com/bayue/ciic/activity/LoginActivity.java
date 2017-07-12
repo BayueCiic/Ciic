@@ -23,12 +23,15 @@ import com.bayue.ciic.http.API;
 import com.bayue.ciic.preferences.Preferences;
 import com.bayue.ciic.utils.DensityUtil;
 import com.bayue.ciic.utils.HTTPUtils;
+import com.bayue.ciic.utils.ToastUtils;
 import com.bayue.ciic.utils.ToolKit;
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -121,16 +124,37 @@ public class LoginActivity extends BaseLoginActivity {
         }
     }
     String phone;
+    String path;
+    String key;
     private void login(){
         phone=etLoginAccount.getText().toString();
 //        String verification=etCommonVerification.getText().toString();
         final String password=etLoginPassword.getText().toString();
 //        String password2=etCommonPassword2.getText().toString();
 
-        if(phone.length()!=11){
-            Toast.makeText(this,"请输入正确的手机号码",Toast.LENGTH_SHORT).show();
-            return;
+
+        if(phone.contains("@")){
+            Pattern p = Pattern.compile("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\\.([a-zA-Z0-9_-])+)+$");
+            Matcher m = p.matcher(phone);
+            //Mather m = p.matcher("wangxu198709@gmail.com.cn");这种也是可以的！
+            boolean b = m.matches();
+            Log.e("@@@@@@@@====",b+"");
+            if(!b){
+                ToastUtils.showShortToast("请输入正确的邮箱");
+                return;
+            }
+           path= API.Login.EMAIL_lOGIN;
+            key="email";
+        }else {
+
+            path= API.Login.LOGIN;
+            key="phone";
+            if(phone.length()!=11){
+                Toast.makeText(this,"请输入正确的帐号",Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
+
 //        if(verification.isEmpty()){
 //            Toast.makeText(this,"请输入验证码",Toast.LENGTH_SHORT).show();
 //            return;
@@ -145,12 +169,16 @@ public class LoginActivity extends BaseLoginActivity {
 //        }
         Map<String ,Object> map=new HashMap<>();
 
-        map.put("phone",phone);
+        map.put(key,phone);
         map.put("password",password);
-        HTTPUtils.getNetDATA(API.BaseUrl + API.Login.LOGIN, map, new Callback() {
+        HTTPUtils.getNetDATA(API.BaseUrl + path, map, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                ToolKit.runOnMainThreadSync(new Runnable() {
+                    @Override
+                    public void run() {
+ToastUtils.showShortToast("请检查网络");                    }
+                });
             }
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
@@ -170,9 +198,9 @@ public class LoginActivity extends BaseLoginActivity {
                                 DensityUtil.showToast(LoginActivity.this,bean.getData());
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 LoginActivity.this.finish();
-                                App.bgActivity.finish();
+//                                App.bgActivity.finish();
                             }else {
-                                DensityUtil.showToast(LoginActivity.this,bean.getMsg());
+                                ToastUtils.showShortToast(bean.getMsg());
                             }
                         }
                     });
@@ -180,7 +208,7 @@ public class LoginActivity extends BaseLoginActivity {
                     ToolKit.runOnMainThreadSync(new Runnable() {
                         @Override
                         public void run() {
-                            DensityUtil.showToast(LoginActivity.this,response.message());
+                            ToastUtils.showShortToast(response.message());
                         }
                     });
                 }

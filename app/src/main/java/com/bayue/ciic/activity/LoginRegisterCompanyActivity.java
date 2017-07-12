@@ -249,7 +249,7 @@ public class LoginRegisterCompanyActivity extends BaseLoginActivity {
         map.put("short_name",shorName);
         map.put("address",address);
         map.put("password",password);
-        HTTPUtils.getNetDATA(API.BaseUrl + API.Login.REG, map, new Callback() {
+        HTTPUtils.getNetDATA(API.BaseUrl + API.Login.EMAIL_REG, map, new Callback() {
 
             @Override
             public void onFailure(Call call, IOException e) {

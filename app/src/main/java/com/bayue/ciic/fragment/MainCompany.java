@@ -70,7 +70,7 @@ public class MainCompany extends BaseFragment {
         fragments = new ArrayList<>();
         initTabLineWidth();
 
-        fragments.add(new CompanyShouye());
+        fragments.add(new CompanyShouye(this));
         fragments.add(new PlatfromZhibo());
         fragments.add(new PlatfromShipin());
         fragments.add(new PlatfromHuodong());
@@ -239,6 +239,13 @@ public class MainCompany extends BaseFragment {
                 break;
         }
     }
+
+    public void setCurrentItem(int item){
+
+        vpCompany.setCurrentItem(item);
+        setColor(item);
+    }
+
 
     class VpAdapter extends FragmentPagerAdapter {
         public VpAdapter(FragmentManager fm) {

@@ -30,7 +30,7 @@
             android:textSize="20px"
             android:text="手机号"
             android:layout_marginTop="27px"/>
-        <EditText
+        <EditText android:id="@+id/et_staff_phone"
             android:layout_width="match_parent"
             android:layout_height="89px"
             android:layout_marginTop="9px"
@@ -56,7 +56,7 @@
             android:paddingLeft="30px"
             android:paddingRight="30px"
             android:orientation="horizontal">
-            <EditText
+            <EditText  android:id="@+id/et_staff_yanzheng"
                 android:layout_width="0px"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -70,7 +70,7 @@
                 android:layout_height="22px"
                 android:layout_gravity="center_vertical"
                 android:background="@color/themecolor"/>
-            <TextView
+            <TextView  android:id="@+id/tv_staff_send"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -87,10 +87,10 @@
             android:textSize="20px"
             android:text="密码"
             android:layout_marginTop="27px"/>
-        <EditText
+        <EditText android:id="@+id/et_staff_prassword"
             android:layout_width="match_parent"
             android:layout_height="89px"
-            android:inputType="numberPassword"
+            android:inputType="textPassword"
             android:layout_marginTop="9px"
             android:background="@drawable/account_bg"
             android:paddingLeft="30px"
@@ -105,10 +105,11 @@
             android:textSize="20px"
             android:text="邀请ID号"
             android:layout_marginTop="27px"/>
-        <EditText
+        <EditText android:id="@+id/et_staff_id"
             android:layout_width="match_parent"
             android:layout_height="89px"
             android:layout_marginTop="9px"
+            android:inputType="number"
             android:background="@drawable/account_bg"
             android:paddingLeft="30px"
             android:paddingRight="30px"
@@ -122,7 +123,7 @@
             android:textSize="20px"
             android:text="邀请链接"
             android:layout_marginTop="27px"/>
-        <EditText
+        <EditText android:id="@+id/et_staff_link"
             android:layout_width="match_parent"
             android:layout_height="89px"
             android:layout_marginTop="9px"
@@ -133,7 +134,7 @@
             android:textSize="20px"
             android:textColor="@color/accountText"/>
 
-        <Button
+        <Button  android:id="@+id/but_staff_reg"
             android:layout_width="match_parent"
             android:layout_height="89px"
             android:text="注册"
@@ -145,9 +146,10 @@
             android:layout_height="1px"
             android:background="@color/greyHorizontal"
             android:layout_marginTop="30px"/>
-        <TextView
+        <TextView android:id="@+id/tv_staff_backlogin"
             android:layout_width="wrap_content"
             android:layout_height="50px"
+            android:gravity="center"
             android:textSize="20px"
             android:textColor="@color/themecolor"
             android:text="@string/goBack"

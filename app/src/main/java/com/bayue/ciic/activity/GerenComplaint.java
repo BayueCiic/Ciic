@@ -142,12 +142,15 @@ public class GerenComplaint extends BaseActivity {
                 return;
             }
             Bundle bundle=data.getExtras();
+            if(bundle==null){
+                return;
+            }
             Bitmap bitmap= (Bitmap) bundle.get("data");
             ivComplaintImg1.setImageBitmap(bitmap);
             ivComplaintImg1.setVisibility(View.VISIBLE);
             b=true;
             file= compressImage2(bitmap);
-
+            fileMap.put("file",file);
 
 
 
@@ -185,7 +188,7 @@ public class GerenComplaint extends BaseActivity {
                     case 0:
                         Bitmap bitmap1=BitmapFactory.decodeFile(photos.get(0),GerenShezhi.getBitmapOption(2));
                         file=compressImage2(bitmap1);
-                        fileMap.put(file.getName(),file);
+                        fileMap.put("file",file);
                         Glide.with(getBaseContext())
                                 .load(file)
                                 .error(R.mipmap.ic_launcher_round)
@@ -197,7 +200,7 @@ public class GerenComplaint extends BaseActivity {
                     case 1:
                         Bitmap bitmap2=BitmapFactory.decodeFile(photos.get(1),GerenShezhi.getBitmapOption(2));
                         file=compressImage2(bitmap2);
-                        fileMap.put(file.getName(),file);
+                        fileMap.put("file0",file);
                         Glide.with(getBaseContext())
                                 .load(file)
                                 .error(R.mipmap.ic_launcher_round)
@@ -208,7 +211,7 @@ public class GerenComplaint extends BaseActivity {
                     case 2:
                         Bitmap bitmap3=BitmapFactory.decodeFile(photos.get(2),GerenShezhi.getBitmapOption(2));
                         file=compressImage2(bitmap3);
-                        fileMap.put(file.getName(),file);
+                        fileMap.put("file1",file);
 //                        ivComplaintImg3.setImageBitmap(bitmap);
                         Glide.with(getBaseContext())
                                 .load(file)

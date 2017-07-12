@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import com.bayue.ciic.R;
 import com.bayue.ciic.base.BaseActivity;
-import com.bayue.ciic.bean.ShoucangBean;
 import com.bayue.ciic.bean.VerificationBean;
 import com.bayue.ciic.bean.XxBean;
 import com.bayue.ciic.http.API;
@@ -366,7 +365,7 @@ public class GerenXx extends BaseActivity {
             holder.xxItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(GerenXx.this,GerenDetails.class).putExtra("id",bean.getId()));
+                    startActivity(new Intent(GerenXx.this,GerenXxDetails.class).putExtra("id",bean.getId()));
                 }
             });
         }

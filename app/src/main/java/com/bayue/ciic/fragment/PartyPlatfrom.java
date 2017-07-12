@@ -26,7 +26,7 @@ public class PartyPlatfrom extends BaseFragment {
 
     @Override
     protected int getViewId() {
-        return R.layout.frament_news_platfrom;
+        return R.layout.frament_party_platfrom;
     }
 
     @Override

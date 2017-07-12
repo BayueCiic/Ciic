@@ -65,6 +65,7 @@ public class MainPlatfrom extends BaseFragment {
     @BindView(R.id.tv_shezhi)
     TextView tvShezhi;
 
+
     @Override
     protected int getViewId() {
         return R.layout.frament_main_platfrom;
@@ -74,7 +75,7 @@ public class MainPlatfrom extends BaseFragment {
     public void init() {
         fragments = new ArrayList<>();
         initTabLineWidth();
-        fragments.add(new PlatfromShouye());
+        fragments.add(new PlatfromShouye(this));
         fragments.add(new PlatfromZhibo());
         fragments.add(new PlatfromShipin());
         fragments.add(new PlatfromHuodong());
@@ -282,6 +283,13 @@ public class MainPlatfrom extends BaseFragment {
                 break;
         }
     }
+
+    public void setCurrentItem(int item){
+
+        vpPaltfrom.setCurrentItem(item);
+        setColor(item);
+    }
+
 
 
     class VpAdapter extends FragmentPagerAdapter {

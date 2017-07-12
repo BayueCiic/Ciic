@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bayue.ciic.R;
+import com.bayue.ciic.activity.PhotoAlbum;
 import com.bayue.ciic.activity.PhotoDetails;
 import com.bayue.ciic.base.BaseFragment;
 
@@ -41,8 +43,7 @@ public class PlatfromWenderful extends BaseFragment {
     View viewWonderfulTwo;
     @BindView(R.id.tv_wonderful_name)
     TextView tvWonderfulName;
-    @BindView(R.id.tv_wonderful_genduo)
-    TextView tvWonderfulGenduo;
+
     @BindView(R.id.vp_wonderful)
     RecyclerView vpWonderful;
     Unbinder unbinder;
@@ -63,7 +64,7 @@ public class PlatfromWenderful extends BaseFragment {
         tvWonderfulShipin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), PhotoDetails.class));
+
             }
         });
 
@@ -87,9 +88,11 @@ public class PlatfromWenderful extends BaseFragment {
     class Myadapter extends RecyclerView.Adapter<Myadapter.MyHolder> {
 
         public class MyHolder extends RecyclerView.ViewHolder {
-
+            LinearLayout ll_item;
             public MyHolder(View itemView) {
                 super(itemView);
+                ll_item= (LinearLayout) itemView.findViewById(R.id.ll_item);
+
             }
         }
 
@@ -102,7 +105,12 @@ public class PlatfromWenderful extends BaseFragment {
 
         @Override
         public void onBindViewHolder(MyHolder holder, int position) {
-
+            holder.ll_item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getContext(), PhotoAlbum.class));
+                }
+            });
         }
 
         @Override

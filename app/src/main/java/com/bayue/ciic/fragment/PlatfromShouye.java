@@ -1,5 +1,6 @@
 package com.bayue.ciic.fragment;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.bayue.ciic.R;
 import com.bayue.ciic.activity.GerenWonderful;
+import com.bayue.ciic.activity.PhotoAlbum;
 import com.bayue.ciic.base.BaseFragment;
 
 import butterknife.BindView;
@@ -135,6 +137,12 @@ public class PlatfromShouye extends BaseFragment {
     LinearLayout llXinwen4;
     Unbinder unbinder;
 
+    MainPlatfrom mainPlatfrom;
+    public PlatfromShouye( ){}
+    public PlatfromShouye( MainPlatfrom mainPlatfrom ){
+
+       this. mainPlatfrom=mainPlatfrom;
+    }
     @Override
     protected int getViewId() {
         return R.layout.frament_platfrom_shouye;
@@ -169,18 +177,24 @@ public class PlatfromShouye extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_shipin_genduo:
+                mainPlatfrom.setCurrentItem(2);
                 break;
             case R.id.ll_zhibo:
                 break;
             case R.id.tv_jingcai_genduo:
+                mainPlatfrom.setCurrentItem(5);
                 break;
             case R.id.iv_jingcai1:
+                startActivity(new Intent(getContext(), PhotoAlbum.class));
                 break;
             case R.id.iv_jingcai2:
+                startActivity(new Intent(getContext(), PhotoAlbum.class));
                 break;
             case R.id.iv_jingcai3:
+                startActivity(new Intent(getContext(), PhotoAlbum.class));
                 break;
             case R.id.tv_huodong_genduo:
+                mainPlatfrom.setCurrentItem(3);
                 break;
             case R.id.ll_huodon1:
                 break;
@@ -191,6 +205,7 @@ public class PlatfromShouye extends BaseFragment {
             case R.id.ll_huodon4:
                 break;
             case R.id.tv_xinwen_genduo:
+                mainPlatfrom.setCurrentItem(4);
                 break;
             case R.id.ll_xinwen1:
                 break;

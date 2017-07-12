@@ -53,7 +53,7 @@ public class BaseLoginActivity extends BaseActivity {
                 return true;
             } else {
                 //两次按键小于2秒时，退出应用
-                App.bgActivity.finish();
+//                App.bgActivity.finish();
                 finish();
                 System.exit(0);
 //                finish();

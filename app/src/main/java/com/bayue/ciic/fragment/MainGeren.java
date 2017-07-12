@@ -24,10 +24,12 @@ import com.bayue.ciic.activity.GerenGuanyu;
 import com.bayue.ciic.activity.GerenNews;
 import com.bayue.ciic.activity.GerenParty;
 import com.bayue.ciic.activity.GerenShezhi;
+import com.bayue.ciic.activity.GerenShipin;
 import com.bayue.ciic.activity.GerenShoucang;
 import com.bayue.ciic.activity.GerenWonderful;
 import com.bayue.ciic.activity.GerenXiugai;
 import com.bayue.ciic.activity.GerenXx;
+import com.bayue.ciic.activity.GerenZhibo;
 import com.bayue.ciic.activity.Gerenlianxi;
 import com.bayue.ciic.activity.LoginActivity;
 import com.bayue.ciic.activity.LoginBgActivity;
@@ -103,6 +105,9 @@ public class MainGeren extends BaseFragment {
     TextView tvTitletxt;
     boolean b=false;
 
+    String img="",name="",company="",shortname="",companyid="";
+
+
     RequestManager glideRequest;
     @Override
     protected int getViewId() {
@@ -112,7 +117,7 @@ public class MainGeren extends BaseFragment {
     @Override
     public void init() {
         main = (MainActivity) getActivity();
-        hide();
+//        hide();
         glideRequest= Glide.with(main);
         tvTitletxt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +151,14 @@ public class MainGeren extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.fl_shezhi:
-                main.startActivity(new Intent(main, GerenShezhi.class));
+                Intent intent=new Intent(main, GerenShezhi.class);
+                intent.putExtra("img",img);
+                intent.putExtra("name",name);
+                intent.putExtra("company",company);
+                intent.putExtra("shortname",shortname);
+                intent.putExtra("companyid",companyid);
+                Log.e("船公司==id=",companyid+"");
+                main.startActivity(intent);
                 break;
             case R.id.iv_geren_toux:
                 break;
@@ -157,8 +169,10 @@ public class MainGeren extends BaseFragment {
                 main.startActivity(new Intent(main, GerenNews.class));
                 break;
             case R.id.ll_geren_shipin:
+                main.startActivity(new Intent(main, GerenShipin.class));
                 break;
             case R.id.ll_geren_zhibo:
+                main.startActivity(new Intent(main, GerenZhibo.class));
                 break;
             case R.id.ll_geren_jingcai:
                 main.startActivity(new Intent(main, GerenWonderful.class));
@@ -233,6 +247,7 @@ public class MainGeren extends BaseFragment {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 String msg = response.body().string();
+                Log.e("msg========",msg);
                 if (response.code() == 200) {
                     Gson gson = new Gson();
                     final GerenBean bean = gson.fromJson(msg, GerenBean.class);
@@ -246,16 +261,23 @@ public class MainGeren extends BaseFragment {
                                         return;
                                     }
                                     Log.e("uri========",bean+"");
-                                    Log.e("个人图片===",bean.getData().getUseravatar());
+                                    Log.e("个人图片==url=",bean.getData().getUseravatar());
+                                    img=bean.getData().getUseravatar();
+                                    name=bean.getData().getUsername();
+                                    company=bean.getData().getEnterpriseName();
+                                    shortname=bean.getData().getEnterpriseShortName();
+                                    companyid=bean.getData().getEnterprise_id();
+
+                                    Log.e("个人公司==id=",companyid+"");
                                     if(ivGerenToux!=null){
                                         glideRequest.load(bean.getData().getUseravatar())
                                                 .placeholder(R.mipmap.bianjiziliao_toux2_3x)
                                                 .error(R.mipmap.bianjiziliao_toux2_3x)
                                                 .transform(new GlideCircleTransform(main))
                                                 .into(ivGerenToux);
-                                        tvGerenToux.setText(bean.getData().getEnterpriseShortName()+"-"+bean.getData().getUsername());
-                                        tvGerenCompanyname.setText(bean.getData().getEnterpriseName());
-                                        tvGerenMininame.setText(bean.getData().getEnterpriseShortName());
+                                        tvGerenToux.setText(shortname+"-"+name);
+                                        tvGerenCompanyname.setText(company);
+                                        tvGerenMininame.setText(shortname);
                                     }
 
                                 }

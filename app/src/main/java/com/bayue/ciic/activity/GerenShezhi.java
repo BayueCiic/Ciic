@@ -117,7 +117,7 @@ public class GerenShezhi extends BaseActivity {
                     GalleryConfig config = new GalleryConfig.Build()
                             .limitPickPhoto(1)
                             .singlePhoto(false)
-                            .hintOfPick("this is pick hint")
+                            .hintOfPick("只可选一张")
 //                            .filterMimeTypes(new String[]{"jpg","png"})
                             .build();
                     GalleryActivity.openActivity(GerenShezhi.this, 100, config);
@@ -141,16 +141,37 @@ public class GerenShezhi extends BaseActivity {
 
     @Override
     protected void initViews() {
+        getData();
         glideRequest = Glide.with(this);
         ivGoback.setImageResource(R.mipmap.back_3x);
         tvTitletxt.setText("编辑资料");
         ivShezhi.setVisibility(View.INVISIBLE);
         tvShezhi.setText("保存");
+
+
+        Intent intent=getIntent();
+        glideRequest.
+                load(intent.getStringExtra("img"))
+                .placeholder(R.mipmap.bianjiziliao_toux2_3x)
+                .error(R.mipmap.bianjiziliao_toux2_3x)
+                .transform(new  GlideCircleTransform(this))
+                .into(ivShezhiToux);
+
+        etShezhiName.setText(intent.getStringExtra("name"));
+        companyName=intent.getStringExtra("company");
+        companyId=intent.getStringExtra("companyid");
+        Log.e("公司name===",companyName+"");
+        Log.e("公司id===",companyId+"");
+        tvShezhiShorname.setText(intent.getStringExtra("shortname"));
         oldname=etShezhiName.getText().toString();
         myadapter = new Myadapter();
         elvShezhi.setGroupIndicator(null);
         elvShezhi.setAdapter(myadapter);
-        getData();
+
+
+
+
+
         elvShezhi.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
@@ -180,7 +201,7 @@ public class GerenShezhi extends BaseActivity {
 
 
                 elvShezhi.collapseGroup(groupPosition);
-                companyName = data.get(childPosition).getName();
+                companyName = data.get(childPosition).getUsername();
                 companyId=data.get(childPosition).getId();
                 tvShezhiShorname.setText(data.get(childPosition).getShort_name());
                 myadapter.notifyDataSetChanged();
@@ -242,6 +263,8 @@ public class GerenShezhi extends BaseActivity {
                                 List<CompanyBean.DataBean> lists = bean.getData();
 
                                 data.addAll(lists);
+                                Log.e("+++++++++++",data.size()+"");
+                                Log.e(">>>>>>",data.get(1).getUsername());
                                 myadapter.notifyDataSetChanged();
                             }
                         });
@@ -279,7 +302,8 @@ public class GerenShezhi extends BaseActivity {
 
         Map<String ,File>  fileMap=new HashMap<>();
         if(file!=null){
-            fileMap.put(file.getName(),file);
+            fileMap.put("file",file);
+            Log.e("图片名===",file.getName());
         }
         HTTPUtils.getFileDATA(API.BaseUrl + API.user.ALTER, map,fileMap, new Callback() {
             @Override
@@ -333,6 +357,7 @@ public class GerenShezhi extends BaseActivity {
     }
 
     File file;
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(data==null){
             return;
@@ -343,7 +368,9 @@ public class GerenShezhi extends BaseActivity {
 
             Bundle bundle=data.getExtras();
 
-
+                if(bundle==null){
+                    return;
+                }
 //            Log.e("data=====1111===",bundle.getString("data"));
             Bitmap bitmap= (Bitmap) bundle.get("data");
             Log.e("bitmap===bbbbb====",bitmap+"");
@@ -482,7 +509,8 @@ public class GerenShezhi extends BaseActivity {
                 convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_geren_shezhi_sub, null);
             }
             TextView textView = (TextView) convertView.findViewById(R.id.tv_subitem_companyname);
-            textView.setText(data.get(childPosition).getName());
+            textView.setText(data.get(childPosition).getUsername());
+            Log.e(">>>>>>",data.get(childPosition).getUsername());
             return convertView;
         }
 

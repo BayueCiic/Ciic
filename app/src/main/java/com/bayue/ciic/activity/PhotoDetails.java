@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import com.bayue.ciic.R;
 import com.bayue.ciic.base.BaseActivity;
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -61,12 +62,14 @@ public class PhotoDetails extends BaseActivity {
 
         bannerImg.setBannerAnimation(Transformer.DepthPage);
 
-        bannerImg.isAutoPlay(true);
+        bannerImg.isAutoPlay(false);
 
         bannerImg.setDelayTime(2000);
 
         bannerImg.setIndicatorGravity(BannerConfig.CENTER);
 
+
+//        bannerImg.onPageSelected(3);
         bannerImg.start();
 
         bannerImg.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -150,10 +153,12 @@ public class PhotoDetails extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_details_left:
-                if(mCurrentPosition==0){
-                    return;
-                }
-
+//                if(mCurrentPosition==0){
+//                    return;
+//                }
+                Log.e("图片页面选择","========");
+                bannerImg.toRealPosition(3);
+//                bannerImg.start();
                 break;
             case R.id.iv_details_right:
                 break;
@@ -175,11 +180,11 @@ public class PhotoDetails extends BaseActivity {
             //Glide 加载图片简单用法
             Glide.with(context).load(path).into(imageView);
 
-            /*//Picasso 加载图片简单用法
-            Picasso.with(context).load(path).into(imageView)*/
+            //Picasso 加载图片简单用法
+//            Picasso.with(context).load((Uri) path).into(imageView);
 
-           /* //用fresco加载图片简单用法
-            Uri uri = Uri.parse((String) path);
+            //用fresco加载图片简单用法
+           /* Uri uri = Uri.parse((String) path);
             imageView.setImageURI(uri);*/
         }
        /* //提供createImageView 方法，如果不用可以不重写这个方法，方便fresco自定义ImageView
@@ -188,5 +193,10 @@ public class PhotoDetails extends BaseActivity {
             SimpleDraweeView simpleDraweeView=new SimpleDraweeView(context);
             return simpleDraweeView;
         }*/
+    }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0, 0);
     }
 }

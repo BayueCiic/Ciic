@@ -42,7 +42,7 @@ import okhttp3.Response;
  * Created by Administrator on 2017/7/5.
  */
 
-public class GerenDetails extends BaseActivity {
+public class GerenXxDetails extends BaseActivity {
     @BindView(R.id.iv_goback)
     ImageView ivGoback;
     @BindView(R.id.fl_goback)

@@ -31,7 +31,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activity.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyDialogStyle"/>
@@ -74,7 +75,11 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.GerenShoucang"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.GerenDetails"
+        <activity android:name=".activity.GerenXxDetails"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.GerenShipin"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.GerenZhibo"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".activity.PhotoAlbum"

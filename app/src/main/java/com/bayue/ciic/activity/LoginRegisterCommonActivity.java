@@ -126,6 +126,66 @@ public class LoginRegisterCommonActivity extends BaseLoginActivity {
             }
         }).start();
     }
+    private void sendTag(){
+        phone=etCommonPhone.getText().toString();
+        if(phone.length()!=11){
+            Toast.makeText(this,"请输入正确的手机号码",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Map<String ,Object> map=new HashMap<>();
+
+        map.put("phone",phone);
+        send();
+        HTTPUtils.getNetDATA(API.BaseUrl + API.Login.VALI, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ToolKit.runOnMainThreadSync(new Runnable() {
+                    @Override
+                    public void run() {
+                        DensityUtil.showToast(LoginRegisterCommonActivity.this,"请检查网络");
+                    }
+                });
+            }
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                Log.e("^^^^^^^^^^^^","2222222222222");
+                String msg=response.body().string();
+                if(response.code()==200){
+                    Gson gson=new Gson();
+                    final VerificationBean bean=gson.fromJson(msg,VerificationBean.class);
+                    ToolKit.runOnMainThreadSync(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(bean.getCode()==200){
+                                etCommonVerification.setText(bean.getData());
+                            }else {
+                                DensityUtil.showToast(LoginRegisterCommonActivity.this,bean.getMsg());
+                            }
+                        }
+                    });
+                }else {
+                    ToolKit.runOnMainThreadSync(new Runnable() {
+                        @Override
+                        public void run() {
+                            DensityUtil.showToast(LoginRegisterCommonActivity.this,response.message());
+                        }
+                    });
+
+
+
+                }
+
+
+            }
+        });
+
+
+
+
+
+
+
+    }
     String phone;
     private void reg(){
         phone=etCommonPhone.getText().toString();
@@ -202,64 +262,5 @@ public class LoginRegisterCommonActivity extends BaseLoginActivity {
 
 
     }
-    private void sendTag(){
-        phone=etCommonPhone.getText().toString();
-        if(phone.length()!=11){
-            Toast.makeText(this,"请输入正确的手机号码",Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Map<String ,Object> map=new HashMap<>();
 
-        map.put("phone",phone);
-        send();
-        HTTPUtils.getNetDATA(API.BaseUrl + API.Login.VALI, map, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                ToolKit.runOnMainThreadSync(new Runnable() {
-                    @Override
-                    public void run() {
-                        DensityUtil.showToast(LoginRegisterCommonActivity.this,"请检查网络");
-                    }
-                });
-            }
-            @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-                Log.e("^^^^^^^^^^^^","2222222222222");
-                String msg=response.body().string();
-                if(response.code()==200){
-                    Gson gson=new Gson();
-                    final VerificationBean bean=gson.fromJson(msg,VerificationBean.class);
-                    ToolKit.runOnMainThreadSync(new Runnable() {
-                        @Override
-                        public void run() {
-                            if(bean.getCode()==200){
-                                etCommonVerification.setText(bean.getData());
-                            }else {
-                                DensityUtil.showToast(LoginRegisterCommonActivity.this,bean.getMsg());
-                            }
-                        }
-                    });
-                }else {
-                    ToolKit.runOnMainThreadSync(new Runnable() {
-                        @Override
-                        public void run() {
-                            DensityUtil.showToast(LoginRegisterCommonActivity.this,response.message());
-                        }
-                    });
-
-
-
-                }
-
-
-            }
-        });
-
-
-
-
-
-
-
-    }
 }

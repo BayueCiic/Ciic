@@ -39,8 +39,6 @@ public class PlatfromHuodong extends BaseFragment {
     View viewHuodongTwo;
     @BindView(R.id.tv_huodong_name)
     TextView tvHuodongName;
-    @BindView(R.id.tv_huodong_genduo)
-    TextView tvHuodongGenduo;
     @BindView(R.id.vp_huodong)
     RecyclerView vpHuodong;
     Unbinder unbinder;

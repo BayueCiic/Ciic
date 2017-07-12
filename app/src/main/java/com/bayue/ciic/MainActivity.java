@@ -153,7 +153,9 @@ public class MainActivity extends BaseActivity {
                 Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
                 firstTime = secondTime;//更新firstTime
                 return true;
-            } else {                                                    //两次按键小于2秒时，退出应用
+            } else {
+                //两次按键小于2秒时，退出应用
+                App.bgActivity.finish();
                 System.exit(0);
             }
         }
