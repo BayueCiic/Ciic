@@ -17,13 +17,26 @@ import android.widget.TextView;
 
 import com.bayue.ciic.R;
 import com.bayue.ciic.base.BaseFragment;
+import com.bayue.ciic.bean.TagBean;
+import com.bayue.ciic.http.API;
+import com.bayue.ciic.utils.HTTPUtils;
+import com.bayue.ciic.utils.ToastUtils;
+import com.bayue.ciic.utils.ToolKit;
+import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * Created by Administrator on 2017/6/27.
@@ -65,7 +78,7 @@ public class MainPlatfrom extends BaseFragment {
     @BindView(R.id.tv_shezhi)
     TextView tvShezhi;
 
-
+    float offsets;
     @Override
     protected int getViewId() {
         return R.layout.frament_main_platfrom;
@@ -75,7 +88,7 @@ public class MainPlatfrom extends BaseFragment {
     public void init() {
         fragments = new ArrayList<>();
         initTabLineWidth();
-        fragments.add(new PlatfromShouye(this));
+        fragments.add(PlatfromShouye.getPlatfromShouye(this));
         fragments.add(new PlatfromZhibo());
         fragments.add(new PlatfromShipin());
         fragments.add(new PlatfromHuodong());
@@ -108,6 +121,11 @@ public class MainPlatfrom extends BaseFragment {
                         .getLayoutParams();
 
                 Log.e("offset:", offset + "");
+
+                if(currentIndex==5){
+                    offsets=offset;
+
+                }
                 /**
                  * 利用currentIndex(当前所在页面)和position(下一个页面)以及offset来
                  * 设置mTabLineIv的左边距 滑动场景：
@@ -161,11 +179,11 @@ public class MainPlatfrom extends BaseFragment {
                             * (screenWidth / 6));
                 } else if (currentIndex == 5 && position == 4) // 5->4
                 {
-                    lp.leftMargin = (int) (-(1 - offset)
+                    lp.leftMargin = (int) (-(1 - offsets)
                             * (screenWidth * 1.0 / 6) + currentIndex
                             * (screenWidth / 6));
                 }
-
+                Log.e("<<<<<平台<<<<<<",lp.leftMargin+"");
                 viewPlatfromXian.setLayoutParams(lp);
             }
 
@@ -307,5 +325,8 @@ public class MainPlatfrom extends BaseFragment {
             return fragments.size();
         }
     }
+
+
+
 
 }

@@ -52,12 +52,12 @@
                 android:textSize="22px"
                 android:textColor="@android:color/black"/>
         </LinearLayout>
-        <android.support.v7.widget.RecyclerView
+        <com.androidkun.PullToRefreshRecyclerView
             android:id="@+id/rlv_news"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </android.support.v7.widget.RecyclerView>
+        </com.androidkun.PullToRefreshRecyclerView>
 
 
     </LinearLayout>

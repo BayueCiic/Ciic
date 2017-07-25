@@ -70,7 +70,7 @@ public class MainCompany extends BaseFragment {
         fragments = new ArrayList<>();
         initTabLineWidth();
 
-        fragments.add(new CompanyShouye(this));
+        fragments.add(CompanyShouye.getCompanyShouye(this));
         fragments.add(new PlatfromZhibo());
         fragments.add(new PlatfromShipin());
         fragments.add(new PlatfromHuodong());
@@ -138,7 +138,7 @@ public class MainCompany extends BaseFragment {
                             * (screenWidth * 1.0 / 4) + currentIndex
                             * (screenWidth / 4));
                 }
-
+                Log.e("<<<<<<企业<<<<<",lp.leftMargin+"");
                 viewPlatfromXian.setLayoutParams(lp);
             }
 
@@ -150,6 +150,12 @@ public class MainCompany extends BaseFragment {
         });
 
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        initTabLineWidth();
     }
 
     private void initTabLineWidth() {

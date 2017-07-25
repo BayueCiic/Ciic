@@ -23,6 +23,7 @@ import com.bayue.ciic.activity.GerenComplaint;
 import com.bayue.ciic.activity.GerenGuanyu;
 import com.bayue.ciic.activity.GerenNews;
 import com.bayue.ciic.activity.GerenParty;
+import com.bayue.ciic.activity.GerenQiyeShezhi;
 import com.bayue.ciic.activity.GerenShezhi;
 import com.bayue.ciic.activity.GerenShipin;
 import com.bayue.ciic.activity.GerenShoucang;
@@ -31,6 +32,7 @@ import com.bayue.ciic.activity.GerenXiugai;
 import com.bayue.ciic.activity.GerenXx;
 import com.bayue.ciic.activity.GerenZhibo;
 import com.bayue.ciic.activity.Gerenlianxi;
+import com.bayue.ciic.activity.LiveWatch;
 import com.bayue.ciic.activity.LoginActivity;
 import com.bayue.ciic.activity.LoginBgActivity;
 import com.bayue.ciic.base.BaseFragment;
@@ -131,6 +133,14 @@ public class MainGeren extends BaseFragment {
                 }
             }
         });
+
+       if(Preferences.getEnterprise_id().equals("1")&&Preferences.getAdmin().equals("1")){
+
+       }else if((!Preferences.getEnterprise_id().equals("1"))&&(Preferences.getAdmin().equals("1")||Preferences.getAdmin().equals("2"))){
+           hide3();
+       }else {
+           hide();
+       }
     }
 
     @Override
@@ -151,7 +161,13 @@ public class MainGeren extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.fl_shezhi:
-                Intent intent=new Intent(main, GerenShezhi.class);
+                Intent intent;
+                if(Preferences.getAdmin().equals("2")){
+                    intent=new Intent(main, GerenQiyeShezhi.class);
+
+                }else {
+                    intent=new Intent(main, GerenShezhi.class);
+                }
                 intent.putExtra("img",img);
                 intent.putExtra("name",name);
                 intent.putExtra("company",company);
@@ -200,6 +216,7 @@ public class MainGeren extends BaseFragment {
                 break;
             case R.id.rl_geren_tuichu:
                 exit();
+//                main.startActivity(new Intent(main, LiveWatch.class));
                 break;
         }
     }
@@ -222,6 +239,12 @@ public class MainGeren extends BaseFragment {
         llGerenZhibo.setVisibility(View.GONE);
         llGerenJingcai.setVisibility(View.GONE);
 
+    }
+
+    private void hide3(){
+        llGerenXinwen.setVisibility(View.GONE);
+        llGerenZhibo.setVisibility(View.GONE);
+        llGerenJingcai.setVisibility(View.GONE);
     }
 
     @Override

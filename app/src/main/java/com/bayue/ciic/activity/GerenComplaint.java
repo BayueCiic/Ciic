@@ -24,8 +24,11 @@ import com.bayue.ciic.preferences.Preferences;
 import com.bayue.ciic.utils.HTTPUtils;
 import com.bayue.ciic.utils.ToastUtils;
 import com.bayue.ciic.utils.ToolKit;
+import com.bayue.ciic.utils.glide.GlideCircleTransform;
+import com.bayue.ciic.utils.glide.GlideRoundTransform;
 import com.bayue.ciic.view.MyPopupWindow;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.google.gson.Gson;
 import com.tangxiaolv.telegramgallery.GalleryActivity;
 
@@ -74,6 +77,8 @@ public class GerenComplaint extends BaseActivity {
 
     MyPopupWindow popupWindow;
 
+    RequestManager glideRequest;
+
     private View.OnClickListener itemsOnClick=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -103,6 +108,7 @@ public class GerenComplaint extends BaseActivity {
 
     @Override
     protected void initViews() {
+        glideRequest = Glide.with(this);
         ivGoback.setImageResource(R.mipmap.back_3x);
         tvTitletxt.setText("投诉建议");
         ivShezhi.setVisibility(View.INVISIBLE);
@@ -133,27 +139,35 @@ public class GerenComplaint extends BaseActivity {
     boolean b=false;
     File file;
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        Log.e("data=====",data+"");
+        if(data==null){
+            return;
+        }
         Log.e("resultCode===>>>>",resultCode+"");
         Log.e("requestCode===>>>>",requestCode+"");
         if(requestCode==1){
-            Log.e("data=====",data+"");
-            if(data==null){
-                return;
-            }
+
             Bundle bundle=data.getExtras();
+
             if(bundle==null){
                 return;
             }
+
             Bitmap bitmap= (Bitmap) bundle.get("data");
-            ivComplaintImg1.setImageBitmap(bitmap);
+
+//            ivComplaintImg1.setImageBitmap(bitmap);
             ivComplaintImg1.setVisibility(View.VISIBLE);
             b=true;
             file= compressImage2(bitmap);
             fileMap.put("file",file);
+            glideRequest.
+                    load(file)
+                    .placeholder(R.mipmap.bianjiziliao_toux2_3x)
+                    .error(R.mipmap.bianjiziliao_toux2_3x)
+                    .transform(new GlideRoundTransform(this))
+                    .into(ivComplaintImg1);
 
-
-
+            new GlideCircleTransform(this);
 
             /*ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
@@ -188,7 +202,7 @@ public class GerenComplaint extends BaseActivity {
                     case 0:
                         Bitmap bitmap1=BitmapFactory.decodeFile(photos.get(0),GerenShezhi.getBitmapOption(2));
                         file=compressImage2(bitmap1);
-                        fileMap.put("file",file);
+                        fileMap.put("file1",file);
                         Glide.with(getBaseContext())
                                 .load(file)
                                 .error(R.mipmap.ic_launcher_round)
@@ -200,7 +214,7 @@ public class GerenComplaint extends BaseActivity {
                     case 1:
                         Bitmap bitmap2=BitmapFactory.decodeFile(photos.get(1),GerenShezhi.getBitmapOption(2));
                         file=compressImage2(bitmap2);
-                        fileMap.put("file0",file);
+                        fileMap.put("file2",file);
                         Glide.with(getBaseContext())
                                 .load(file)
                                 .error(R.mipmap.ic_launcher_round)
@@ -211,7 +225,7 @@ public class GerenComplaint extends BaseActivity {
                     case 2:
                         Bitmap bitmap3=BitmapFactory.decodeFile(photos.get(2),GerenShezhi.getBitmapOption(2));
                         file=compressImage2(bitmap3);
-                        fileMap.put("file1",file);
+                        fileMap.put("file3",file);
 //                        ivComplaintImg3.setImageBitmap(bitmap);
                         Glide.with(getBaseContext())
                                 .load(file)

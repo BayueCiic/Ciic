@@ -191,9 +191,10 @@ ToastUtils.showShortToast("请检查网络");                    }
                         public void run() {
                             if(bean.getCode()==200){
                                 Preferences.saveString(getApplicationContext(),Preferences.TOKEN,bean.getToken());
-                                Preferences.saveAdmin(bean.getIs_admin()+"");
                                 Preferences.saveUserName(etLoginAccount.getText().toString());
                                 Preferences.savePassword(etLoginPassword.getText().toString());
+                                Preferences.saveAdmin(bean.getIs_admin()+"");
+                                Preferences.saveEnterprise_id(bean.getEnterprise_id());
                                 Log.e("token",bean.getToken());
                                 DensityUtil.showToast(LoginActivity.this,bean.getData());
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));

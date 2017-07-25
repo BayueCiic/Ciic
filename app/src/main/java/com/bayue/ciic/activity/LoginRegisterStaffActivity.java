@@ -13,8 +13,10 @@ import android.widget.Toast;
 
 import com.bayue.ciic.R;
 import com.bayue.ciic.base.BaseLoginActivity;
+import com.bayue.ciic.bean.RegBean;
 import com.bayue.ciic.bean.VerificationBean;
 import com.bayue.ciic.http.API;
+import com.bayue.ciic.preferences.Preferences;
 import com.bayue.ciic.utils.DensityUtil;
 import com.bayue.ciic.utils.HTTPUtils;
 import com.bayue.ciic.utils.ToastUtils;
@@ -149,11 +151,14 @@ public class LoginRegisterStaffActivity extends BaseLoginActivity {
                 String msg=response.body().string();
                 if(response.code()==200){
                     Gson gson=new Gson();
-                    final VerificationBean bean=gson.fromJson(msg,VerificationBean.class);
+                    final RegBean bean=gson.fromJson(msg,RegBean.class);
                     ToolKit.runOnMainThreadSync(new Runnable() {
                         @Override
                         public void run() {
                             if(bean.getCode()==200){
+                                Preferences.saveString(getApplicationContext(),Preferences.TOKEN,bean.getToken());
+                                Preferences.saveAdmin(bean.getIs_admin()+"");
+                                Preferences.saveEnterprise_id(bean.getEnterprise_id());
 
                             }else {
                                 ToastUtils.showShortToast(bean.getData());

@@ -236,6 +236,9 @@ public class LoginRegisterCommonActivity extends BaseLoginActivity {
                         public void run() {
                             if(bean.getCode()==200){
                                 Preferences.saveString(getApplicationContext(),Preferences.TOKEN,bean.getToken());
+                                Preferences.saveAdmin(bean.getIs_admin()+"");
+                                Preferences.saveEnterprise_id(bean.getEnterprise_id());
+
                                 DensityUtil.showToast(LoginRegisterCommonActivity.this,bean.getData());
                                 startActivity(new Intent(LoginRegisterCommonActivity.this, MainActivity.class));
                                 LoginRegisterCommonActivity.this.finish();

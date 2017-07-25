@@ -9,19 +9,19 @@
         android:layout_width="match_parent"
         android:background="@android:color/white"
         android:layout_height="wrap_content">
-        <ImageView
+        <ImageView android:id="@+id/iv_shipin_img"
             android:layout_width="match_parent"
             android:layout_height="138px"
             android:src="@mipmap/shouye_img01_3x"
             android:scaleType="fitXY"/>
-        <TextView
+        <TextView android:id="@+id/tv_shipin_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="中智—直播"
             android:textColor="@android:color/black"
             android:textSize="22px"
             android:layout_marginLeft="20px"/>
-        <TextView
+        <TextView android:id="@+id/tv_shipin_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="主播:中智-管理"

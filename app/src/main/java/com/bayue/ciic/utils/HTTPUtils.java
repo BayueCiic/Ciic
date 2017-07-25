@@ -22,7 +22,7 @@ import okhttp3.RequestBody;
 public class HTTPUtils {
     public static void getNetDATA(String url, Map<String, Object> map, Callback callback){
         Tracer.e("AddAddressActivity", url);
-        map.put("safecode", "BaYue.JingCai");
+        map.put("safecode", "BaYue.ZhongZhi");
         map.put("apiversion", "v.1.0");
         RequestBody body ;
         FormBody.Builder formBody = new FormBody.Builder();
@@ -39,7 +39,7 @@ public class HTTPUtils {
     }
     public static void getFileDATA(String url, Map<String, Object> map, Map<String,File> fileMap,Callback callback){
         Tracer.e("AddAddressActivity", url);
-        map.put("safecode", "BaYue.JingCai");
+        map.put("safecode", "BaYue.ZhongZhi");
         map.put("apiversion", "v.1.0");
         RequestBody body  ;
        /* FormBody.Builder formBody = new FormBody.Builder();
@@ -59,6 +59,7 @@ public class HTTPUtils {
         for (Map.Entry<String, File> entry : fileMap.entrySet()){
             Log.e("图片file=2222222===",entry.getValue()+"");
             Log.e("图片大小=====",entry.getValue().length()+"");
+            Log.e(entry.getKey()+"图片名字=====",entry.getValue().getName());
             part.addFormDataPart(entry.getKey(),entry.getValue().getName(), RequestBody.create( MediaType.parse("application/octet-stream"), entry.getValue()));
 
 //            Tracer.e("AddAddressActivity", entry.getKey() +":"+String.valueOf(entry.getValue()));

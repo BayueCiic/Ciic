@@ -9,6 +9,7 @@
         <ImageView android:id="@+id/iv_video_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scaleType="fitXY"
             android:background="#99323232"/>
         <ImageView android:id="@+id/tv_video_time"
             android:layout_width="89px"

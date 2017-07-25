@@ -20,7 +20,7 @@
                 android:background="@color/themecolor"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20px"/>
-            <TextView
+            <TextView android:id="@+id/iv_huodong_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="这里是活动的标题"
@@ -29,7 +29,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/civ_dian"
                 android:layout_marginLeft="20px"/>
-            <TextView
+            <TextView android:id="@+id/iv_huodong_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2017-05-05"
@@ -52,11 +52,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="92px"
                 android:orientation="horizontal">
-                <ImageView
+                <ImageView android:id="@+id/iv_huodong_img"
                     android:layout_width="145px"
                     android:layout_height="match_parent"
                     android:background="#F2F2F2"/>
-                <TextView
+                <TextView android:id="@+id/iv_huodong_txt"
                     android:layout_width="0px"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0px"
                 android:layout_weight="1">
-                <TextView
+                <TextView android:id="@+id/iv_huodong_ing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="进行中..."
@@ -79,7 +79,7 @@
                     android:textSize="24px"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10px"/>
-                <TextView
+                <TextView android:id="@+id/iv_huodong_author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="中智-管理员"

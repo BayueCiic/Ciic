@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
     package="com.bayue.ciic">
 
     <!-- 访问网络 -->
@@ -9,6 +10,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+
+    <!-- 允许程序获取网络相关信息 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 允许程序获取Wifi网络状态信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!-- 允许程序获得设备信息 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
 
 
     <application
@@ -59,6 +68,9 @@
         <activity android:name=".activity.GerenShezhi"
             android:windowSoftInputMode="stateHidden|stateUnchanged"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity.GerenQiyeShezhi"
+            android:windowSoftInputMode="stateHidden|stateUnchanged"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activity.GerenXiugai"
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.GerenXx"
@@ -82,10 +94,14 @@
         <activity android:name=".activity.GerenZhibo"
             android:screenOrientation="portrait"/>
 
+
         <activity android:name=".activity.PhotoAlbum"
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.PhotoDetails"
             android:theme="@style/MyPhotoDetails"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.LiveWatch"
             android:screenOrientation="portrait"/>
 
         <!--相册-->

@@ -6,10 +6,10 @@ package com.bayue.ciic.http;
 
 public class API {
     private static boolean isLocal(){
-        return 2==2;
+        return 1==2;
     }
-    private static final String Base_Inner="http://192.168.1.171/zhongz";
-    private static final String Domain_Net="";
+    private static final String Base_Inner="http://192.168.1.159/zhongz";
+    private static final String Domain_Net="http://zz.bayuenet.com";
     public static final String BaseUrl= isLocal()? Base_Inner:Domain_Net;
 
     public static class Login{
@@ -37,17 +37,34 @@ public class API {
         public static final String DETAILS="/Home/User/MessageInfo";
         public static final String GEREN="/Home/User/Userinfo";
 
+        public static final String WONDERFUL="/Home/Photo/ManageAlbumList";
+        public static final String NEWS="/Home/Photo/ManageAlbumList";
+
+        public static final String SHIPINP="/Home/Video/ManageVideoList";
+        public static final String SHIPINC="/Home/Video/ManageVideoAudit";
+
+        public static final String ZHIBO="/Home/Direct/ManageDirectList";
     }
 
     public  static class patfrom{
         public static final String SHOUYE="";
-        public static final String ZHIBO="/Home/Index/index_direct";
-        public static final String SHIPIN="";
-        public static final String HUODOANG="";
-        public static final String XINWEN="";
-        public static final String JINGCAI="";
+        public static final String SHOUYE_ZHIBO= "/Home/Index/IndexDirect";
+        public static final String SHOUYE_SHIPING= "/Home/Index/IndexVideo";
+        public static final String SHOUYE_PHOTO= "/Home/Index/IndexPhoto";
+        public static final String SHOUYE_HUODONG= "/Home/Index/IndexActivity";
+        public static final String SHOUYE_XINWEN= "/Home/Index/IndexNews";
+
+
+
+        public static final String ZHIBO="/Home/Direct/ListDirect";
+        public static final String SHIPIN="/Home/Video/ListVideo";
+        public static final String HUODOANG="/Home/Activity/ListActivity";
+        public static final String XINWEN="/Home/News/ListNews";
+        public static final String JINGCAI="/Home/Photo/ListAlbum";
     }
 
+    //类型
+    public static final String TAG="/Home/Index/LabelList";
 
 
 

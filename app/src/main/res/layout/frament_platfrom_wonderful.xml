@@ -36,10 +36,11 @@
                     android:layout_marginLeft="10px"/>
                 <TextView android:id="@+id/tv_wonderful_xiuxian"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="日常休闲"
                     android:textSize="18px"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/gerenTextcolor"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/tv_wonderful_shipin"
                     android:layout_marginLeft="20px"/>
@@ -52,7 +53,8 @@
                     android:layout_marginLeft="20px"/>
                 <TextView android:id="@+id/tv_wonderful_yepao"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="夜跑"
                     android:textSize="18px"
                     android:textColor="@color/gerenTextcolor"
@@ -68,23 +70,35 @@
                     android:layout_marginLeft="20px"/>
                 <TextView android:id="@+id/tv_wonderful_name"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="500强运动会"
                     android:textSize="18px"
                     android:textColor="@color/gerenTextcolor"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/view_wonderful_two"
                     android:layout_marginLeft="20px"/>
+                <TextView android:id="@+id/tv_wonderful_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginRight="20px"
+                    android:text="全 部"
+                    android:textSize="18px"
+                    android:textColor="@color/gerenTextcolor"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20px"/>
 
 
             </RelativeLayout>
 
-            <android.support.v7.widget.RecyclerView
+            <com.androidkun.PullToRefreshRecyclerView
                 android:id="@+id/vp_wonderful"
                 android:layout_marginTop="20px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            </android.support.v7.widget.RecyclerView>
+            </com.androidkun.PullToRefreshRecyclerView>
 
         </LinearLayout>
 

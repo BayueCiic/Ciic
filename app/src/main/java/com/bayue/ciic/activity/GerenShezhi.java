@@ -374,6 +374,7 @@ public class GerenShezhi extends BaseActivity {
 //            Log.e("data=====1111===",bundle.getString("data"));
             Bitmap bitmap= (Bitmap) bundle.get("data");
             Log.e("bitmap===bbbbb====",bitmap+"");
+
             file=compressImage2(bitmap);
 //            Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null,null));
 //            file=saveBitmap(bitmap);

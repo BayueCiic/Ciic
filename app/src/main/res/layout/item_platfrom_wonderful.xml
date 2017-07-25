@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <LinearLayout android:id="@+id/ll_item"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -10,10 +10,11 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="341px">
-            <ImageView
+            <ImageView android:id="@+id/iv_wenderful_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#021C27"/>
+                android:background="#021C27"
+                android:scaleType="fitXY"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="81px"
@@ -33,24 +34,24 @@
                     android:paddingBottom="9px"
                     android:paddingRight="30px"
                     android:background="@android:color/black">
-                    <TextView
+                    <TextView android:id="@+id/tv_wenderful_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="这里是画册名称"
                         android:textSize="23px"
                         android:textColor="@android:color/white"/>
-                    <TextView
+                    <TextView android:id="@+id/tv_wenderful_author"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="中智-管理员"
-                        android:textColor="#999999"
+                        android:textColor="@android:color/white"
                         android:textSize="18px"
                         android:layout_alignParentBottom="true"/>
-                    <TextView
+                    <TextView android:id="@+id/tv_wenderful_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="2017-05-05"
-                        android:textColor="#999999"
+                        android:textColor="@android:color/white"
                         android:textSize="18px"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"/>

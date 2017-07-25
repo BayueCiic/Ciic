@@ -8,80 +8,112 @@
     android:background="@color/gerenBg"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="67px"
             android:background="@android:color/white">
-            <ImageView android:id="@+id/iv_shipin_sanjiao"
+
+            <ImageView
+                android:id="@+id/iv_shipin_sanjiao"
                 android:layout_width="21px"
                 android:layout_height="27px"
-                android:layout_marginLeft="10px"
-                android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:src="@mipmap/xiaosanjiao_3x"/>
-            <TextView android:id="@+id/tv_shipin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="热门直播"
-                android:textSize="26px"
-                android:textColor="@android:color/black"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/iv_shipin_sanjiao"
-                android:layout_marginLeft="10px"/>
-            <TextView android:id="@+id/tv_shipin_xiuxian"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="日常休闲"
-                android:textSize="18px"
-                android:textColor="@android:color/black"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/tv_shipin"
-                android:layout_marginLeft="20px"/>
-            <View android:id="@+id/view_shipin_one"
-                android:layout_width="2px"
-                android:layout_height="15px"
-                android:background="@color/gerenTextcolor"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/tv_shipin_xiuxian"
-                android:layout_marginLeft="20px"/>
-            <TextView android:id="@+id/tv_shipin_yepao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="夜跑"
-                android:textSize="18px"
-                android:textColor="@color/gerenTextcolor"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/view_shipin_one"
-                android:layout_marginLeft="20px"/>
-            <View android:id="@+id/view_shipin_two"
-                android:layout_width="2px"
-                android:layout_height="15px"
-                android:background="@color/gerenTextcolor"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/tv_shipin_yepao"
-                android:layout_marginLeft="20px"/>
-            <TextView android:id="@+id/tv_shipin_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="500强运动会"
-                android:textSize="18px"
-                android:textColor="@color/gerenTextcolor"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/view_shipin_two"
-                android:layout_marginLeft="20px"/>
+                android:layout_marginLeft="10px"
+                android:src="@mipmap/xiaosanjiao_3x" />
 
+            <TextView
+                android:id="@+id/tv_shipin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10px"
+                android:layout_toRightOf="@+id/iv_shipin_sanjiao"
+                android:text="热门直播"
+                android:textColor="@android:color/black"
+                android:textSize="26px" />
+
+            <TextView
+                android:id="@+id/tv_shipin_xiuxian"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:layout_toRightOf="@+id/tv_shipin"
+                android:text="日常休闲"
+                android:textColor="@color/gerenTextcolor"
+                android:textSize="18px" />
+
+            <View
+                android:id="@+id/view_shipin_one"
+                android:layout_width="2px"
+                android:layout_height="15px"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:layout_toRightOf="@+id/tv_shipin_xiuxian"
+                android:background="@color/gerenTextcolor" />
+
+            <TextView
+                android:id="@+id/tv_shipin_yepao"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:layout_toRightOf="@+id/view_shipin_one"
+                android:text="夜跑"
+                android:textColor="@color/gerenTextcolor"
+                android:textSize="18px" />
+
+            <View
+                android:id="@+id/view_shipin_two"
+                android:layout_width="2px"
+                android:layout_height="15px"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:layout_toRightOf="@+id/tv_shipin_yepao"
+                android:background="@color/gerenTextcolor" />
+
+            <TextView
+                android:id="@+id/tv_shipin_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:layout_toRightOf="@+id/view_shipin_two"
+                android:text="500强运动会"
+                android:textColor="@color/gerenTextcolor"
+                android:textSize="18px" />
+            <TextView
+                android:id="@+id/tv_shipin_all"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:layout_alignParentRight="true"
+                android:text="全 部"
+                android:layout_marginRight="20px"
+                android:textColor="@color/gerenTextcolor"
+                android:textSize="18px" />
 
         </RelativeLayout>
-        <android.support.v7.widget.RecyclerView
+
+        <com.androidkun.PullToRefreshRecyclerView
             android:id="@+id/vp_shipin"
-            android:layout_marginTop="20px"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px">
+
+        </com.androidkun.PullToRefreshRecyclerView>
 
     </LinearLayout>
 

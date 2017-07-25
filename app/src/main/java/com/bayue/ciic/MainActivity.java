@@ -3,27 +3,48 @@ package com.bayue.ciic;
 
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bayue.ciic.activity.LoginBgActivity;
 import com.bayue.ciic.base.BaseActivity;
+import com.bayue.ciic.bean.TagBean;
 import com.bayue.ciic.fragment.MainCompany;
 import com.bayue.ciic.fragment.MainGeren;
 import com.bayue.ciic.fragment.MainPlatfrom;
+import com.bayue.ciic.http.API;
 import com.bayue.ciic.preferences.Preferences;
+import com.bayue.ciic.utils.HTTPUtils;
+import com.bayue.ciic.utils.ToastUtils;
+import com.bayue.ciic.utils.ToolKit;
+import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class MainActivity extends BaseActivity {
 
@@ -42,6 +63,7 @@ public class MainActivity extends BaseActivity {
     MainPlatfrom platfrom;
     MainGeren geren;
 
+    public  static List<TagBean.DataBean> lists;
 
     @Override
     protected void setTheme() {
@@ -56,13 +78,13 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initViews(){
         App.mainActivity=this;
+        getTagData();
         platfrom=new MainPlatfrom();
         company=new MainCompany();
         geren=new MainGeren();
         setFrament(platfrom,llMainPlatform);
 
-//        Log.e("Token======", Preferences.getString(this,Preferences.TOKEN));
-
+        Log.e("Token======", Preferences.getString(this,Preferences.TOKEN));
 
 
     }
@@ -84,6 +106,13 @@ public class MainActivity extends BaseActivity {
                 llMainGeren.setEnabled(true);
                 break;
             case R.id.ll_main_company:
+
+                if(Preferences.getEnterprise_id().equals("0")){
+                    remind();
+                    return;
+
+                }
+
                 setFrament(company,llMainCompany);
                 llMainPlatform.setEnabled(true);
                 llMainCompany.setEnabled(false);
@@ -104,6 +133,19 @@ public class MainActivity extends BaseActivity {
         ll.setBackgroundColor(getResources().getColor(R.color.clickColor));
         getFragmentManager().popBackStack();
 //        Log.e("数量yyyyyyy", getFragmentManager().getBackStackEntryCount()+"");
+       /* if(platfrom!=null)
+        transaction.hide(platfrom);
+        if(company!=null)
+        transaction.hide(company);
+        if(geren!=null)
+        transaction.hide(geren);
+
+
+            transaction.add(R.id.fl_main,fragm);
+            Log.e("","添加--------");
+
+            transaction.show(fragm);
+*/
         transaction.replace(R.id.fl_main,fragm);
 //        transaction.addToBackStack(null);//将fragment加入返回栈
         transaction.commit();
@@ -122,6 +164,7 @@ public class MainActivity extends BaseActivity {
     }*/
 
     private void restoreColor(){
+
         llMainPlatform.setBackgroundColor(getResources().getColor(R.color.themecolor));
         llMainCompany.setBackgroundColor(getResources().getColor(R.color.themecolor));
         llMainGeren.setBackgroundColor(getResources().getColor(R.color.themecolor));
@@ -155,10 +198,101 @@ public class MainActivity extends BaseActivity {
                 return true;
             } else {
                 //两次按键小于2秒时，退出应用
-                App.bgActivity.finish();
+//                App.bgActivity.finish();
                 System.exit(0);
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void remind(){
+        LayoutInflater inflaterDl = LayoutInflater.from(this);
+        LinearLayout layout = (LinearLayout)inflaterDl.inflate(R.layout.dialog_remind, null );
+
+        //对话框
+        final Dialog dialog = new AlertDialog.Builder(this).create();
+        dialog.show();
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes() ;
+        Display display =this.getWindowManager().getDefaultDisplay();
+        params.width =(int) (display.getWidth()*0.8);
+
+        //使用这种方式更改了dialog的框宽
+        dialog.getWindow().setAttributes(params);
+        dialog.getWindow().setContentView(layout);
+
+        layout.findViewById(R.id.but_dialog_queding).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+    }
+    //获取数据类型
+    private void getTagData() {
+        Map<String, Object> map = new HashMap<>();
+
+//        map.put("token", Preferences.getString(getContext(), Preferences.TOKEN));
+        HTTPUtils.getNetDATA(API.BaseUrl + API.TAG, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ToolKit.runOnMainThreadSync(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtils.showShortToast("请检查网络");
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                String msg = response.body().string();
+                if (response.code() == 200) {
+                    Gson gson = new Gson();
+                    final TagBean bean = gson.fromJson(msg, TagBean.class);
+
+                    if (bean.getCode() == 200) {
+                        ToolKit.runOnMainThreadSync(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                 lists = bean.getData();
+
+                                if(setTag!=null)
+                                setTag.setTag(bean.getData());
+
+                                Log.e("TTTTTT", lists.get(0).getName() + lists.get(1).getName() + lists.get(2).getName());
+
+                            }
+                        });
+                    } else {
+                        ToolKit.runOnMainThreadSync(new Runnable() {
+                            @Override
+                            public void run() {
+//                                ToastUtils.showShortToast(bean.getMsg());
+                            }
+                        });
+                    }
+                } else {
+                    ToolKit.runOnMainThreadSync(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.showShortToast(response.message());
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    SetTag setTag;
+
+    public interface SetTag{
+        void setTag(List<TagBean.DataBean> lists);
+
+    }
+
+    public void setTag(SetTag setTag){
+        this.setTag=setTag;
     }
 }

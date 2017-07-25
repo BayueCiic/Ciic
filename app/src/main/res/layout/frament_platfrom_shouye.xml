@@ -37,7 +37,8 @@
                     android:layout_marginLeft="10px"/>
                 <TextView android:id="@+id/tv_shipin_xiuxian"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="日常休闲"
                     android:textSize="18px"
                     android:textColor="@android:color/black"
@@ -53,7 +54,8 @@
                     android:layout_marginLeft="20px"/>
                 <TextView android:id="@+id/tv_shipin_yepao"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="夜跑"
                     android:textSize="18px"
                     android:textColor="@color/gerenTextcolor"
@@ -69,7 +71,8 @@
                     android:layout_marginLeft="20px"/>
                 <TextView android:id="@+id/tv_shipin_name"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="500强运动会"
                     android:textSize="18px"
                     android:textColor="@color/gerenTextcolor"
@@ -95,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:background="@android:color/white"
                 android:layout_height="418px">
-                <ImageView
+                <ImageView android:id="@+id/iv_zhibo"
                     android:layout_width="match_parent"
                     android:layout_height="337px"
                     android:src="@mipmap/shouye_img01_3x"
@@ -146,7 +149,8 @@
                     android:layout_marginLeft="10px"/>
                 <TextView android:id="@+id/tv_jingcai_xiuxian"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="日常休闲"
                     android:textSize="18px"
                     android:textColor="@android:color/black"
@@ -162,7 +166,8 @@
                     android:layout_marginLeft="20px"/>
                 <TextView android:id="@+id/tv_jingcai_yepao"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="夜跑"
                     android:textSize="18px"
                     android:textColor="@color/gerenTextcolor"
@@ -178,7 +183,8 @@
                     android:layout_marginLeft="20px"/>
                 <TextView android:id="@+id/tv_jingcai_name"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="500强运动会"
                     android:textSize="18px"
                     android:textColor="@color/gerenTextcolor"

@@ -7,12 +7,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bayue.ciic.R;
 import com.bayue.ciic.base.BaseActivity;
 import com.bayue.ciic.fragment.PartyCompany;
 import com.bayue.ciic.fragment.PartyPlatfrom;
+import com.bayue.ciic.preferences.Preferences;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,6 +46,8 @@ public class GerenParty extends BaseActivity {
 
     Fragment company;
     Fragment platfrom;
+    @BindView(R.id.ll_daohang)
+    LinearLayout llDaohang;
 
     @Override
     protected void setTheme() {
@@ -61,13 +65,20 @@ public class GerenParty extends BaseActivity {
         tvTitletxt.setText("活动管理");
         ivShezhi.setVisibility(View.INVISIBLE);
 
-       company=new PartyCompany();
-        platfrom=new PartyPlatfrom();
-        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+        company = new PartyCompany();
+        platfrom = new PartyPlatfrom();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if(!Preferences.getEnterprise_id().equals("1")&&!Preferences.getEnterprise_id().equals("0")){
+            llDaohang.setVisibility(View.VISIBLE);
 
-        FragmentTransaction replace = transaction.replace(R.id.fl_news, platfrom);
+            FragmentTransaction replace = transaction.replace(R.id.fl_news, company);
+            transaction.commit();
+        }else if(Preferences.getEnterprise_id().equals("1")){
+            FragmentTransaction replace = transaction.replace(R.id.fl_news, platfrom);
+            transaction.commit();
+        }
 
-        transaction.commit();
+
     }
 
     @Override
@@ -104,14 +115,14 @@ public class GerenParty extends BaseActivity {
                 break;
         }
     }
-    private void setFrament(Fragment frament){
 
-        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+    private void setFrament(Fragment frament) {
 
-        transaction.replace(R.id.fl_news,frament);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fl_news, frament);
 
         transaction.commit();
-
 
 
     }

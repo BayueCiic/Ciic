@@ -83,11 +83,16 @@ public class CompanyShouye extends BaseFragment {
     LinearLayout llHuodon4;
     Unbinder unbinder;
 
-    MainCompany mainCompany;
+    static MainCompany mainCompany;
 
-    public CompanyShouye(MainCompany mainCompany){
-        super();
-        this.mainCompany=mainCompany;
+
+
+    public static CompanyShouye getCompanyShouye(MainCompany mainCompany){
+
+
+        CompanyShouye.mainCompany=mainCompany;
+        mainCompany=mainCompany;
+        return new CompanyShouye();
     }
 
     @Override

@@ -171,13 +171,18 @@ public class LoginRegisterCompanyActivity extends BaseLoginActivity {
                 String msg=response.body().string();
                 if(response.code()==200){
                     Gson gson=new Gson();
-                    final VerificationBean bean=gson.fromJson(msg,VerificationBean.class);
+                    final RegBean bean=gson.fromJson(msg,RegBean.class);
                     if(bean.getCode()==200){
                         ToolKit.runOnMainThreadSync(new Runnable() {
                             @Override
                             public void run() {
 
                                 ToastUtils.showShortToast(bean.getData());
+                                Preferences.saveString(getApplicationContext(),Preferences.TOKEN,bean.getToken());
+                                Preferences.saveAdmin(bean.getIs_admin()+"");
+                                Preferences.saveEnterprise_id(bean.getEnterprise_id());
+
+
                             }
                         });
                     }

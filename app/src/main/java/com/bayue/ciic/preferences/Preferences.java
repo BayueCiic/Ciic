@@ -14,6 +14,8 @@ public class Preferences {
     public  static final String TOKEN="token";
     public  static final String ADMIN="admin";
 
+    private static final String ID="id";
+
     public  static void saveString (Context context,String key,String value){
         SharedPreferences sp=context.getSharedPreferences("",context.MODE_PRIVATE);
         SharedPreferences.Editor editor =sp.edit();
@@ -57,5 +59,16 @@ public class Preferences {
 
         SharedPreferences sp=Utils.getContext().getSharedPreferences("",Utils.getContext().MODE_PRIVATE);
         return sp.getString(ADMIN,"");
+    }
+    public static void saveEnterprise_id(String id){
+        SharedPreferences sp= Utils.getContext().getSharedPreferences("",Utils.getContext().MODE_PRIVATE);
+        SharedPreferences.Editor editor =sp.edit();
+        editor.putString(ID, id);
+        editor.commit();
+    }
+    public static String  getEnterprise_id(){
+
+        SharedPreferences sp=Utils.getContext().getSharedPreferences("",Utils.getContext().MODE_PRIVATE);
+        return sp.getString(ID,"");
     }
 }

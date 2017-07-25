@@ -16,6 +16,15 @@ public class RegBean {
     private String data;
     private int code;
     private String token;
+    private String enterprise_id;
+
+    public String getEnterprise_id() {
+        return enterprise_id;
+    }
+
+    public void setEnterprise_id(String enterprise_id) {
+        this.enterprise_id = enterprise_id;
+    }
 
     public String getIs_admin() {
         return is_admin;

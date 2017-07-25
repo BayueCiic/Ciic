@@ -163,7 +163,7 @@
                         android:layout_weight="1"
                         android:layout_height="150px"
                         android:gravity="center"
-                        android:layout_marginRight="20px"
+
                         android:orientation="vertical"
                         android:background="@drawable/geren_guanli_bg">
                         <ImageView
@@ -184,6 +184,7 @@
                         android:layout_weight="1"
                         android:layout_height="150px"
                         android:gravity="center"
+                        android:layout_marginLeft="20px"
                         android:orientation="vertical"
                         android:background="@drawable/geren_guanli_bg">
                         <ImageView
