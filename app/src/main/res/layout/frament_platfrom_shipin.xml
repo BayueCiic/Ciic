@@ -35,7 +35,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10px"
                 android:layout_toRightOf="@+id/iv_shipin_sanjiao"
-                android:text="热门直播"
+                android:text="热门视频"
                 android:textColor="@android:color/black"
                 android:textSize="26px" />
 
@@ -47,7 +47,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20px"
                 android:layout_toRightOf="@+id/tv_shipin"
-                android:text="日常休闲"
+                android:text=""
                 android:textColor="@color/gerenTextcolor"
                 android:textSize="18px" />
 
@@ -68,7 +68,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20px"
                 android:layout_toRightOf="@+id/view_shipin_one"
-                android:text="夜跑"
+                android:text=""
                 android:textColor="@color/gerenTextcolor"
                 android:textSize="18px" />
 
@@ -89,7 +89,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20px"
                 android:layout_toRightOf="@+id/view_shipin_two"
-                android:text="500强运动会"
+                android:text=""
                 android:textColor="@color/gerenTextcolor"
                 android:textSize="18px" />
             <TextView
@@ -107,13 +107,18 @@
 
         </RelativeLayout>
 
-        <com.androidkun.PullToRefreshRecyclerView
-            android:id="@+id/vp_shipin"
+        <com.bayue.ciic.view.swipe.SwipyRefreshLayout
+            android:id="@+id/swipe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20px">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/vp_shipin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+        </com.bayue.ciic.view.swipe.SwipyRefreshLayout>
 
-        </com.androidkun.PullToRefreshRecyclerView>
 
     </LinearLayout>
 

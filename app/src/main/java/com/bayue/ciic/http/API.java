@@ -1,5 +1,7 @@
 package com.bayue.ciic.http;
 
+import com.bayue.ciic.MainActivity;
+
 /**
  * Created by Administrator on 2017/6/26.
  */
@@ -63,11 +65,43 @@ public class API {
         public static final String JINGCAI="/Home/Photo/ListAlbum";
     }
 
+    public static class Company{
+
+
+        public static final String SHOUYE_ZHIBO= "/Home/Enterprise/DirectList";
+        public static final String SHOUYE_SHIPING= "/Home/Enterprise/VideoList";
+        public static final String SHOUYE_HUODONG= "/Home/Enterprise/ActivityList";
+
+
+
+    }
+
     //类型
     public static final String TAG="/Home/Index/LabelList";
 
+    //获取推拉流
+    public static final String PUSH="/Home/Direct/initDirect";
 
+    public  static class Zhibo{
 
+        public static final String DATAS="/Home/Direct/getCondition";
+        public static final String STATR="/Home/Direct/addDirect";
 
+    }
+
+    //视频详情
+    public static final String SHIPING_INFO="/Home/Video/getVideo_info";
+
+    //点赞
+    public static final String THUMB="/Home/Video/ThumbsChange";
+
+    //收藏
+    public static final String CANG="/Home/Video/CollectionChange";
+
+    //评论
+    public static final String COMMENT="/Home/Video/commentList";
+
+    //
+    public static final String COMMENT_ADD="/Home/Video/addComment";
 
 }

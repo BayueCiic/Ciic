@@ -71,9 +71,9 @@ public class MainCompany extends BaseFragment {
         initTabLineWidth();
 
         fragments.add(CompanyShouye.getCompanyShouye(this));
-        fragments.add(new PlatfromZhibo());
-        fragments.add(new PlatfromShipin());
-        fragments.add(new PlatfromHuodong());
+        fragments.add(new PlatfromZhibo(false));
+        fragments.add(new PlatfromShipin(false));
+        fragments.add(new PlatfromHuodong(false));
 
         vpCompany.setAdapter(new VpAdapter(getChildFragmentManager()));
         vpCompany.setCurrentItem(0);

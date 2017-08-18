@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_top_title"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="116px"
+        android:paddingTop="18px"
+        android:paddingBottom="18px"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="186px"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView android:id="@+id/iv_video_photo"
+                android:layout_width="48px"
+                android:layout_height="48px"
+                android:src="@mipmap/bianjiziliao_toux2_3x"/>
+            <TextView android:id="@+id/tv_video_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5px"
+                android:layout_marginLeft="25px"
+                android:layout_marginRight="25px"
+                android:singleLine="true"
+                android:text="中智-管理员"
+                android:textColor="@color/black"
+                android:textSize="18px"/>
+        </LinearLayout>
+        <View
+            android:layout_width="2px"
+            android:layout_height="match_parent"
+            android:background="@color/c6c"/>
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="30px"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+            <TextView android:id="@+id/tv_video_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="中智杯第八届世界著名在华企业健身大赛“SGS“ 通标杯"
+                android:textColor="@color/black"
+                android:textSize="25px"
+                android:singleLine="true"/>
+            <TextView android:id="@+id/tv_video_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2017/02/27"
+                android:textColor="@color/h99"
+                android:textSize="18px"/>
+        </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="400px">
+        <com.bayue.ciic.liveplayer.NEVideoView
+            android:id="@+id/nevideoview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:id="@+id/ll_number_shipin"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="31px"
+            android:gravity="center"
+            android:layout_marginLeft="50px"
+            android:layout_marginTop="36px"
+            android:paddingLeft="10px"
+            android:paddingRight="10px"
+            android:background="@drawable/bg_back30">
+            <TextView android:id="@+id/tv_video_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1000人再看"
+                android:textColor="@color/white"
+                android:textSize="18px"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_zan_shipin"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="31px"
+            android:layout_below="@+id/ll_number_shipin"
+            android:gravity="center"
+            android:layout_marginLeft="50px"
+            android:layout_marginTop="20px"
+            android:paddingLeft="10px"
+            android:paddingRight="10px"
+            android:background="@drawable/bg_back30">
+            <ImageView android:id="@+id/iv_video_zan"
+                android:layout_width="16px"
+                android:layout_height="16px"
+                android:src="@mipmap/dianzan_2x"/>
+            <TextView  android:id="@+id/tv_video_zan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:text="1000"
+                android:textColor="@color/white"
+                android:textSize="18px"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_feng_shipin"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="31px"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:layout_marginRight="50px"
+            android:layout_marginTop="36px"
+            android:paddingLeft="10px"
+            android:paddingRight="10px"
+            android:background="@drawable/bg_back30">
+            <ImageView
+                android:layout_width="16px"
+                android:layout_height="16px"
+                android:src="@mipmap/zhibo_fenxiang_3x"/>
+            <TextView android:id="@+id/tv_video_fen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分享"
+                android:textColor="@color/white"
+                android:textSize="18px"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="聊天"
+                android:gravity="center"
+                android:textColor="#EF930A"
+                android:textSize="26px"/>
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="在线成员"
+                android:gravity="center"
+                android:textColor="#EF930A"
+                android:textSize="26px"/>
+        </LinearLayout>
+        <View android:id="@+id/hr"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#EF930A"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1">
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v4.view.ViewPager>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/send"
+            android:layout_width="match_parent"
+            android:layout_height="88px"
+            android:text="请输入内容，限字10"
+            android:gravity="center_vertical"
+            android:textSize="22px"
+            android:textColor="@color/bg_media_player_controller"
+            android:background="@drawable/shipin"/>
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

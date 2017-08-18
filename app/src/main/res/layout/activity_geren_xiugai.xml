@@ -30,8 +30,7 @@
             android:paddingRight="30px"
             android:hint="请输入旧密码"
             android:textSize="20px"
-            android:textColor="@color/accountText"
-            android:inputType="number"/>
+            android:textColor="@color/accountText"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,8 +48,7 @@
             android:paddingRight="30px"
             android:hint="请输入新密码"
             android:textSize="20px"
-            android:textColor="@color/accountText"
-            android:inputType="number"/>
+            android:textColor="@color/accountText"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,8 +66,7 @@
             android:paddingRight="30px"
             android:hint="请确认密码"
             android:textSize="20px"
-            android:textColor="@color/accountText"
-            android:inputType="number"/>
+            android:textColor="@color/accountText"/>
         <Button
             android:id="@+id/but_xiugai_tijiao"
             android:layout_width="match_parent"

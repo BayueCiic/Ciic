@@ -38,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="日常休闲"
+                    android:text=""
                     android:textSize="18px"
                     android:textColor="@color/gerenTextcolor"
                     android:layout_centerVertical="true"
@@ -55,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="夜跑"
+                    android:text=""
                     android:textSize="18px"
                     android:textColor="@color/gerenTextcolor"
                     android:layout_centerVertical="true"
@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="500强运动会"
+                    android:text=""
                     android:textSize="18px"
                     android:textColor="@color/gerenTextcolor"
                     android:layout_centerVertical="true"
@@ -93,12 +93,17 @@
 
             </RelativeLayout>
 
-            <com.androidkun.PullToRefreshRecyclerView
-                android:id="@+id/vp_wonderful"
-                android:layout_marginTop="20px"
+            <com.bayue.ciic.view.swipe.SwipyRefreshLayout
+                android:id="@+id/swipe"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </com.androidkun.PullToRefreshRecyclerView>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/vp_wonderful"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+            </com.bayue.ciic.view.swipe.SwipyRefreshLayout>
 
         </LinearLayout>
 

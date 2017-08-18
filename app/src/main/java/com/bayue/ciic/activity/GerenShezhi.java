@@ -264,7 +264,7 @@ public class GerenShezhi extends BaseActivity {
 
                                 data.addAll(lists);
                                 Log.e("+++++++++++",data.size()+"");
-                                Log.e(">>>>>>",data.get(1).getUsername());
+//                                Log.e(">>>>>>",data.get(1).getUsername());
                                 myadapter.notifyDataSetChanged();
                             }
                         });
@@ -540,13 +540,13 @@ public class GerenShezhi extends BaseActivity {
     public static File compressImage2(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
-        int options = 100;
+        /*int options = 100;
         while (baos.toByteArray().length / 1024 > 500) {  //循环判断如果压缩后图片是否大于500kb,大于继续压缩
             baos.reset();//重置baos即清空baos
             options -= 10;//每次都减少10
             bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
             long length = baos.toByteArray().length;
-        }
+        }*/
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
         Date date = new Date(System.currentTimeMillis());
         String filename = format.format(date);

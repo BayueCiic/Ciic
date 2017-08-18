@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="101px"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="90px"
+            android:gravity="center"
+            android:layout_height="match_parent">
+            
+            <ImageView android:id="@+id/iv_touxiang_discuss"
+                android:layout_width="41px"
+                android:layout_height="40px"
+                android:src="@mipmap/bianjiziliao_toux2_3x"/>
+
+        </LinearLayout> 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView  android:id="@+id/tv_name_discuss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20px"
+                    android:text="企业-职员"
+                    android:textColor="#666666"/>
+                <TextView android:id="@+id/tv_time_discuss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20px"
+                    android:text="[2017-05-10]"
+                    android:textColor="#CCCCCC"/>
+            </LinearLayout>
+            <TextView  android:id="@+id/tv_content_discuss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22px"
+                android:textColor="#333333"
+                android:text="非常有意义的活动，很棒！"/>
+
+        </LinearLayout>
+
+        <TextView android:id="@+id/tv_child_discuss"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="40px"
+            android:gravity="center_vertical"
+            android:text="回复"
+            android:textColor="@color/themecolor"
+            android:textSize="22px"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

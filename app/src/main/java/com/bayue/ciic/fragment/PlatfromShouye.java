@@ -16,7 +16,9 @@ import android.widget.TextView;
 import com.bayue.ciic.App;
 import com.bayue.ciic.MainActivity;
 import com.bayue.ciic.R;
+import com.bayue.ciic.activity.live.activity.VideoPlayerActivity;
 import com.bayue.ciic.base.BaseFragment;
+import com.bayue.ciic.bean.PZhiboBean;
 import com.bayue.ciic.bean.ShouyeHuodongData;
 import com.bayue.ciic.bean.ShouyeJingcaiBean;
 import com.bayue.ciic.bean.ShouyeShipinBean;
@@ -28,6 +30,7 @@ import com.bayue.ciic.preferences.Preferences;
 import com.bayue.ciic.utils.HTTPUtils;
 import com.bayue.ciic.utils.ToastUtils;
 import com.bayue.ciic.utils.ToolKit;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -49,7 +52,7 @@ import okhttp3.Response;
  * Created by Administrator on 2017/7/3.
  */
 
-public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag {
+public class PlatfromShouye extends BaseFragment {
 
 
     static MainPlatfrom mainPlatfrom;
@@ -165,11 +168,14 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
 
     MainActivity  main;
 
-    List<TagBean.DataBean> tags;
+    List<TagBean.DataBean> shipintags,jingcaitags;
+
+    List<TagBean.DataBean> lists=new ArrayList<>();
     List<ShouyeShipinBean.DataBean> shipinData = new ArrayList<>();
     @BindView(R.id.iv_zhibo)
     ImageView ivZhibo;
 
+    String  label_id="";
 
 
     public static  PlatfromShouye getPlatfromShouye(MainPlatfrom mainPlatfrom) {
@@ -189,19 +195,27 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
 
         myadapter=new Myadapter();
 
-        vpShouye.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        GridLayoutManager linearLayoutManager = new GridLayoutManager(getActivity(), 3) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        vpShouye.setLayoutManager(linearLayoutManager);
         vpShouye.setHasFixedSize(true);
         vpShouye.setItemAnimator(new DefaultItemAnimator());
         vpShouye.setAdapter(myadapter);
         vpShouye.addItemDecoration(new SpaceItemDecoration(18));
         main= (MainActivity) App.mainActivity;
-        main.setTag(this);
+
 //        getTagData();
         getZhiboData();
         getShipinData();
         getJingcaiData();
         getHuodongData();
         getXinwenData();
+        getTagShipin();
+        getTagJingcai();
     }
 
     @Override
@@ -222,53 +236,71 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_shipin_xiuxian:
-//                restoreColor1(tvShipinXiuxian);
-                if(tags!=null)
-                PlatfromShipin.label_id=tags.get(0).getId();
-                mainPlatfrom.setCurrentItem(2);
+                restoreColor1(tvShipinXiuxian);
+                if(tvShipinXiuxian!=null&&shipintags.size()>0)
+                label_id=shipintags.get(0).getId();
+
+                getShipinData();
+//                PlatfromShipin.label_id=tags.get(0).getId();
+//                mainPlatfrom.setCurrentItem(2);
                 break;
             case R.id.tv_shipin_yepao:
-//                restoreColor1(tvShipinYepao);
-                if(tags!=null)
-                PlatfromShipin.label_id=tags.get(1).getId();
-                mainPlatfrom.setCurrentItem(2);
+                restoreColor1(tvShipinYepao);
+                if(tvShipinXiuxian!=null&&shipintags.size()>1)
+                label_id=shipintags.get(1).getId();
+
+                getShipinData();
+//                PlatfromShipin.label_id=tags.get(1).getId();
+//                mainPlatfrom.setCurrentItem(2);
                 break;
             case R.id.tv_shipin_name:
-//                restoreColor1(tvShipinName);
-                if(tags!=null)
-                PlatfromShipin.label_id=tags.get(2).getId();
-                mainPlatfrom.setCurrentItem(2);
+                restoreColor1(tvShipinName);
+                if(tvShipinXiuxian!=null&&shipintags.size()>2)
+                label_id=shipintags.get(2).getId();
+
+                getShipinData();
+//                PlatfromShipin.label_id=tags.get(2).getId();
+//                mainPlatfrom.setCurrentItem(2);
                 break;
             case R.id.tv_shipin_genduo:
                 PlatfromShipin.label_id="";
                 mainPlatfrom.setCurrentItem(2);
                 break;
             case R.id.ll_zhibo:
+
+
+
+//                main.createLiveRoom(true);
+
                 break;
-
-
             case R.id.tv_jingcai_xiuxian:
                 restoreColor2(tvJingcaiXiuxian);
 
-
-                if(tags!=null)
-                PlatfromWenderful.label_id=tags.get(0).getId();
-                mainPlatfrom.setCurrentItem(5);
-
+                if(tvShipinXiuxian!=null&&jingcaitags.size()>0)
+                    label_id=shipintags.get(0).getId();
+//                if(tags!=null)
+//                PlatfromWenderful.label_id=tags.get(0).getId();
+//                mainPlatfrom.setCurrentItem(5);
+                getJingcaiData();
                 break;
             case R.id.tv_jingcai_yepao:
                 restoreColor2(tvJingcaiYepao);
-                if(tags!=null)
-                PlatfromWenderful.label_id=tags.get(1).getId();
-                mainPlatfrom.setCurrentItem(5);
-
+                if(tvShipinXiuxian!=null&&jingcaitags.size()>1)
+                    label_id=shipintags.get(1).getId();
+//                if(tags!=null)
+//                PlatfromWenderful.label_id=tags.get(1).getId();
+//                mainPlatfrom.setCurrentItem(5);
+                getJingcaiData();
                 break;
             case R.id.tv_jingcai_name:
                 restoreColor2(tvJingcaiName);
-                if(tags!=null)
-                PlatfromWenderful.label_id=tags.get(2).getId();
-                mainPlatfrom.setCurrentItem(5);
+                if(tvShipinXiuxian!=null&&jingcaitags.size()>2)
+                    label_id=shipintags.get(2).getId();
 
+//                if(tags!=null)
+//                PlatfromWenderful.label_id=tags.get(2).getId();
+//                mainPlatfrom.setCurrentItem(5);
+                getJingcaiData();
                 break;
             case R.id.tv_jingcai_genduo:
                 PlatfromWenderful.label_id="";
@@ -305,13 +337,35 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
                 break;
         }
     }
-    List<TagBean.DataBean> lists=new ArrayList<>();
+
+
+    String   url ="http://tanzi27niu.cdsb.mobi/wps/wp-content/uploads/2017/05/2017-05-17_17-33-30.mp4";
+    /**
+     * 用户可自定义过滤规则
+     * @return
+     */
+    private boolean checkUrlValidate() {
+
+
+        if(url.startsWith("http://flv")|| url.startsWith("http://pullhls") || url.startsWith("rtmp://")){
+            ToastUtils.showShortToast("点播地址错误");
+            return false;
+        }
+        if(url.endsWith(".mp4")|| url.endsWith(".flv") || url.endsWith(".m3u8")){
+            return true;
+        }
+        ToastUtils.showShortToast("点播地址错误");
+        return false;
+    }
+
+
 
 
     //获取直播数据
     private void getZhiboData() {
         Map<String, Object> map = new HashMap<>();
         map.put("num", 1);
+        map.put("label_id",label_id);
         map.put("token", Preferences.getString(getContext(), Preferences.TOKEN));
         HTTPUtils.getNetDATA(API.BaseUrl + API.patfrom.SHOUYE_ZHIBO, map, new Callback() {
             @Override
@@ -319,7 +373,7 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
                 ToolKit.runOnMainThreadSync(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtils.showShortToast("请检查网络");
+                        ToastUtils.showShortToast("直播---请检查网络");
                     }
                 });
             }
@@ -329,19 +383,22 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
                 String msg = response.body().string();
                 if (response.code() == 200) {
                     Gson gson = new Gson();
-                    final ShouyeZhiboBean bean = gson.fromJson(msg, ShouyeZhiboBean.class);
+                    final PZhiboBean bean = gson.fromJson(msg, PZhiboBean.class);
 
                     if (bean.getCode() == 200) {
                         ToolKit.runOnMainThreadSync(new Runnable() {
                             @Override
                             public void run() {
 
-                                List<ShouyeZhiboBean.DataBean> lists = bean.getData();
-
+                                List<PZhiboBean.DataBean> lists = bean.getData();
+                                Log.e("list直播====size==",lists.size()+"");
                                 if(ivZhibo!=null)
-                                Picasso.with(getContext())
-                                        .load(lists.get(0).getVideo_img())
-                                        .into(ivZhibo);
+                                    Glide.with(getContext())
+                                    .load(lists.get(0).getVideo_img())
+                                    .asBitmap()
+                                    .error(R.drawable.shouye_img_01_2x)
+                                    .into(ivZhibo);
+
                                 if(tvShipinTitle!=null)
                                 tvShipinTitle.setText(lists.get(0).getTitle());
                                 if(tvShipinCompere!=null)
@@ -376,6 +433,7 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
     private void getShipinData() {
         Map<String, Object> map = new HashMap<>();
         map.put("num", 6);
+        map.put("label_id",label_id);
         map.put("token", Preferences.getString(getContext(), Preferences.TOKEN));
         HTTPUtils.getNetDATA(API.BaseUrl + API.patfrom.SHOUYE_SHIPING, map, new Callback() {
             @Override
@@ -383,7 +441,7 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
                 ToolKit.runOnMainThreadSync(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtils.showShortToast("请检查网络");
+                        ToastUtils.showShortToast("视频----请检查网络");
                     }
                 });
             }
@@ -391,6 +449,7 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 String msg = response.body().string();
+                Log.e("视频数据====",msg);
                 if (response.code() == 200) {
                     Gson gson = new Gson();
                     final ShouyeShipinBean bean = gson.fromJson(msg, ShouyeShipinBean.class);
@@ -401,8 +460,10 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
                             public void run() {
 
                                 List<ShouyeShipinBean.DataBean> lists = bean.getData();
+                                Log.e("list视频====size==",lists.size()+"");
                                 shipinData.clear();
                                 shipinData.addAll(lists);
+                                Log.e("平台首页的视频个数=====",shipinData.size()+"");
 //                                Log.e("TTTTTT",lists.get(0).getName()+lists.get(1).getName()+lists.get(2).getName());
                                 myadapter.notifyDataSetChanged();
 
@@ -432,6 +493,7 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
     private void getJingcaiData() {
         Map<String, Object> map = new HashMap<>();
         map.put("num", 3);
+        map.put("label_id",label_id);
         map.put("token", Preferences.getString(getContext(), Preferences.TOKEN));
         HTTPUtils.getNetDATA(API.BaseUrl + API.patfrom.SHOUYE_PHOTO, map, new Callback() {
             @Override
@@ -439,7 +501,7 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
                 ToolKit.runOnMainThreadSync(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtils.showShortToast("请检查网络");
+                        ToastUtils.showShortToast("精彩----请检查网络");
                     }
                 });
             }
@@ -457,6 +519,7 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
                             public void run() {
 
                                 List<ShouyeJingcaiBean.DataBean> lists = bean.getData();
+                                Log.e("list精彩====size==",lists.size()+"");
                                 if(ivJingcai1!=null)
                                 Picasso.with(getContext())
                                        .load(lists.get(0).getCover_photo())
@@ -496,6 +559,7 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
     private void getHuodongData() {
         Map<String, Object> map = new HashMap<>();
         map.put("num", 4);
+        map.put("label_id",label_id);
         map.put("token", Preferences.getString(getContext(), Preferences.TOKEN));
         HTTPUtils.getNetDATA(API.BaseUrl + API.patfrom.SHOUYE_HUODONG, map, new Callback() {
             @Override
@@ -503,7 +567,7 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
                 ToolKit.runOnMainThreadSync(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtils.showShortToast("请检查网络");
+                        ToastUtils.showShortToast("活动-----请检查网络");
                     }
                 });
             }
@@ -521,6 +585,7 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
                             public void run() {
 
                                 List<ShouyeHuodongData.DataBean> lists = bean.getData();
+                                Log.e("list活动====size==",lists.size()+"");
                                 if(tvTimeHuodon1!=null)
                                 tvTimeHuodon1.setText(lists.get(0).getCreate_time());
                                 if(tvTimeHuodon2!=null)
@@ -573,7 +638,7 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
                 ToolKit.runOnMainThreadSync(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtils.showShortToast("请检查网络");
+                        ToastUtils.showShortToast("新闻----请检查网络");
                     }
                 });
             }
@@ -591,6 +656,7 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
                             public void run() {
 
                                 List<ShouyeXinwenBean.DataBean> lists = bean.getData();
+                                Log.e("list新闻====size==",lists.size()+"");
                                 if(tvTimeXinwen1!=null)
                                 tvTimeXinwen1.setText(lists.get(0).getAdd_time());
                                 if(tvTimeXinwen2!=null)
@@ -632,6 +698,137 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
         });
     }
 
+    //获取视频类型
+    private void getTagShipin() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("type","video");
+//        map.put("token", Preferences.getString(getContext(), Preferences.TOKEN));
+        HTTPUtils.getNetDATA(API.BaseUrl + API.TAG, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ToolKit.runOnMainThreadSync(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtils.showShortToast("请检查网络");
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                String msg = response.body().string();
+                if (response.code() == 200) {
+                    Gson gson = new Gson();
+                    final TagBean bean = gson.fromJson(msg, TagBean.class);
+
+                    if (bean.getCode() == 200) {
+                        ToolKit.runOnMainThreadSync(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                lists = bean.getData();
+                                shipintags=lists;
+                                if(shipintags.isEmpty()||shipintags==null){
+                                    return;
+                                }
+                                if(tvShipinXiuxian!=null&&shipintags.size()>0){
+                                    tvShipinXiuxian.setText(shipintags.get(0).getName());
+                                }
+
+
+                                if(tvShipinYepao!=null&&shipintags.size()>1)
+                                    tvShipinYepao.setText(shipintags.get(1).getName());
+
+
+                                if(tvShipinName!=null&&shipintags.size()>2)
+                                    tvShipinName.setText(shipintags.get(2).getName());
+
+                            }
+                        });
+                    } else {
+                        ToolKit.runOnMainThreadSync(new Runnable() {
+                            @Override
+                            public void run() {
+//                                ToastUtils.showShortToast(bean.getMsg());
+                            }
+                        });
+                    }
+                } else {
+                    ToolKit.runOnMainThreadSync(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.showShortToast(response.message());
+                        }
+                    });
+                }
+            }
+        });
+    }
+    //获取精彩类型
+    private void getTagJingcai() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("type","picture");
+//        map.put("token", Preferences.getString(getContext(), Preferences.TOKEN));
+        HTTPUtils.getNetDATA(API.BaseUrl + API.TAG, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ToolKit.runOnMainThreadSync(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtils.showShortToast("请检查网络");
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                String msg = response.body().string();
+                if (response.code() == 200) {
+                    Gson gson = new Gson();
+                    final TagBean bean = gson.fromJson(msg, TagBean.class);
+
+                    if (bean.getCode() == 200) {
+                        ToolKit.runOnMainThreadSync(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                lists = bean.getData();
+                                jingcaitags=lists;
+                                if(jingcaitags.isEmpty()||jingcaitags==null){
+                                    return;
+                                }
+
+                                if(tvJingcaiXiuxian!=null&&jingcaitags.size()>0)
+                                    tvJingcaiXiuxian.setText(jingcaitags.get(0).getName());
+
+
+                                if(tvJingcaiYepao!=null&&jingcaitags.size()>1)
+                                    tvJingcaiYepao.setText(jingcaitags.get(1).getName());
+
+                                if(tvJingcaiName!=null&&jingcaitags.size()>2)
+                                    tvJingcaiName.setText(jingcaitags.get(2).getName());
+                            }
+                        });
+                    } else {
+                        ToolKit.runOnMainThreadSync(new Runnable() {
+                            @Override
+                            public void run() {
+//                                ToastUtils.showShortToast(bean.getMsg());
+                            }
+                        });
+                    }
+                } else {
+                    ToolKit.runOnMainThreadSync(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.showShortToast(response.message());
+                        }
+                    });
+                }
+            }
+        });
+    }
+
     //恢复颜色1
     private void restoreColor1(TextView view) {
         tvShipinXiuxian.setTextColor(getResources().getColor(R.color.gerenTextcolor));
@@ -648,30 +845,7 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
         view.setTextColor(getResources().getColor(R.color.black));
     }
 
-    @Override
-    public void setTag(List<TagBean.DataBean> lists) {
-            tags=lists;
-        if(tvShipinXiuxian!=null){
-            tvShipinXiuxian.setText(lists.get(0).getName());
-        }
 
-        if(tvJingcaiXiuxian!=null)
-            tvJingcaiXiuxian.setText(lists.get(0).getName());
-
-        if(tvShipinYepao!=null)
-            tvShipinYepao.setText(lists.get(1).getName());
-        if(tvJingcaiYepao!=null)
-            tvJingcaiYepao.setText(lists.get(1).getName());
-
-        if(tvShipinName!=null)
-            tvShipinName.setText(lists.get(2).getName());
-
-        if(tvJingcaiName!=null)
-            tvJingcaiName.setText(lists.get(2).getName());
-
-        Log.e("设置Tag",".>>>>>>");
-
-    }
 
 //    private void ZhiboData() {
 //        Map<String, Object> map = new HashMap<>();
@@ -737,11 +911,11 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
             ImageView iv_shipin_img;
 
             TextView tv_shipin_title,tv_shipin_author;
-
+            View view;
 
             public MyHolder(View itemView) {
                 super(itemView);
-
+                view=itemView;
                 iv_shipin_img= (ImageView) itemView.findViewById(R.id.iv_shipin_img);
                 tv_shipin_title= (TextView) itemView.findViewById(R.id.tv_shipin_title);
                 tv_shipin_author= (TextView) itemView.findViewById(R.id.tv_shipin_author);
@@ -757,13 +931,23 @@ public class PlatfromShouye extends BaseFragment implements MainActivity.SetTag 
         }
 
         @Override
-        public void onBindViewHolder(MyHolder holder, int position) {
+        public void onBindViewHolder(MyHolder holder, final int position) {
 
             holder.tv_shipin_title.setText(shipinData.get(position).getVideo_name());
             holder.tv_shipin_author.setText(shipinData.get(position).getAuthor_name());
             Picasso.with(getContext())
                     .load(shipinData.get(position).getVideo_img())
                     .into(holder.iv_shipin_img);
+            holder.view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("播放---","shi频");
+                    //check
+                    if(checkUrlValidate()) {
+                        VideoPlayerActivity.startActivity(getContext(), shipinData.get(position).getVideo_id(),shipinData.get(position).getVideo_url(),shipinData.get(position).getVideo_img());
+                    }
+                }
+            });
         }
 
         @Override

@@ -157,7 +157,7 @@ public class LoginRegisterCommonActivity extends BaseLoginActivity {
                         @Override
                         public void run() {
                             if(bean.getCode()==200){
-                                etCommonVerification.setText(bean.getData());
+//                                etCommonVerification.setText(bean.getData());
                             }else {
                                 DensityUtil.showToast(LoginRegisterCommonActivity.this,bean.getMsg());
                             }
@@ -213,6 +213,7 @@ public class LoginRegisterCommonActivity extends BaseLoginActivity {
 
         map.put("phone",phone);
         map.put("password",password);
+        map.put("message",verification);
         HTTPUtils.getNetDATA(API.BaseUrl + API.Login.REG, map, new Callback() {
 
             @Override
@@ -235,10 +236,12 @@ public class LoginRegisterCommonActivity extends BaseLoginActivity {
                         @Override
                         public void run() {
                             if(bean.getCode()==200){
+                                Preferences.saveUserName(etCommonPhone.getText().toString());
                                 Preferences.saveString(getApplicationContext(),Preferences.TOKEN,bean.getToken());
                                 Preferences.saveAdmin(bean.getIs_admin()+"");
                                 Preferences.saveEnterprise_id(bean.getEnterprise_id());
-
+                                Preferences.saveIm_token(bean.getIm_token());
+                                Preferences.saveAccid(bean.getAccid());
                                 DensityUtil.showToast(LoginRegisterCommonActivity.this,bean.getData());
                                 startActivity(new Intent(LoginRegisterCommonActivity.this, MainActivity.class));
                                 LoginRegisterCommonActivity.this.finish();

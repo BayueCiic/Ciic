@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.androidkun.PullToRefreshRecyclerView;
 import com.androidkun.callback.PullToRefreshListener;
 import com.bayue.ciic.App;
 import com.bayue.ciic.MainActivity;
@@ -22,11 +21,14 @@ import com.bayue.ciic.R;
 import com.bayue.ciic.activity.PhotoAlbum;
 import com.bayue.ciic.base.BaseFragment;
 import com.bayue.ciic.bean.PWenderfulBean;
+import com.bayue.ciic.bean.TagBean;
 import com.bayue.ciic.http.API;
 import com.bayue.ciic.preferences.Preferences;
 import com.bayue.ciic.utils.HTTPUtils;
 import com.bayue.ciic.utils.ToastUtils;
 import com.bayue.ciic.utils.ToolKit;
+import com.bayue.ciic.view.swipe.SwipyRefreshLayout;
+import com.bayue.ciic.view.swipe.SwipyRefreshLayoutDirection;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
@@ -68,10 +70,13 @@ public class PlatfromWenderful extends BaseFragment {
 
 
     Unbinder unbinder;
-    @BindView(R.id.vp_wonderful)
-    PullToRefreshRecyclerView vpWonderful;
+
     @BindView(R.id.tv_wonderful_all)
     TextView tvWonderfulAll;
+    @BindView(R.id.vp_wonderful)
+    RecyclerView vpWonderful;
+    @BindView(R.id.swipe)
+    SwipyRefreshLayout swipe;
     private int tag = 1;
     Myadapter myadapter;
     List<PWenderfulBean.DataBean> data = new ArrayList<>();
@@ -100,22 +105,20 @@ public class PlatfromWenderful extends BaseFragment {
 
             }
         });
-        vpWonderful.setPullRefreshEnabled(false);
-        vpWonderful.setLoadingMoreEnabled(true);
-        vpWonderful.displayLastRefreshTime(true);
+        swipe.setDirection(SwipyRefreshLayoutDirection.BOTH);
 
-        vpWonderful.setPullToRefreshListener(new PullToRefreshListener() {
+        swipe.setOnRefreshListener(new SwipyRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh() {
-                vpWonderful.setLoadMoreComplete();
-            }
-
-            @Override
-            public void onLoadMore() {
-                tag++;
+            public void onRefresh(SwipyRefreshLayoutDirection direction) {
+                if (direction == SwipyRefreshLayoutDirection.TOP) {
+                    tag=1;
+                } else {
+                    tag++;
+                }
                 getNewsData();
             }
         });
+        getTagWenderful();
     }
 
     @Override
@@ -140,9 +143,9 @@ public class PlatfromWenderful extends BaseFragment {
     }
 
     private void getNewsData() {
-        if (main.lists != null)
-            for (int i = 0; i < main.lists.size(); i++) {
-                if (label_id.equals(main.lists.get(i).getId())) {
+        if (lists != null)
+            for (int i = 0; i < lists.size(); i++) {
+                if (label_id.equals(lists.get(i).getId())) {
                     switch (i) {
                         case 0:
                             restoreColor1(tvWonderfulXiuxian);
@@ -191,14 +194,11 @@ public class PlatfromWenderful extends BaseFragment {
                                 List<PWenderfulBean.DataBean> lists = bean.getData();
                                 if (tag == 1) {
                                     data.clear();
-                                } else {
-                                    if (vpWonderful != null)
-                                        vpWonderful.setLoadMoreComplete();
                                 }
                                 data.addAll(lists);
 //                                Log.e("TTTTTT",lists.get(0).getName()+lists.get(1).getName()+lists.get(2).getName());
                                 myadapter.notifyDataSetChanged();
-
+                                swipe.setRefreshing(false);
                             }
                         });
                     } else {
@@ -221,9 +221,78 @@ public class PlatfromWenderful extends BaseFragment {
         });
     }
 
+    List<TagBean.DataBean> lists = new ArrayList<>();
+    List<TagBean.DataBean> tags = new ArrayList<>();
+    ;
+
+    //获取精彩类型
+    private void getTagWenderful() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("type", "picture");
+//        map.put("token", Preferences.getString(getContext(), Preferences.TOKEN));
+        HTTPUtils.getNetDATA(API.BaseUrl + API.TAG, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ToolKit.runOnMainThreadSync(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtils.showShortToast("请检查网络");
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                String msg = response.body().string();
+                if (response.code() == 200) {
+                    Gson gson = new Gson();
+                    final TagBean bean = gson.fromJson(msg, TagBean.class);
+
+                    if (bean.getCode() == 200) {
+                        ToolKit.runOnMainThreadSync(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                lists = bean.getData();
+                                tags = lists;
+                                if (lists.isEmpty() || lists == null) {
+                                    return;
+                                }
+
+                                if (tvWonderfulXiuxian != null)
+                                    tvWonderfulXiuxian.setText(lists.get(0).getName());
+
+
+                                if (tvWonderfulYepao != null)
+                                    tvWonderfulYepao.setText(lists.get(1).getName());
+
+                                if (tvWonderfulName != null)
+                                    tvWonderfulName.setText(lists.get(2).getName());
+                            }
+                        });
+                    } else {
+                        ToolKit.runOnMainThreadSync(new Runnable() {
+                            @Override
+                            public void run() {
+//                                ToastUtils.showShortToast(bean.getMsg());
+                            }
+                        });
+                    }
+                } else {
+                    ToolKit.runOnMainThreadSync(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.showShortToast(response.message());
+                        }
+                    });
+                }
+            }
+        });
+    }
+
     //恢复颜色1
     private void restoreColor1(TextView view) {
-        Log.e("sdfadsf",">>>>>>>");
+        Log.e("sdfadsf", ">>>>>>>");
         tvWonderfulAll.setTextColor(getResources().getColor(R.color.gerenTextcolor));
         tvWonderfulName.setTextColor(getResources().getColor(R.color.gerenTextcolor));
         tvWonderfulXiuxian.setTextColor(getResources().getColor(R.color.gerenTextcolor));
@@ -233,23 +302,23 @@ public class PlatfromWenderful extends BaseFragment {
 
     @OnClick({R.id.tv_wonderful_xiuxian, R.id.tv_wonderful_yepao, R.id.tv_wonderful_name, R.id.tv_wonderful_all})
     public void onViewClicked(View view) {
-        tag=1;
+        tag = 1;
         switch (view.getId()) {
             case R.id.tv_wonderful_xiuxian:
                 restoreColor1(tvWonderfulXiuxian);
-                label_id=main.lists.get(0).getId();
+                label_id = main.lists.get(0).getId();
                 break;
             case R.id.tv_wonderful_yepao:
                 restoreColor1(tvWonderfulYepao);
-                label_id=main.lists.get(1).getId();
+                label_id = main.lists.get(1).getId();
                 break;
             case R.id.tv_wonderful_name:
                 restoreColor1(tvWonderfulName);
-                label_id=main.lists.get(2).getId();
+                label_id = main.lists.get(2).getId();
                 break;
             case R.id.tv_wonderful_all:
                 restoreColor1(tvWonderfulAll);
-                label_id="";
+                label_id = "";
                 break;
         }
         getNewsData();
@@ -322,12 +391,12 @@ public class PlatfromWenderful extends BaseFragment {
 
             //由于每行都只有3个，所以第一个都是3的倍数，把左边距设为0
             if (parent.getChildLayoutPosition(view) % 2 == 0) {
-                outRect.left = 10;
-                outRect.right = 0;
+                outRect.left = 0;
+                outRect.right =10;
             }
             if ((parent.getChildLayoutPosition(view) - 1) % 2 == 0) {
-                outRect.left = 0;
-                outRect.right = 10;
+                outRect.left = 10;
+                outRect.right = 0;
 
             }
 

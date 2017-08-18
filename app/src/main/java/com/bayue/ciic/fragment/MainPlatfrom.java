@@ -1,10 +1,19 @@
 package com.bayue.ciic.fragment;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +24,26 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bayue.ciic.DemoCache;
+import com.bayue.ciic.MainActivity;
 import com.bayue.ciic.R;
+import com.bayue.ciic.activity.Soso;
+import com.bayue.ciic.activity.live.activity.LiveRoomActivity;
 import com.bayue.ciic.base.BaseFragment;
+import com.bayue.ciic.bean.PushBean;
+import com.bayue.ciic.bean.ShouyeZhiboBean;
 import com.bayue.ciic.bean.TagBean;
 import com.bayue.ciic.http.API;
+import com.bayue.ciic.liveStreaming.PublishParam;
+import com.bayue.ciic.preferences.Preferences;
+import com.bayue.ciic.server.DemoServerHttpClient;
+import com.bayue.ciic.server.entity.RoomInfoEntity;
 import com.bayue.ciic.utils.HTTPUtils;
 import com.bayue.ciic.utils.ToastUtils;
 import com.bayue.ciic.utils.ToolKit;
 import com.google.gson.Gson;
+import com.netease.nim.uikit.common.ui.dialog.DialogMaker;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,6 +64,7 @@ import okhttp3.Response;
  */
 
 public class MainPlatfrom extends BaseFragment {
+    private static MainActivity mainActivity;
     @BindView(R.id.fl_paltfrom_sousou)
     FrameLayout flPaltfromSousou;
     @BindView(R.id.tv_paltfrom_shouye)
@@ -66,6 +88,9 @@ public class MainPlatfrom extends BaseFragment {
     Unbinder unbinder;
 
 
+
+
+
     int currentIndex;
 
     int screenWidth;
@@ -79,6 +104,17 @@ public class MainPlatfrom extends BaseFragment {
     TextView tvShezhi;
 
     float offsets;
+
+
+    static MainPlatfrom mainPlatfrom;
+    public static MainPlatfrom getMainPlatform(MainActivity main){
+        if(mainPlatfrom==null){
+            mainPlatfrom=new MainPlatfrom();
+        }
+        mainActivity=main;
+        return mainPlatfrom;
+    }
+
     @Override
     protected int getViewId() {
         return R.layout.frament_main_platfrom;
@@ -86,12 +122,13 @@ public class MainPlatfrom extends BaseFragment {
 
     @Override
     public void init() {
+
         fragments = new ArrayList<>();
         initTabLineWidth();
         fragments.add(PlatfromShouye.getPlatfromShouye(this));
-        fragments.add(new PlatfromZhibo());
-        fragments.add(new PlatfromShipin());
-        fragments.add(new PlatfromHuodong());
+        fragments.add(new PlatfromZhibo(true));
+        fragments.add(new PlatfromShipin(true));
+        fragments.add(new PlatfromHuodong(true));
         fragments.add(new PlatfromNews());
         fragments.add(new PlatfromWenderful());
 
@@ -234,6 +271,62 @@ public class MainPlatfrom extends BaseFragment {
 
     }
 
+    //获取推流地址
+    private void getData() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", Preferences.getString(getContext(), Preferences.TOKEN));
+        HTTPUtils.getNetDATA(API.BaseUrl + API.PUSH, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ToolKit.runOnMainThreadSync(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtils.showShortToast("直播---请检查网络");
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                String msg = response.body().string();
+                if (response.code() == 200) {
+                    Gson gson = new Gson();
+                    final PushBean bean = gson.fromJson(msg, PushBean.class);
+
+                    if (bean.getCode() == 200) {
+                        ToolKit.runOnMainThreadSync(new Runnable() {
+                            @Override
+                            public void run() {
+                                PushBean.DataBean dataBean=bean.getData();
+                                Preferences.saveTitle(dataBean.getTitle());
+                                Preferences.saveImg(dataBean.getVideo_img());
+                                Preferences.saveRoomid(dataBean.getRoom_id()+"");
+
+                                Log.e(dataBean.getCid(),">>>>>>>>>>>>>>>>>>>>>>>>>>"+dataBean.getPush_url());
+                                mainActivity.createLiveRoom(dataBean.getPush_url(),dataBean.getRoom_id()+"",false);
+
+                            }
+                        });
+                    } else {
+                        ToolKit.runOnMainThreadSync(new Runnable() {
+                            @Override
+                            public void run() {
+                                ToastUtils.showShortToast(bean.getMsg());
+                            }
+                        });
+                    }
+                } else {
+                    ToolKit.runOnMainThreadSync(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.showShortToast(response.message());
+                        }
+                    });
+                }
+            }
+        });
+    }
+
     private void initTabLineWidth() {
         ViewTreeObserver vto2 = llDiv.getViewTreeObserver();
         vto2.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -268,10 +361,16 @@ public class MainPlatfrom extends BaseFragment {
         unbinder.unbind();
     }
 
+
+
     @OnClick({R.id.fl_paltfrom_sousou, R.id.tv_paltfrom_shouye, R.id.tv_paltfrom_zhibo, R.id.tv_paltfrom_shipin, R.id.tv_paltfrom_huodong, R.id.tv_paltfrom_xinwen, R.id.tv_paltfrom_jingcai, R.id.fl_paltfrom_zhibo})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.fl_paltfrom_sousou:
+
+                Intent intent=new Intent(mainActivity,Soso.class);
+                mainActivity.startActivity(intent);
+                Log.e("索索","______________________________________________________");
                 break;
             case R.id.tv_paltfrom_shouye:
                 vpPaltfrom.setCurrentItem(0);
@@ -298,6 +397,7 @@ public class MainPlatfrom extends BaseFragment {
                 setColor(5);
                 break;
             case R.id.fl_paltfrom_zhibo:
+                getData();
                 break;
         }
     }

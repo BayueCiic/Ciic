@@ -126,6 +126,7 @@ public class LoginActivity extends BaseLoginActivity {
     String phone;
     String path;
     String key;
+
     private void login(){
         phone=etLoginAccount.getText().toString();
 //        String verification=etCommonVerification.getText().toString();
@@ -195,6 +196,8 @@ ToastUtils.showShortToast("请检查网络");                    }
                                 Preferences.savePassword(etLoginPassword.getText().toString());
                                 Preferences.saveAdmin(bean.getIs_admin()+"");
                                 Preferences.saveEnterprise_id(bean.getEnterprise_id());
+                                Preferences.saveIm_token(bean.getIm_token());
+                                Preferences.saveAccid(bean.getAccid());
                                 Log.e("token",bean.getToken());
                                 DensityUtil.showToast(LoginActivity.this,bean.getData());
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));

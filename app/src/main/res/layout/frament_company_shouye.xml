@@ -38,7 +38,7 @@
                 <TextView android:id="@+id/tv_shipin_xiuxian"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="日常休闲"
+                    android:text=""
                     android:textSize="18px"
                     android:textColor="@android:color/black"
                     android:layout_centerVertical="true"
@@ -54,7 +54,7 @@
                 <TextView android:id="@+id/tv_shipin_yepao"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="夜跑"
+                    android:text=""
                     android:textSize="18px"
                     android:textColor="@color/gerenTextcolor"
                     android:layout_centerVertical="true"
@@ -70,7 +70,7 @@
                 <TextView android:id="@+id/tv_shipin_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="500强运动会"
+                    android:text=""
                     android:textSize="18px"
                     android:textColor="@color/gerenTextcolor"
                     android:layout_centerVertical="true"
@@ -95,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:background="@android:color/white"
                 android:layout_height="418px">
-                <ImageView
+                <ImageView android:id="@+id/iv_zhibo"
                     android:layout_width="match_parent"
                     android:layout_height="337px"
                     android:src="@mipmap/shouye_img01_3x"
@@ -103,7 +103,7 @@
                 <TextView android:id="@+id/tv_shipin_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="中智—直播"
+                    android:text=""
                     android:textColor="@android:color/black"
                     android:textSize="22px"
                     android:layout_marginLeft="20px"
@@ -111,7 +111,7 @@
                 <TextView android:id="@+id/tv_shipin_compere"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="主播:中智-管理"
+                    android:text=""
                     android:textSize="18px"
                     android:textColor="@color/h99"
                     android:layout_marginLeft="20px"
@@ -167,7 +167,7 @@
                     android:gravity="center_vertical"
                     android:layout_marginLeft="21px"
                     android:textColor="@color/gerenTextcolor"
-                    android:text="[2017/01/23]"
+                    android:text=""
                     android:textSize="18px"/>
                 <TextView android:id="@+id/tv_name_huodon1"
                     android:layout_width="wrap_content"
@@ -175,7 +175,7 @@
                     android:layout_marginLeft="10px"
                     android:gravity="center_vertical"
                     android:textColor="@android:color/black"
-                    android:text="活动活动活动活动活动活动活动"
+                    android:text=""
                     android:textSize="18px"/>
             </LinearLayout>
             <LinearLayout android:id="@+id/ll_huodon2"
@@ -189,7 +189,7 @@
                     android:layout_marginLeft="21px"
                     android:gravity="center_vertical"
                     android:textColor="@color/gerenTextcolor"
-                    android:text="[2017/01/23]"
+                    android:text=""
                     android:textSize="18px"/>
                 <TextView android:id="@+id/tv_name_huodon2"
                     android:layout_width="wrap_content"
@@ -197,7 +197,7 @@
                     android:layout_marginLeft="10px"
                     android:gravity="center_vertical"
                     android:textColor="@android:color/black"
-                    android:text="活动活动活动活动活动活动活动"
+                    android:text=""
                     android:textSize="18px"/>
             </LinearLayout>
             <LinearLayout android:id="@+id/ll_huodon3"
@@ -211,7 +211,7 @@
                     android:layout_marginLeft="21px"
                     android:gravity="center_vertical"
                     android:textColor="@color/gerenTextcolor"
-                    android:text="[2017/01/23]"
+                    android:text=""
                     android:textSize="18px"/>
                 <TextView android:id="@+id/tv_name_huodon3"
                     android:layout_width="wrap_content"
@@ -219,7 +219,7 @@
                     android:layout_marginLeft="10px"
                     android:gravity="center_vertical"
                     android:textColor="@android:color/black"
-                    android:text="活动活动活动活动活动活动活动"
+                    android:text=""
                     android:textSize="18px"/>
             </LinearLayout>
             <LinearLayout android:id="@+id/ll_huodon4"
@@ -233,7 +233,7 @@
                     android:layout_marginLeft="21px"
                     android:gravity="center_vertical"
                     android:textColor="@color/gerenTextcolor"
-                    android:text="[2017/01/23]"
+                    android:text=""
                     android:textSize="18px"/>
                 <TextView android:id="@+id/tv_name_huodon4"
                     android:layout_width="wrap_content"
@@ -241,7 +241,7 @@
                     android:layout_marginLeft="10px"
                     android:gravity="center_vertical"
                     android:textColor="@android:color/black"
-                    android:text="活动活动活动活动活动活动活动"
+                    android:text=""
                     android:textSize="18px"/>
             </LinearLayout>
         </LinearLayout>

@@ -17,6 +17,24 @@ public class RegBean {
     private int code;
     private String token;
     private String enterprise_id;
+    private String im_token;
+    private String accid;
+
+    public String getAccid() {
+        return accid;
+    }
+
+    public void setAccid(String accid) {
+        this.accid = accid;
+    }
+
+    public String getIm_token() {
+        return im_token;
+    }
+
+    public void setIm_token(String im_token) {
+        this.im_token = im_token;
+    }
 
     public String getEnterprise_id() {
         return enterprise_id;

@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.androidkun.PullToRefreshRecyclerView;
 import com.androidkun.callback.PullToRefreshListener;
 import com.bayue.ciic.R;
 import com.bayue.ciic.base.BaseFragment;
@@ -22,6 +21,8 @@ import com.bayue.ciic.preferences.Preferences;
 import com.bayue.ciic.utils.HTTPUtils;
 import com.bayue.ciic.utils.ToastUtils;
 import com.bayue.ciic.utils.ToolKit;
+import com.bayue.ciic.view.swipe.SwipyRefreshLayout;
+import com.bayue.ciic.view.swipe.SwipyRefreshLayoutDirection;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
@@ -51,11 +52,13 @@ public class PlatfromNews extends BaseFragment {
     TextView tvNews;
 
     Unbinder unbinder;
-    private int tag=1;
+    @BindView(R.id.vp_news)
+    RecyclerView vpNews;
+    @BindView(R.id.swipe)
+    SwipyRefreshLayout swipe;
+    private int tag = 1;
     Myadapter myadapter;
     List<PXinwenBean.DataBean> data = new ArrayList<>();
-    @BindView(R.id.vp_news)
-    PullToRefreshRecyclerView vpNews;
 
     @Override
     protected int getViewId() {
@@ -71,19 +74,16 @@ public class PlatfromNews extends BaseFragment {
         vpNews.setAdapter(myadapter);
 //        vpZhibo.addItemDecoration(new SpaceItemDecoration(18));
 
-        vpNews.setPullRefreshEnabled(false);
-        vpNews.setLoadingMoreEnabled(true);
-        vpNews.displayLastRefreshTime(true);
+        swipe.setDirection(SwipyRefreshLayoutDirection.BOTH);
 
-        vpNews.setPullToRefreshListener(new PullToRefreshListener() {
+        swipe.setOnRefreshListener(new SwipyRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh() {
-                vpNews.setLoadMoreComplete();
-            }
-
-            @Override
-            public void onLoadMore() {
-                tag++;
+            public void onRefresh(SwipyRefreshLayoutDirection direction) {
+                if (direction == SwipyRefreshLayoutDirection.TOP) {
+                    tag=1;
+                } else {
+                    tag++;
+                }
                 getNewsData();
             }
         });
@@ -106,7 +106,7 @@ public class PlatfromNews extends BaseFragment {
     @Override
     public void onStart() {
         super.onStart();
-        tag=1;
+        tag = 1;
         getNewsData();
     }
 
@@ -143,14 +143,11 @@ public class PlatfromNews extends BaseFragment {
                                 List<PXinwenBean.DataBean> lists = bean.getData();
                                 if (tag == 1) {
                                     data.clear();
-                                } else {
-                                    if (vpNews != null)
-                                        vpNews.setLoadMoreComplete();
                                 }
                                 data.addAll(lists);
 //                                Log.e("TTTTTT",lists.get(0).getName()+lists.get(1).getName()+lists.get(2).getName());
                                 myadapter.notifyDataSetChanged();
-
+                                swipe.setRefreshing(false);
                             }
                         });
                     } else {
@@ -172,6 +169,7 @@ public class PlatfromNews extends BaseFragment {
             }
         });
     }
+
 
     class Myadapter extends RecyclerView.Adapter<Myadapter.MyHolder> {
 

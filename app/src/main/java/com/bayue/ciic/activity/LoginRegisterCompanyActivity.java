@@ -4,22 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bayue.ciic.App;
 import com.bayue.ciic.MainActivity;
 import com.bayue.ciic.R;
 import com.bayue.ciic.base.BaseLoginActivity;
 import com.bayue.ciic.bean.RegBean;
-import com.bayue.ciic.bean.VerificationBean;
 import com.bayue.ciic.http.API;
 import com.bayue.ciic.preferences.Preferences;
-import com.bayue.ciic.utils.DensityUtil;
 import com.bayue.ciic.utils.HTTPUtils;
 import com.bayue.ciic.utils.ToastUtils;
 import com.bayue.ciic.utils.ToolKit;
@@ -67,6 +64,14 @@ public class LoginRegisterCompanyActivity extends BaseLoginActivity {
     TextView etCompanyBacklogin;
 
     String mail;
+    @BindView(R.id.et_company_rname)
+    EditText etCompanyRname;
+    @BindView(R.id.et_company_rzhiwei)
+    EditText etCompanyRzhiwei;
+    @BindView(R.id.et_company_rshouji)
+    EditText etCompanyRshouji;
+    @BindView(R.id.ll_company_xieyi)
+    LinearLayout llCompanyXieyi;
 
     @Override
     protected void setTheme() {
@@ -91,7 +96,7 @@ public class LoginRegisterCompanyActivity extends BaseLoginActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.tv_company_send, R.id.but_company_zhuce, R.id.et_company_backlogin})
+    @OnClick({R.id.ll_company_xieyi,R.id.tv_company_send, R.id.but_company_zhuce, R.id.et_company_backlogin})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_company_send:
@@ -101,45 +106,53 @@ public class LoginRegisterCompanyActivity extends BaseLoginActivity {
                 reg();
                 break;
             case R.id.et_company_backlogin:
-                startActivity(new Intent(this,LoginActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 break;
+
+            case R.id.ll_company_xieyi:
+               ToastUtils.showShortToast("用户协议");
+                break;
+
         }
     }
-    Handler handler=new Handler(){
+
+    Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 
-            tvCompanySend.setText(msg.obj.toString()+"秒后重发");
+            tvCompanySend.setText(msg.obj.toString() + "秒后重发");
 
-            if((int)msg.obj==0){
+            if ((int) msg.obj == 0) {
                 tvCompanySend.setEnabled(true);
                 tvCompanySend.setText("发送验证码");
             }
         }
     };
-    private void sendTag(){
+
+    private void sendTag() {
         tvCompanySend.setEnabled(false);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 5; i >-1; i--) {
+                for (int i = 5; i > -1; i--) {
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    Message m=new Message();
-                    m.obj=i;
+                    Message m = new Message();
+                    m.obj = i;
                     handler.sendMessage(m);
                 }
             }
         }).start();
     }
-    private void send(){
-        mail=etCompanyMail.getText().toString();
-        if(mail.isEmpty()||mail==null){
+
+    private void send() {
+        mail = etCompanyMail.getText().toString();
+        if (mail.isEmpty() || mail == null) {
             ToastUtils.showShortToast("请输入邮箱");
             return;
         }
@@ -148,12 +161,12 @@ public class LoginRegisterCompanyActivity extends BaseLoginActivity {
         //Mather m = p.matcher("wangxu198709@gmail.com.cn");这种也是可以的！
         boolean b = m.matches();
 
-        if(!b){
+        if (!b) {
             ToastUtils.showShortToast("请输入正确的邮箱");
             return;
         }
-        Map<String ,Object> map=new HashMap();
-          map.put("to",mail);
+        Map<String, Object> map = new HashMap();
+        map.put("to", mail);
         sendTag();
         HTTPUtils.getNetDATA(API.BaseUrl + API.Login.MAIL, map, new Callback() {
             @Override
@@ -168,25 +181,25 @@ public class LoginRegisterCompanyActivity extends BaseLoginActivity {
 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
-                String msg=response.body().string();
-                if(response.code()==200){
-                    Gson gson=new Gson();
-                    final RegBean bean=gson.fromJson(msg,RegBean.class);
-                    if(bean.getCode()==200){
+                String msg = response.body().string();
+                if (response.code() == 200) {
+                    Gson gson = new Gson();
+                    final RegBean bean = gson.fromJson(msg, RegBean.class);
+                    if (bean.getCode() == 200) {
                         ToolKit.runOnMainThreadSync(new Runnable() {
                             @Override
                             public void run() {
 
                                 ToastUtils.showShortToast(bean.getData());
-                                Preferences.saveString(getApplicationContext(),Preferences.TOKEN,bean.getToken());
-                                Preferences.saveAdmin(bean.getIs_admin()+"");
+                                Preferences.saveString(getApplicationContext(), Preferences.TOKEN, bean.getToken());
+                                Preferences.saveAdmin(bean.getIs_admin() + "");
                                 Preferences.saveEnterprise_id(bean.getEnterprise_id());
 
 
                             }
                         });
                     }
-                }else {
+                } else {
 
                     ToolKit.runOnMainThreadSync(new Runnable() {
                         @Override
@@ -201,59 +214,72 @@ public class LoginRegisterCompanyActivity extends BaseLoginActivity {
         });
 
 
-
-
-
-
-
-
     }
 
-    private void reg(){
-        mail=etCompanyMail.getText().toString();
-        String verification=etCompanyYanzheng.getText().toString();
-        String name=etCompanyName.getText().toString();
-        String shorName=etCompanyShorname.getText().toString();
-        String address=etCompanyAddress.getText().toString();
-        String password=etCompanyPrassword.getText().toString();
-        String password2=etCompanyPrassword2.getText().toString();
+    private void reg() {
+        mail = etCompanyMail.getText().toString();
+        String verification = etCompanyYanzheng.getText().toString();
+        String name = etCompanyName.getText().toString();
+        String shorName = etCompanyShorname.getText().toString();
+        String address = etCompanyAddress.getText().toString();
+        String password = etCompanyPrassword.getText().toString();
+        String password2 = etCompanyPrassword2.getText().toString();
 
-        if(mail.isEmpty()||mail==null){
+        String rname=etCompanyRname.getText().toString();
+        String rzhiwei=etCompanyRzhiwei.getText().toString();
+        String rshouji=etCompanyRshouji.getText().toString();
+
+        if (mail.isEmpty() || mail == null) {
             ToastUtils.showShortToast("请输入邮箱");
             return;
         }
-        if(verification.isEmpty()||verification==null){
+        if (verification.isEmpty() || verification == null) {
             ToastUtils.showShortToast("请输入验证码");
             return;
         }
-        if(password.isEmpty()||password==null){
+        if (password.isEmpty() || password == null) {
             ToastUtils.showShortToast("请输入密码");
             return;
         }
-        if(!password.equals(password2)){
+        if (!password.equals(password2)) {
             ToastUtils.showShortToast("密码不一致");
             return;
         }
-        if(name.isEmpty()||name==null){
+        if (name.isEmpty() || name == null) {
             ToastUtils.showShortToast("请输入公司名称");
             return;
         }
-        if(shorName.isEmpty()||shorName==null){
+        if (shorName.isEmpty() || shorName == null) {
             ToastUtils.showShortToast("请输入公司简称");
             return;
         }
-        if(address.isEmpty()||address==null){
+        if (address.isEmpty() || address == null) {
             ToastUtils.showShortToast("请输入公司地址");
             return;
         }
-        Map<String ,Object> map=new HashMap<>();
+        if(rname.isEmpty()||rname==null){
+            ToastUtils.showShortToast("请输入责任人姓名");
+            return;
+        }
+        if(rzhiwei.isEmpty()||rzhiwei==null){
+            ToastUtils.showShortToast("请输入责任人职位");
+            return;
+        }
+        if(rshouji.isEmpty()||rshouji==null){
+            ToastUtils.showShortToast("请输入责任人职位");
+            return;
+        }
+        Map<String, Object> map = new HashMap<>();
 
-        map.put("email",mail);
-        map.put("code",verification);
-        map.put("name",name);
-        map.put("short_name",shorName);
-        map.put("address",address);
-        map.put("password",password);
+        map.put("email", mail);
+        map.put("code", verification);
+        map.put("name", name);
+        map.put("short_name", shorName);
+        map.put("address", address);
+        map.put("password", password);
+        map.put("duty_name", rname);
+        map.put("duty_position", rzhiwei);
+        map.put("duty_phone", rshouji);
         HTTPUtils.getNetDATA(API.BaseUrl + API.Login.EMAIL_REG, map, new Callback() {
 
             @Override
@@ -261,30 +287,38 @@ public class LoginRegisterCompanyActivity extends BaseLoginActivity {
                 ToolKit.runOnMainThreadSync(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtils.showShortToast("请检查网络");                    }
+                        ToastUtils.showShortToast("请检查网络");
+                    }
                 });
             }
 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
-                String msg=response.body().string();
-                if(response.code()==200){
-                    Gson gson=new Gson();
-                    final RegBean bean=gson.fromJson(msg,RegBean.class);
+                String msg = response.body().string();
+                if (response.code() == 200) {
+                    Gson gson = new Gson();
+                    final RegBean bean = gson.fromJson(msg, RegBean.class);
                     ToolKit.runOnMainThreadSync(new Runnable() {
                         @Override
                         public void run() {
-                            if(bean.getCode()==200){
-                                Preferences.saveString(getApplicationContext(),Preferences.TOKEN,bean.getToken());
-                                ToastUtils.showShortToast(bean.getData());
+                            if (bean.getCode() == 200) {
+                                Preferences.saveUserName(etCompanyName.getText().toString());
+                                Preferences.saveString(getApplicationContext(), Preferences.TOKEN, bean.getToken());
+                                Preferences.saveAdmin(bean.getIs_admin());
+                                Preferences.saveEnterprise_id(bean.getEnterprise_id());
+                                Preferences.saveIm_token(bean.getIm_token());
+                                Preferences.saveAccid(bean.getAccid());
+//                                ToastUtils.showShortToast(bean.getData());
+
                                 startActivity(new Intent(LoginRegisterCompanyActivity.this, MainActivity.class));
                                 finish();
                                 App.bgActivity.finish();
-                            }else {
-                                ToastUtils.showShortToast(bean.getMsg());                             }
+                            } else {
+                                ToastUtils.showShortToast(bean.getMsg());
+                            }
                         }
                     });
-                }else {
+                } else {
                     ToolKit.runOnMainThreadSync(new Runnable() {
                         @Override
                         public void run() {
@@ -293,11 +327,9 @@ public class LoginRegisterCompanyActivity extends BaseLoginActivity {
                     });
 
 
-
                 }
             }
         });
-
 
 
     }

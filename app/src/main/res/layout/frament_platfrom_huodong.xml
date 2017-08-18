@@ -9,95 +9,118 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="67px"
-                android:background="@android:color/white">
-                <ImageView android:id="@+id/iv_huodong_sanjiao"
-                    android:layout_width="21px"
-                    android:layout_height="27px"
-                    android:layout_marginLeft="10px"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:src="@mipmap/xiaosanjiao_3x"/>
-                <TextView android:id="@+id/tv_huodong"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="热门直播"
-                    android:textSize="26px"
-                    android:textColor="@android:color/black"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/iv_huodong_sanjiao"
-                    android:layout_marginLeft="10px"/>
-                <TextView android:id="@+id/tv_huodong_xiuxian"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="日常休闲"
-                    android:textSize="18px"
-                    android:textColor="@color/gerenTextcolor"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/tv_huodong"
-                    android:layout_marginLeft="20px"/>
-                <View android:id="@+id/view_huodong_one"
-                    android:layout_width="2px"
-                    android:layout_height="15px"
-                    android:background="@color/gerenTextcolor"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/tv_huodong_xiuxian"
-                    android:layout_marginLeft="20px"/>
-                <TextView android:id="@+id/tv_huodong_yepao"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="夜跑"
-                    android:textSize="18px"
-                    android:textColor="@color/gerenTextcolor"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/view_huodong_one"
-                    android:layout_marginLeft="20px"/>
-                <View android:id="@+id/view_huodong_two"
-                    android:layout_width="2px"
-                    android:layout_height="15px"
-                    android:background="@color/gerenTextcolor"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/tv_huodong_yepao"
-                    android:layout_marginLeft="20px"/>
-                <TextView android:id="@+id/tv_huodong_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="500强运动会"
-                    android:textSize="18px"
-                    android:textColor="@color/gerenTextcolor"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/view_huodong_two"
-                    android:layout_marginLeft="20px"/>
-                <TextView android:id="@+id/tv_huodong_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:layout_marginRight="20px"
-                    android:text="全 部"
-                    android:textSize="18px"
-                    android:textColor="@color/gerenTextcolor"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="20px"/>
+            android:layout_height="67px"
+            android:background="@android:color/white">
+
+            <ImageView
+                android:id="@+id/iv_huodong_sanjiao"
+                android:layout_width="21px"
+                android:layout_height="27px"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10px"
+                android:src="@mipmap/xiaosanjiao_3x" />
+
+            <TextView
+                android:id="@+id/tv_huodong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10px"
+                android:layout_toRightOf="@+id/iv_huodong_sanjiao"
+                android:text="热门活动"
+                android:textColor="@android:color/black"
+                android:textSize="26px" />
+
+            <TextView
+                android:id="@+id/tv_huodong_xiuxian"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:layout_toRightOf="@+id/tv_huodong"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/gerenTextcolor"
+                android:textSize="18px" />
+
+            <View
+                android:id="@+id/view_huodong_one"
+                android:layout_width="2px"
+                android:layout_height="15px"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:layout_toRightOf="@+id/tv_huodong_xiuxian"
+                android:background="@color/gerenTextcolor" />
+
+            <TextView
+                android:id="@+id/tv_huodong_yepao"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:layout_toRightOf="@+id/view_huodong_one"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/gerenTextcolor"
+                android:textSize="18px" />
+
+            <View
+                android:id="@+id/view_huodong_two"
+                android:layout_width="2px"
+                android:layout_height="15px"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:layout_toRightOf="@+id/tv_huodong_yepao"
+                android:background="@color/gerenTextcolor" />
+
+            <TextView
+                android:id="@+id/tv_huodong_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:layout_toRightOf="@+id/view_huodong_two"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/gerenTextcolor"
+                android:textSize="18px" />
+
+            <TextView
+                android:id="@+id/tv_huodong_all"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:gravity="center"
+                android:text="全 部"
+                android:textColor="@color/gerenTextcolor"
+                android:textSize="18px" />
 
 
-            </RelativeLayout>
-            <com.androidkun.PullToRefreshRecyclerView
+        </RelativeLayout>
+
+        <com.bayue.ciic.view.swipe.SwipyRefreshLayout
+            android:id="@+id/swipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px">
+            <android.support.v7.widget.RecyclerView
                 android:id="@+id/vp_huodong"
-                android:layout_marginTop="20px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            </com.androidkun.PullToRefreshRecyclerView>
+            </android.support.v7.widget.RecyclerView>
+        </com.bayue.ciic.view.swipe.SwipyRefreshLayout>
 
-        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

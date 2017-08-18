@@ -5,10 +5,11 @@ android {
     buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.bayue.ciic"
-        minSdkVersion 16
+        minSdkVersion 18
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -20,6 +21,17 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
+        }
+    }
+    repositories {
+        mavenCentral()
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    allprojects {
+        repositories {
+            maven { url 'https://jitpack.io' }
         }
     }
     applicationVariants.all { variant ->
@@ -41,6 +53,8 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile fileTree(include: '*.jar', dir: 'jniLibs')
+    compile(name: 'Transcoding-release', ext: 'aar')
+    compile(name: 'barcodescanner-core-1.8.4', ext: 'aar')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -60,5 +74,14 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile files('libs/NELivePlayer.jar')
     compile 'com.androidkun:pulltorefreshrecyclerview:1.0.7'
-    compile files('libs/glide-3.7.0.jar')
+    compile project(':uikit')
+    compile files('libs/nos-android-sdk-allin-2.0.3.jar')
+    compile files('libs/nim-chatroom-3.3.0.jar')
+    compile files('libs/NELivePlayer.jar')
+    compile files('libs/Livestreaming.jar')
+    compile files('libs/vcloudUpload.jar')
+    compile files('libs/zxing-core-3.2.1.jar')
+    compile 'com.github.xiaoyanger0825:NiceVieoPlayer:v2.1'
+    compile files('libs/ShareSDK-Core-3.0.1.jar')
+    compile 'fm.jiecao:jiecaovideoplayer:5.8.1'
 }
